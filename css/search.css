@@ -1,0 +1,130 @@
+/* Search Container */
+.search-wrapper {
+    position: relative;
+    margin-right: 15px;
+}
+
+/* Search Input */
+.search-input {
+    width: 200px;
+    padding: 8px 35px 8px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 25px;
+    background: transparent;
+    color: var(--light);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+    width: 250px;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(6, 163, 218, 0.2);
+}
+
+/* Search Button */
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.search-button:hover {
+    color: var(--light);
+}
+
+/* Search Results */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--dark);
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-results.show {
+    display: block;
+}
+
+.search-result-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: rgba(6, 163, 218, 0.1);
+}
+
+.search-result-title {
+    color: var(--light);
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.search-result-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+}
+
+/* Loading State */
+.search-wrapper.loading .search-button {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Dark Mode */
+[data-theme="dark"] .search-input {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .search-results {
+    background: var(--dark);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .search-wrapper {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .search-input:focus {
+        width: 100%;
+    }
+} 

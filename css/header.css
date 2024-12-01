@@ -1,0 +1,130 @@
+/* Brand & Contact Section */
+.top-bar {
+    padding: 0;
+    height: 100px;
+}
+
+.navbar-brand img {
+    max-height: 60px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--primary);
+}
+
+.btn-lg-square i {
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: var(--dark);
+    padding: 0;
+}
+
+.navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: var(--light);
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+.navbar-toggler {
+    border: none;
+    color: var(--light);
+}
+
+/* Search Bar */
+.search-wrapper {
+    position: relative;
+    margin-right: 15px;
+}
+
+.search-input {
+    padding: 8px 15px;
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--light);
+    width: 200px;
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--primary);
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.btn-login,
+.btn-register {
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-login {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    margin-right: 10px;
+}
+
+.btn-register {
+    background: var(--primary);
+    color: var(--light);
+    border: 1px solid var(--primary);
+}
+
+.btn-login:hover {
+    background: var(--primary);
+    color: var(--light);
+}
+
+.btn-register:hover {
+    background: transparent;
+    color: var(--primary);
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+    }
+    
+    .auth-buttons {
+        margin-top: 15px;
+    }
+    
+    .search-wrapper {
+        margin-bottom: 15px;
+    }
+    
+    .navbar-brand img {
+        max-height: 40px;
+    }
+} 

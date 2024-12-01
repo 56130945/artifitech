@@ -1,0 +1,168 @@
+/* Auth Modal Styles */
+.auth-modal .modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-modal .modal-header {
+    border-bottom: none;
+    padding: 20px 30px;
+}
+
+.auth-modal .modal-title {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.auth-modal .modal-body {
+    padding: 20px 30px;
+}
+
+.auth-modal .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-modal .form-label {
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.auth-modal .form-control {
+    border-radius: 25px;
+    padding: 12px 20px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.auth-modal .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(6, 163, 218, 0.25);
+}
+
+.auth-modal .btn-submit {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    background: var(--primary);
+    color: var(--light);
+    font-weight: 500;
+    border: 1px solid var(--primary);
+    transition: all 0.3s ease;
+}
+
+.auth-modal .btn-submit:hover {
+    background: transparent;
+    color: var(--primary);
+}
+
+.auth-modal .modal-footer {
+    border-top: none;
+    padding: 0 30px 20px;
+    text-align: center;
+}
+
+.auth-modal .modal-footer p {
+    margin: 0;
+    color: var(--dark);
+}
+
+.auth-modal .modal-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-modal .modal-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Social Login Buttons */
+.social-login {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.social-login .btn-social {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+    color: var(--light);
+    transition: all 0.3s ease;
+}
+
+.btn-facebook {
+    background: #3b5998;
+}
+
+.btn-google {
+    background: #db4437;
+}
+
+.btn-twitter {
+    background: #1da1f2;
+}
+
+.social-login .btn-social:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.divider span {
+    background: #fff;
+    padding: 0 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .auth-modal .modal-content {
+    background: var(--dark);
+}
+
+[data-theme="dark"] .auth-modal .modal-title,
+[data-theme="dark"] .auth-modal .form-label,
+[data-theme="dark"] .auth-modal .modal-footer p {
+    color: var(--light);
+}
+
+[data-theme="dark"] .auth-modal .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+}
+
+[data-theme="dark"] .divider span {
+    background: var(--dark);
+    color: var(--light);
+} 
