@@ -73,14 +73,69 @@
                     </button>
                     <div class="search-results"></div>
                 </div>
-                <a href="#" class="btn-login" id="loginBtn">
+                <a href="login.php" class="btn-login <?php echo ($page === 'login') ? 'active' : ''; ?>">
                     <i class="bi bi-person"></i> Login
                 </a>
-                <a href="#" class="btn-register" id="registerBtn">
+                <a href="register.php" class="btn-register <?php echo ($page === 'register') ? 'active' : ''; ?>">
                     <i class="bi bi-person-plus"></i> Register
                 </a>
             </div>
         </div>
     </div>
 </nav>
-<!-- Navbar End --> 
+<!-- Navbar End -->
+
+<style>
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-login, .btn-register {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-login {
+    color: #2124B1;
+    background: transparent;
+    border: 2px solid #2124B1;
+}
+
+.btn-login:hover, .btn-login.active {
+    color: #fff;
+    background: #2124B1;
+}
+
+.btn-register {
+    color: #fff;
+    background: #2124B1;
+    border: 2px solid #2124B1;
+}
+
+.btn-register:hover, .btn-register.active {
+    background: #1b1e8f;
+    border-color: #1b1e8f;
+}
+
+.btn-login i, .btn-register i {
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 991.98px) {
+    .auth-buttons {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
+    .auth-buttons.d-none.d-lg-flex {
+        display: flex !important;
+    }
+}
+</style> 

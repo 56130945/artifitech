@@ -944,71 +944,214 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<!-- Facts Start -->
+<!-- News & Notices Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5 parallax" data-speed="0.2">
-                    <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Years Experience</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">5</h1>
+        <div class="row g-5">
+            <!-- Latest News Section -->
+            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="section-title position-relative mb-4">
+                    <h6 class="position-relative text-primary ps-4">Latest News</h6>
+                    <h3 class="mb-0">Stay Updated with Artifitech</h3>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="blog-item bg-light rounded">
+                            <div class="position-relative overflow-hidden">
+                                <img class="img-fluid" src="img/blog-1.jpg" alt="">
+                                <div class="blog-date">
+                                    <h5 class="text-white fw-bold mb-0">23</h5>
+                                    <small class="text-white">Jan</small>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h5 class="mb-3">New Features Added to EduManager LMS</h5>
+                                <p class="mb-4">Explore the latest updates to our Learning Management System...</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blog-item bg-light rounded">
+                            <div class="position-relative overflow-hidden">
+                                <img class="img-fluid" src="img/blog-2.jpg" alt="">
+                                <div class="blog-date">
+                                    <h5 class="text-white fw-bold mb-0">20</h5>
+                                    <small class="text-white">Jan</small>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h5 class="mb-3">Introducing Our New Analytics Suite</h5>
+                                <p class="mb-4">Discover powerful insights with our new analytics tools...</p>
+                                <a class="btn btn-primary rounded-pill py-2 px-4" href="">Read More</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5 parallax" data-speed="0.2">
-                    <i class="fa fa-users-cog fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Team Members</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">1234</h1>
+            <!-- Important Notices Section -->
+            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="section-title position-relative mb-4">
+                    <h6 class="position-relative text-primary ps-4">Notices</h6>
+                    <h3 class="mb-0">Important Updates</h3>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5 parallax" data-speed="0.2">
-                    <i class="fa fa-users fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Satisfied Clients</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">1234</h1>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5 parallax" data-speed="0.2">
-                    <i class="fa fa-check fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Projects Done</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">1234</h1>
+                <div class="bg-light rounded p-4">
+                    <div class="notice-item mb-3 pb-3 border-bottom">
+                        <div class="d-flex mb-2">
+                            <i class="fa fa-bell text-primary me-2 mt-1"></i>
+                            <h6 class="mb-0">System Maintenance Notice</h6>
+                        </div>
+                        <small class="text-body">Scheduled maintenance on January 25th, 2024</small>
+                    </div>
+                    <div class="notice-item mb-3 pb-3 border-bottom">
+                        <div class="d-flex mb-2">
+                            <i class="fa fa-info-circle text-primary me-2 mt-1"></i>
+                            <h6 class="mb-0">New Course Registration Open</h6>
+                        </div>
+                        <small class="text-body">Register for February 2024 intake now</small>
+                    </div>
+                    <div class="notice-item">
+                        <div class="d-flex mb-2">
+                            <i class="fa fa-calendar text-primary me-2 mt-1"></i>
+                            <h6 class="mb-0">Upcoming Webinar</h6>
+                        </div>
+                        <small class="text-body">Join our AI in Education webinar on Jan 30th</small>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Facts End -->
+<!-- News & Notices End -->
 
-<!-- Login Modal -->
-<div id="loginModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Login</h2>
-        <form id="loginForm">
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="#" onclick="showRegisterModal(); loginModal.style.display='none';">Register here</a></p>
+<!-- Upcoming Events Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center position-relative mb-5">
+            <h6 class="position-relative d-inline text-primary ps-4">Events</h6>
+            <h3 class="mb-0">Upcoming Events & Workshops</h3>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="event-item bg-light rounded">
+                    <div class="p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-calendar-alt"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <small class="text-body">Jan 28, 2024</small>
+                                    <h6 class="mb-0">2:00 PM - 4:00 PM</h6>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-1 px-3">Free</span>
+                        </div>
+                        <h5 class="mb-3">EduManager Workshop</h5>
+                        <p class="mb-4">Learn how to maximize your use of EduManager LMS features...</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="event-item bg-light rounded">
+                    <div class="p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-calendar-alt"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <small class="text-body">Feb 2, 2024</small>
+                                    <h6 class="mb-0">10:00 AM - 12:00 PM</h6>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-1 px-3">Premium</span>
+                        </div>
+                        <h5 class="mb-3">Analytics Masterclass</h5>
+                        <p class="mb-4">Deep dive into educational data analytics and reporting...</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="event-item bg-light rounded">
+                    <div class="p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-calendar-alt"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <small class="text-body">Feb 5, 2024</small>
+                                    <h6 class="mb-0">3:00 PM - 5:00 PM</h6>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-1 px-3">Free</span>
+                        </div>
+                        <h5 class="mb-3">HR System Training</h5>
+                        <p class="mb-4">Introduction to our new HR management features...</p>
+                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<!-- Upcoming Events End -->
 
-<!-- Register Modal -->
-<div id="registerModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Register</h2>
-        <form id="registerForm">
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
-            <button type="submit">Register</button>
-        </form>
-        <p>Already have an account? <a href="#" onclick="showLoginModal(); registerModal.style.display='none';">Login here</a></p>
-    </div>
-</div>
+<style>
+.quick-access-item {
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 0.3s ease;
+}
+
+.quick-access-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.blog-item {
+    transition: all 0.3s ease;
+}
+
+.blog-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.blog-date {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #2124B1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    right: 20px;
+    bottom: -30px;
+    border-radius: 8px;
+}
+
+.notice-item {
+    transition: all 0.3s ease;
+}
+
+.notice-item:hover {
+    transform: translateX(5px);
+}
+
+.event-item {
+    transition: all 0.3s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+</style>
 
 <?php
 $content = ob_get_clean();
