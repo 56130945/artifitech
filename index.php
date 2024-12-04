@@ -1,7 +1,9 @@
 <?php
-$page = 'home';
+// Include global configuration
+require_once 'includes/config.php';
 
-// Meta information
+// Set page-specific variables
+$page = 'home';
 $title = "Artifitech - Leading Educational Technology Solutions Provider";
 $keywords = "Educational Technology, EduManager, AI Solutions, IoT Solutions, Cloud Computing";
 $description = "Artifitech is South Africa's leading provider of educational technology solutions, specializing in Learning Management Systems and enterprise solutions.";
@@ -9,9 +11,41 @@ $og_title = "Artifitech - Leading Educational Technology Solutions";
 $og_description = "South Africa's leading provider of educational technology solutions";
 $og_url = "https://artifitech.com";
 
+// Add Black Friday Modal CSS with correct path
+$additional_css = '<link rel="stylesheet" href="' . $base_url . '/css/black-friday-modal.css">';
+
+// Add Black Friday Modal JS with correct path
+$additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></script>';
+
 // Start output buffering
 ob_start();
 ?>
+
+<!-- Black Friday Modal -->
+<div class="black-friday-overlay" id="modalOverlay">
+    <div class="black-friday-modal" role="dialog" aria-labelledby="modalTitle">
+        <button class="black-friday-close" id="closeButton" aria-label="Close">&times;</button>
+        <div class="black-friday-content">
+            <h1 class="black-friday-header" id="modalTitle">🎉 Black Friday Special 🚀</h1>
+            <div class="black-friday-body">
+                <h2>70% OFF EduManager LMS</h2>
+                <p>Transform your institution with South Africa's leading Learning Management System</p>
+                <ul class="black-friday-features">
+                    <li>✓ Virtual Classrooms</li>
+                    <li>✓ Advanced Analytics</li>
+                    <li>✓ Student Management</li>
+                    <li>✓ 24/7 Support</li>
+                </ul>
+                <p class="black-friday-price">
+                    <span class="original-price">R4,999/mo</span>
+                    <span class="new-price">R1,499/mo</span>
+                </p>
+                <p class="offer-ends">Offer ends in 48 hours!</p>
+                <a href="products.php" class="black-friday-cta">Get Started Now</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Add this right after the opening body tag -->
 <div class="preloader">
@@ -114,519 +148,714 @@ ob_start();
 </div>
 <!-- EduManager Spotlight End -->
 
-<!-- Pricing Start -->
+<!-- Pricing Plans Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h6 class="section-title gradient-text bg-white text-center px-3">Pricing Plans</h6>
-            <h1 class="display-6 mb-4">Choose the Perfect Plan for Your Institution</h1>
+            <h6 class="section-title bg-white text-center text-primary px-3">Pricing Plans</h6>
+            <h1 class="display-6 mb-4">Choose the Perfect Solution for Your Institution</h1>
         </div>
-        <div class="row g-4 justify-content-center">
-            <!-- Starter Plan -->
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="price-item bg-light rounded h-100 p-4 position-relative overflow-hidden">
-                    <div class="border-bottom pb-4 mb-4 text-center">
-                        <h5 class="mb-1">Starter Plan</h5>
-                        <p class="text-muted mb-0">For Small Institutions</p>
-                        <div class="display-5 fw-bold text-primary my-4">
-                            <small class="align-top fs-6">R</small>2,499<small class="align-bottom fs-6">/mo</small>
-                        </div>
+
+        <!-- Product Navigation -->
+        <div class="row g-4 mb-5">
+            <div class="col-12">
+                <div class="product-nav wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="d-flex justify-content-center flex-wrap gap-3">
+                        <a href="#edumanager" class="btn btn-primary rounded-pill px-4 active" data-product="edumanager">EduManager LMS</a>
+                        <a href="#hr" class="btn btn-light rounded-pill px-4" data-product="hr">HR System</a>
+                        <a href="#finance" class="btn btn-light rounded-pill px-4" data-product="finance">Financial System</a>
+                        <a href="#analytics" class="btn btn-light rounded-pill px-4" data-product="analytics">Analytics Suite</a>
                     </div>
-                    <div class="row gy-4">
-                        <!-- 1. Student Capacity -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Up to 500 students</span>
-                            </div>
-                        </div>
-                        <!-- 2. LMS Features -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Basic LMS features</span>
-                            </div>
-                        </div>
-                        <!-- 3. Virtual Classrooms -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Virtual classrooms</span>
-                            </div>
-                        </div>
-                        <!-- 4. Assignment Management -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Assignment management</span>
-                            </div>
-                        </div>
-                        <!-- 5. Analytics -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Basic analytics</span>
-                            </div>
-                        </div>
-                        <!-- 6. Support Level -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Email support</span>
-                            </div>
-                        </div>
-                        <!-- 7. HR & Finance -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">HR & Finance modules</span>
-                            </div>
-                        </div>
-                        <!-- 8. Branding -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">Custom branding</span>
-                            </div>
-                        </div>
-                        <!-- 9. API Access -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">API access</span>
-                            </div>
-                        </div>
-                        <!-- 10. Premium Support -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">24/7 dedicated support</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-modern w-100 mt-4 py-3 position-absolute bottom-0 start-0 mb-4 mx-4" style="width: calc(100% - 2rem) !important;" href="">Get Started</a>
-                </div>
-            </div>
-            <!-- Professional Plan -->
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="price-item bg-light rounded h-100 p-4 position-relative overflow-hidden">
-                    <div class="ribbon-wrapper">
-                        <div class="glow"></div>
-                        <div class="ribbon-text">Most Popular</div>
-                    </div>
-                    <div class="border-bottom pb-4 mb-4 text-center">
-                        <h5 class="mb-1">Professional</h5>
-                        <p class="text-muted mb-0">For Medium Institutions</p>
-                        <div class="display-5 fw-bold text-primary my-4">
-                            <small class="align-top fs-6">R</small>4,999<small class="align-bottom fs-6">/mo</small>
-                        </div>
-                    </div>
-                    <div class="row gy-4">
-                        <!-- 1. Student Capacity -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Up to 2000 students</span>
-                            </div>
-                        </div>
-                        <!-- 2. LMS Features -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Advanced LMS features</span>
-                            </div>
-                        </div>
-                        <!-- 3. Virtual Classrooms -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Virtual classrooms</span>
-                            </div>
-                        </div>
-                        <!-- 4. Assignment Management -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Assignment management</span>
-                            </div>
-                        </div>
-                        <!-- 5. Analytics -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Advanced analytics</span>
-                            </div>
-                        </div>
-                        <!-- 6. Support Level -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Priority support</span>
-                            </div>
-                        </div>
-                        <!-- 7. HR & Finance -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>HR & Finance modules</span>
-                            </div>
-                        </div>
-                        <!-- 8. Branding -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Custom branding</span>
-                            </div>
-                        </div>
-                        <!-- 9. API Access -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">API access</span>
-                            </div>
-                        </div>
-                        <!-- 10. Premium Support -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">24/7 dedicated support</span>
-                            </div>
-                        </div>
-                        <!-- 11. Custom Integrations -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-danger rounded-circle me-3">
-                                    <i class="fa fa-times text-white"></i>
-                                </div>
-                                <span class="text-muted">Custom integrations</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-modern w-100 mt-4 py-3 position-absolute bottom-0 start-0 mb-4 mx-4" style="width: calc(100% - 2rem) !important;" href="">Get Started</a>
-                </div>
-            </div>
-            <!-- Premium Plan -->
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="price-item bg-light rounded h-100 p-4 position-relative overflow-hidden">
-                    <div class="border-bottom pb-4 mb-4 text-center">
-                        <h5 class="mb-1">Premium Plan</h5>
-                        <p class="text-muted mb-0">For Large Institutions</p>
-                        <div class="display-5 fw-bold text-primary my-4">
-                            <small class="align-top fs-6">R</small>9,999<small class="align-bottom fs-6">/mo</small>
-                        </div>
-                    </div>
-                    <div class="row gy-4">
-                        <!-- 1. Student Capacity -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Up to 5000 students</span>
-                            </div>
-                        </div>
-                        <!-- 2. LMS Features -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Full feature access</span>
-                            </div>
-                        </div>
-                        <!-- 3. Virtual Classrooms -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Virtual classrooms</span>
-                            </div>
-                        </div>
-                        <!-- 4. Assignment Management -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Assignment management</span>
-                            </div>
-                        </div>
-                        <!-- 5. Analytics -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>AI-powered analytics</span>
-                            </div>
-                        </div>
-                        <!-- 6. Support Level -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>24/7 dedicated support</span>
-                            </div>
-                        </div>
-                        <!-- 7. HR & Finance -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>HR & Finance modules</span>
-                            </div>
-                        </div>
-                        <!-- 8. Branding -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Custom branding</span>
-                            </div>
-                        </div>
-                        <!-- 9. API Access -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>API access</span>
-                            </div>
-                        </div>
-                        <!-- 10. Premium Support -->
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Custom integrations</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-modern w-100 mt-4 py-3 position-absolute bottom-0 start-0 mb-4 mx-4" style="width: calc(100% - 2rem) !important;" href="">Get Started</a>
-                </div>
-            </div>
-            <!-- Enterprise Plan -->
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="price-item bg-light rounded h-100 p-4 position-relative overflow-hidden">
-                    <div class="border-bottom pb-4 mb-4 text-center">
-                        <h5 class="mb-1">Enterprise Plan</h5>
-                        <p class="text-muted mb-0">Custom Solutions</p>
-                        <div class="display-5 fw-bold text-primary my-4">
-                            Custom<small class="align-bottom fs-6"> pricing</small>
-                        </div>
-                    </div>
-                    <div class="row gy-4">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Unlimited students</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Custom development</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Dedicated support team</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Tailored solutions</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Full customization</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>On-premise option</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-primary rounded-circle me-3">
-                                    <i class="fa fa-check text-white"></i>
-                                </div>
-                                <span>Custom SLA</span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-modern w-100 mt-4 py-3 position-absolute bottom-0 start-0 mb-4 mx-4" style="width: calc(100% - 2rem) !important;" href="">Contact Us</a>
                 </div>
             </div>
         </div>
-        
-        <!-- Additional Pricing Information -->
-        <div class="row mt-5 g-4">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="bg-light rounded p-4 h-100 position-relative overflow-hidden">
-                    <div class="border-bottom pb-4 mb-4">
-                        <h5 class="mb-0">All Plans Include</h5>
+
+        <!-- EduManager Pricing -->
+        <div id="edumanager" class="pricing-section active">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Starter Plan</h5>
+                            <p class="text-muted">For Small Institutions</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>2,499<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 500 students</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic LMS features</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Virtual classrooms</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Email support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
                     </div>
-                    <div class="row gy-4">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
-                                </div>
-                                <span>Security & compliance features</span>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="price-item bg-light rounded h-100 p-5 position-relative overflow-hidden">
+                        <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1">Popular</div>
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Professional Plan</h5>
+                            <p class="text-muted">For Medium Institutions</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>4,999<small class="align-bottom fs-6">/mo</small>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 2000 students</span>
                                 </div>
-                                <span>Regular updates</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced LMS features</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Interactive virtual classrooms</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>24/7 support</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Custom branding</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
-                                </div>
-                                <span>Basic technical support</span>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Enterprise Plan</h5>
+                            <p class="text-muted">For Large Institutions</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>9,999<small class="align-bottom fs-6">/mo</small>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Unlimited students</span>
                                 </div>
-                                <span>Mobile app access</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Full LMS suite</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced virtual classrooms</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Enterprise analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Dedicated support team</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>API access</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
-                                </div>
-                                <span>Cloud storage</span>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-check text-primary"></i>
-                                </div>
-                                <span>SSL security</span>
-                            </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="bg-light rounded p-4 h-100 position-relative overflow-hidden">
-                    <div class="border-bottom pb-4 mb-4">
-                        <h5 class="mb-0">Optional Add-ons</h5>
+        </div>
+
+        <!-- HR System Pricing -->
+        <div id="hr" class="pricing-section">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Basic HR</h5>
+                            <p class="text-muted">Essential HR Management</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>1,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 50 employees</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Employee management</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Leave management</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic reporting</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
                     </div>
-                    <div class="row gy-4">
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-plus text-primary"></i>
-                                </div>
-                                <span>Additional storage: <strong>R499/500GB</strong></span>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="price-item bg-light rounded h-100 p-5 position-relative overflow-hidden">
+                        <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1">Popular</div>
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Professional HR</h5>
+                            <p class="text-muted">Advanced HR Solutions</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>3,999<small class="align-bottom fs-6">/mo</small>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-plus text-primary"></i>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 200 employees</span>
                                 </div>
-                                <span>Extra virtual classroom capacity: R299/100 users</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Full HR management</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Payroll processing</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Performance management</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced reporting</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-plus text-primary"></i>
-                                </div>
-                                <span>Advanced reporting module: R799/month</span>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Enterprise HR</h5>
+                            <p class="text-muted">Complete HR Suite</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>7,999<small class="align-bottom fs-6">/mo</small>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-plus text-primary"></i>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Unlimited employees</span>
                                 </div>
-                                <span>White-label option: R1,499/month</span>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Complete HR suite</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced payroll</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Custom workflows</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>API integration</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex align-items-center">
-                                <div class="btn-sm-square bg-white rounded-circle me-3">
-                                    <i class="fa fa-plus text-primary"></i>
-                                </div>
-                                <span>Additional admin users: R199/user/month</span>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial System Pricing -->
+        <div id="finance" class="pricing-section">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Basic Finance</h5>
+                            <p class="text-muted">Essential Financial Management</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>2,499<small class="align-bottom fs-6">/mo</small>
                             </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic accounting features</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Invoice management</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic reporting</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 1000 transactions/month</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="price-item bg-light rounded h-100 p-5 position-relative overflow-hidden">
+                        <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1">Popular</div>
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Professional Finance</h5>
+                            <p class="text-muted">Advanced Financial Solutions</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>4,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced accounting</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Budgeting tools</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Financial forecasting</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Unlimited transactions</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Multi-currency support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Enterprise Finance</h5>
+                            <p class="text-muted">Complete Financial Suite</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>8,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Full financial suite</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Custom workflows</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>API integration</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Dedicated support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Suite Pricing -->
+        <div id="analytics" class="pricing-section">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Basic Analytics</h5>
+                            <p class="text-muted">Essential Insights</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>1,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Basic dashboards</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Standard reports</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Data visualization</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 100K data points</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="price-item bg-light rounded h-100 p-5 position-relative overflow-hidden">
+                        <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1">Popular</div>
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Advanced Analytics</h5>
+                            <p class="text-muted">Professional Insights</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>3,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Advanced dashboards</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Custom reports</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Predictive analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Up to 1M data points</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Data export</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="price-item bg-light rounded h-100 p-5">
+                        <div class="text-center mb-4">
+                            <h5 class="mb-1">Enterprise Analytics</h5>
+                            <p class="text-muted">Complete Analytics Suite</p>
+                            <div class="display-5 fw-bold text-primary my-4">
+                                <small class="align-top fs-6">R</small>7,999<small class="align-bottom fs-6">/mo</small>
+                            </div>
+                        </div>
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>AI-powered analytics</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Real-time insights</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Custom integrations</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>Unlimited data points</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex align-items-center">
+                                    <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                        <i class="fa fa-check text-white"></i>
+                                    </div>
+                                    <span>24/7 priority support</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -634,7 +863,86 @@ ob_start();
         </div>
     </div>
 </div>
-<!-- Pricing End -->
+<!-- Pricing Plans End -->
+
+<!-- Add JavaScript for tab switching -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show EduManager section by default
+    document.getElementById('edumanager').classList.add('active');
+    
+    const productNav = document.querySelector('.product-nav');
+    const pricingSections = document.querySelectorAll('.pricing-section');
+    
+    // Set first nav button as active by default
+    const defaultButton = productNav.querySelector('[data-product="edumanager"]');
+    if (defaultButton) {
+        defaultButton.classList.add('active');
+    }
+    
+    productNav.addEventListener('click', function(e) {
+        if (e.target.matches('[data-product]')) {
+            e.preventDefault();
+            
+            // Remove active class from all buttons
+            productNav.querySelectorAll('a').forEach(a => {
+                a.classList.remove('active', 'btn-primary');
+                a.classList.add('btn-light');
+            });
+            
+            // Add active class to clicked button
+            e.target.classList.remove('btn-light');
+            e.target.classList.add('active', 'btn-primary');
+            
+            // Hide all pricing sections
+            pricingSections.forEach(section => {
+                section.style.display = 'none';
+                section.classList.remove('active');
+            });
+            
+            // Show selected pricing section
+            const targetProduct = e.target.getAttribute('data-product');
+            const targetSection = document.getElementById(targetProduct);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('active');
+            }
+        }
+    });
+});
+</script>
+
+<!-- Add CSS for pricing sections -->
+<style>
+.pricing-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.pricing-section.active {
+    display: block;
+    opacity: 1;
+}
+
+.product-nav .btn {
+    transition: all 0.3s ease;
+}
+
+.product-nav .btn.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.product-nav {
+    margin-bottom: 2rem;
+}
+
+.product-nav .btn {
+    margin: 0 0.5rem;
+    min-width: 150px;
+}
+</style>
 
 <!-- Facts Start -->
 <div class="container-xxl py-5">

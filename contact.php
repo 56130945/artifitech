@@ -1,13 +1,21 @@
 <?php
-$page = 'contact';
+// Include global configuration
+require_once 'includes/config.php';
 
-// Meta information
-$title = "Artifitech - Contact Us | Leading Educational Technology Solutions Provider";
-$keywords = "Educational Technology, EduManager, AI Solutions, IoT Solutions, Cloud Computing";
-$description = "Contact Artifitech - South Africa's leading provider of educational technology solutions. Get in touch with us for your educational technology needs.";
-$og_title = "Contact Artifitech - Leading Educational Technology Solutions";
-$og_description = "Get in touch with South Africa's leading provider of educational technology solutions";
+// Set page-specific variables
+$page = 'contact';
+$title = "Artifitech - Contact Us | Educational Technology Solutions";
+$keywords = "Contact Artifitech, Support, Sales Inquiry, Technical Support, Educational Technology";
+$description = "Get in touch with Artifitech for all your educational technology needs. Contact our team for support, sales inquiries, or partnership opportunities.";
+$og_title = "Contact Artifitech - Educational Technology Solutions";
+$og_description = "Reach out to our team for educational technology solutions";
 $og_url = "https://artifitech.com/contact";
+
+// Add Black Friday Modal CSS with correct path
+$additional_css = '<link rel="stylesheet" href="' . $base_url . '/css/black-friday-modal.css">';
+
+// Add Black Friday Modal JS with correct path
+$additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></script>';
 
 // Start output buffering
 ob_start();

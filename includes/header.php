@@ -3,7 +3,7 @@
 <div class="container-fluid py-4 px-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="row align-items-center top-bar">
         <div class="col-lg-4 col-md-12 text-center text-lg-start">
-            <a href="" class="navbar-brand m-0 p-0">
+            <a href="index.php" class="navbar-brand m-0 p-0">
                 <img src="img/logo.png" alt="Artifitech Logo" height="60">
             </a>
         </div>
@@ -51,7 +51,7 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand d-lg-none" href="#">
+        <a class="navbar-brand d-lg-none" href="index.php">
             <img src="img/logo.png" alt="Artifitech Logo" height="40">
         </a>
         <button type="button" class="navbar-toggler me-3" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -61,8 +61,8 @@
             <div class="navbar-nav me-auto p-3 p-lg-0">
                 <a href="index.php" class="nav-item nav-link <?php echo ($page === 'home') ? 'active' : ''; ?>">Home</a>
                 <a href="about.php" class="nav-item nav-link <?php echo ($page === 'about') ? 'active' : ''; ?>">About Us</a>
-                <a href="products.php" class="nav-item nav-link <?php echo ($page === 'products') ? 'active' : ''; ?>">Flagship Products</a>
-                <a href="project.php" class="nav-item nav-link <?php echo ($page === 'project') ? 'active' : ''; ?>">Projects</a>
+                <a href="products.php" class="nav-item nav-link <?php echo ($page === 'products') ? 'active' : ''; ?>">Products</a>
+                <a href="academy.php" class="nav-item nav-link <?php echo ($page === 'academy') ? 'active' : ''; ?>">Academy</a>
                 <a href="contact.php" class="nav-item nav-link <?php echo ($page === 'contact') ? 'active' : ''; ?>">Contact Us</a>
             </div>
             <div class="auth-buttons d-none d-lg-flex">

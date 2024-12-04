@@ -1,0 +1,197 @@
+/* Black Friday Modal Specific Styles */
+body #modalOverlay.black-friday-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    display: none !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 99999 !important;
+}
+
+body #modalOverlay.black-friday-overlay.active {
+    display: flex !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-modal {
+    background: white !important;
+    padding: 2.5rem !important;
+    border-radius: 20px !important;
+    position: relative !important;
+    width: 90% !important;
+    max-width: 550px !important;
+    transform: scale(0.7) !important;
+    transition: all 0.3s ease-in-out !important;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3) !important;
+    z-index: 100000 !important;
+    opacity: 0 !important;
+}
+
+body #modalOverlay.black-friday-overlay.active .black-friday-modal {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-close {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: none !important;
+    border: none !important;
+    font-size: 28px !important;
+    cursor: pointer !important;
+    color: #666 !important;
+    padding: 5px 10px !important;
+    transition: color 0.2s !important;
+    z-index: 100001 !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-close:hover {
+    color: #000 !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-content {
+    text-align: center !important;
+    padding: 20px !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-header {
+    color: #ff4d4d !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+    font-weight: 800 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-body h2 {
+    font-size: 2.8rem !important;
+    color: #333 !important;
+    margin-bottom: 0.8rem !important;
+    font-weight: bold !important;
+    background: linear-gradient(45deg, #2c3e50, #3498db) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-body p {
+    font-size: 1.2rem !important;
+    color: #666 !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.6 !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-features {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 1.5rem 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-features li {
+    font-size: 1.1rem !important;
+    color: #2c3e50 !important;
+    padding: 0.5rem !important;
+    background: rgba(52, 152, 219, 0.1) !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-price {
+    margin: 2rem 0 !important;
+    text-align: center !important;
+}
+
+body #modalOverlay.black-friday-overlay .original-price {
+    font-size: 1.5rem !important;
+    color: #999 !important;
+    text-decoration: line-through !important;
+    margin-right: 1rem !important;
+}
+
+body #modalOverlay.black-friday-overlay .new-price {
+    font-size: 2.2rem !important;
+    color: #27ae60 !important;
+    font-weight: bold !important;
+}
+
+body #modalOverlay.black-friday-overlay .offer-ends {
+    color: #e74c3c !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    margin: 1rem 0 !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-cta {
+    background: linear-gradient(45deg, #2980b9, #3498db) !important;
+    color: white !important;
+    border: none !important;
+    padding: 15px 40px !important;
+    font-size: 1.2rem !important;
+    border-radius: 30px !important;
+    cursor: pointer !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    transition: all 0.3s ease !important;
+    display: inline-block !important;
+    margin-top: 20px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3) !important;
+}
+
+body #modalOverlay.black-friday-overlay .black-friday-cta:hover {
+    background: linear-gradient(45deg, #3498db, #2980b9) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+@media (max-width: 768px) {
+    body #modalOverlay.black-friday-overlay .black-friday-modal {
+        width: 95% !important;
+        padding: 1.5rem !important;
+        margin: 15px !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-header {
+        font-size: 2rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-body h2 {
+        font-size: 2rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-body p {
+        font-size: 1rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-features {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-features li {
+        font-size: 1rem !important;
+        padding: 0.4rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .original-price {
+        font-size: 1.2rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .new-price {
+        font-size: 1.8rem !important;
+    }
+    
+    body #modalOverlay.black-friday-overlay .black-friday-cta {
+        padding: 12px 30px !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        max-width: 300px !important;
+    }
+} 
