@@ -41,245 +41,334 @@ ob_start();
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h6 class="section-title bg-white text-center text-primary px-3">Our Products</h6>
                 <h1 class="display-6 mb-4">Transforming Education Through Innovation</h1>
-                <p class="text-muted">Discover our cutting-edge solutions designed to revolutionize the educational landscape in South Africa.</p>
             </div>
 
             <!-- Product Navigation -->
-            <div class="product-nav mb-5 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="nav-wrapper text-center">
-                    <button class="product-nav-btn active" data-filter="all">All Products</button>
-                    <button class="product-nav-btn" data-filter="lms">LMS</button>
-                    <button class="product-nav-btn" data-filter="ai">AI & IoT</button>
-                    <button class="product-nav-btn" data-filter="xr">XR</button>
-                    <button class="product-nav-btn" data-filter="cloud">Cloud</button>
-                </div>
-            </div>
-
-            <!-- Featured Product - EduManager -->
-            <div class="featured-product mb-5 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="product-spotlight">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="spotlight-content p-4 p-lg-5">
-                                <span class="badge bg-primary mb-3">Featured Product</span>
-                                <h2 class="mb-4">EduManager</h2>
-                                <p class="lead mb-4">The next generation learning management system, powered by AI and designed for the future of education.</p>
-                                <div class="spotlight-features mb-4">
-                                    <div class="feature-item">
-                                        <i class="fas fa-brain"></i>
-                                        <span>AI-Powered</span>
-                                    </div>
-                                    <div class="feature-item">
-                                        <i class="fas fa-mobile-alt"></i>
-                                        <span>Mobile-First</span>
-                                    </div>
-                                    <div class="feature-item">
-                                        <i class="fas fa-shield-alt"></i>
-                                        <span>Secure</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary btn-lg rounded-pill">
-                                    Learn More <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="spotlight-image">
-                                <img src="img/edumanager.jpg" alt="EduManager Platform" class="img-fluid rounded-4">
-                                <div class="floating-badge top">
-                                    <i class="fas fa-award"></i>
-                                    <span>Top Rated</span>
-                                </div>
-                                <div class="floating-badge bottom">
-                                    <i class="fas fa-users"></i>
-                                    <span>10K+ Users</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product Grid -->
-            <div class="row g-4">
-                <!-- AI & IoT Solutions Card -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="product-card" data-category="ai">
-                        <div class="product-image">
-                            <img src="img/ai-solutions.jpg" alt="AI Solutions" class="img-fluid">
-                            <div class="product-overlay">
-                                <div class="overlay-content">
-                                    <h4>AI & IoT Solutions</h4>
-                                    <p>Transform your campus with intelligent automation</p>
-                                    <a href="#" class="btn btn-light rounded-pill">Explore <i class="fas fa-arrow-right ms-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="tech-stack">
-                                <span class="tech-badge">Machine Learning</span>
-                                <span class="tech-badge">IoT Sensors</span>
-                                <span class="tech-badge">Analytics</span>
-                            </div>
-                            <div class="product-features">
-                                <div class="feature">
-                                    <i class="fas fa-robot"></i>
-                                    <span>Smart Automation</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-chart-line"></i>
-                                    <span>Predictive Analytics</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-network-wired"></i>
-                                    <span>IoT Integration</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Extended Reality Card -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="product-card" data-category="xr">
-                        <div class="product-image">
-                            <img src="img/xr-solutions.jpg" alt="XR Solutions" class="img-fluid">
-                            <div class="product-overlay">
-                                <div class="overlay-content">
-                                    <h4>Extended Reality</h4>
-                                    <p>Immersive learning experiences that inspire</p>
-                                    <a href="#" class="btn btn-light rounded-pill">Discover <i class="fas fa-arrow-right ms-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="tech-stack">
-                                <span class="tech-badge">VR</span>
-                                <span class="tech-badge">AR</span>
-                                <span class="tech-badge">3D Modeling</span>
-                            </div>
-                            <div class="product-features">
-                                <div class="feature">
-                                    <i class="fas fa-vr-cardboard"></i>
-                                    <span>Virtual Labs</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-cube"></i>
-                                    <span>3D Learning</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-glasses"></i>
-                                    <span>AR Overlay</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cloud Solutions Card -->
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="product-card" data-category="cloud">
-                        <div class="product-image">
-                            <img src="img/cloud-solutions.jpg" alt="Cloud Solutions" class="img-fluid">
-                            <div class="product-overlay">
-                                <div class="overlay-content">
-                                    <h4>Cloud Infrastructure</h4>
-                                    <p>Scalable and secure cloud solutions</p>
-                                    <a href="#" class="btn btn-light rounded-pill">Learn More <i class="fas fa-arrow-right ms-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <div class="tech-stack">
-                                <span class="tech-badge">Cloud Native</span>
-                                <span class="tech-badge">Security</span>
-                                <span class="tech-badge">Scalable</span>
-                            </div>
-                            <div class="product-features">
-                                <div class="feature">
-                                    <i class="fas fa-cloud"></i>
-                                    <span>Cloud Storage</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <span>POPIA Compliant</span>
-                                </div>
-                                <div class="feature">
-                                    <i class="fas fa-sync"></i>
-                                    <span>Auto Scaling</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Statistics Section -->
-            <div class="row mt-5 g-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-4 mb-5">
                 <div class="col-12">
-                    <div class="stats-container">
-                        <div class="row text-center">
-                            <div class="col-lg-3 col-md-6">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-school"></i>
-                                    </div>
-                                    <h3 class="counter">100+</h3>
-                                    <p>Educational Institutions</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <h3 class="counter">50K+</h3>
-                                    <p>Active Students</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-clock"></i>
-                                    </div>
-                                    <h3 class="counter">99.9%</h3>
-                                    <p>Uptime</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="stat-card">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <h3 class="counter">4.8</h3>
-                                    <p>User Rating</p>
-                                </div>
-                            </div>
+                    <div class="product-nav wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="d-flex justify-content-center flex-wrap gap-3">
+                            <a href="#edumanager" class="btn btn-primary rounded-pill px-4 active" data-product="edumanager">EduManager LMS</a>
+                            <a href="#hr" class="btn btn-light rounded-pill px-4" data-product="hr">HR System</a>
+                            <a href="#finance" class="btn btn-light rounded-pill px-4" data-product="finance">Financial System</a>
+                            <a href="#analytics" class="btn btn-light rounded-pill px-4" data-product="analytics">Analytics Suite</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Call to Action -->
-            <div class="row mt-5 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="col-12">
-                    <div class="cta-container text-center">
-                        <h2>Ready to Transform Your Institution?</h2>
-                        <p class="lead">Join the educational revolution with our cutting-edge solutions</p>
-                        <div class="cta-buttons">
-                            <a href="#" class="btn btn-primary btn-lg rounded-pill me-3">
-                                Schedule Demo <i class="fas fa-play-circle ms-2"></i>
-                            </a>
-                            <a href="#" class="btn btn-outline-primary btn-lg rounded-pill">
-                                Contact Sales <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
+            <!-- EduManager Section -->
+            <div id="edumanager" class="product-section active">
+                <div class="row g-4">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <i class="fa fa-graduation-cap text-primary fs-4"></i>
+                            </div>
+                            <h4 class="mb-3">EduManager LMS</h4>
+                            <p class="mb-4">Complete Learning Management System for modern educational institutions</p>
+                            <div class="row gy-2">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Virtual Classrooms</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Interactive Learning Tools</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Student Progress Tracking</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <img src="img/edumanager.jpg" alt="EduManager Platform" class="img-fluid rounded mb-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- HR System Section -->
+            <div id="hr" class="product-section">
+                <div class="row g-4">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <i class="fa fa-users text-primary fs-4"></i>
+                            </div>
+                            <h4 class="mb-3">HR System</h4>
+                            <p class="mb-4">Comprehensive HR management solution for educational institutions</p>
+                            <div class="row gy-2">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Employee Management</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Leave Management</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Performance Tracking</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <img src="img/hr-system.jpg" alt="HR System" class="img-fluid rounded mb-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial System Section -->
+            <div id="finance" class="product-section">
+                <div class="row g-4">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <i class="fa fa-chart-line text-primary fs-4"></i>
+                            </div>
+                            <h4 class="mb-3">Financial System</h4>
+                            <p class="mb-4">Advanced financial management and reporting system</p>
+                            <div class="row gy-2">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Budgeting Tools</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Financial Reporting</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Payment Processing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <img src="img/finance-system.jpg" alt="Financial System" class="img-fluid rounded mb-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Suite Section -->
+            <div id="analytics" class="product-section">
+                <div class="row g-4">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                                <i class="fa fa-chart-pie text-primary fs-4"></i>
+                            </div>
+                            <h4 class="mb-3">Analytics Suite</h4>
+                            <p class="mb-4">Powerful analytics and reporting platform</p>
+                            <div class="row gy-2">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Data Visualization</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Predictive Analytics</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center">
+                                        <div class="btn-sm-square bg-primary rounded-circle me-3">
+                                            <i class="fa fa-check text-white"></i>
+                                        </div>
+                                        <span>Custom Reports</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded h-100 p-5">
+                            <img src="img/analytics-suite.jpg" alt="Analytics Suite" class="img-fluid rounded mb-4">
+                            <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- Products End -->
+
+    <!-- Add JavaScript for product section switching -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show EduManager section by default
+        const defaultSection = document.getElementById('edumanager');
+        if (defaultSection) {
+            defaultSection.style.display = 'block';
+            defaultSection.classList.add('active');
+        }
+        
+        const productNav = document.querySelector('.product-nav');
+        const productSections = document.querySelectorAll('.product-section');
+        
+        // Set first nav button as active by default
+        const defaultButton = productNav.querySelector('[data-product="edumanager"]');
+        if (defaultButton) {
+            defaultButton.classList.remove('btn-light');
+            defaultButton.classList.add('active', 'btn-primary');
+        }
+        
+        productNav.addEventListener('click', function(e) {
+            if (e.target.matches('[data-product]')) {
+                e.preventDefault();
+                
+                // Remove active class from all buttons
+                productNav.querySelectorAll('a').forEach(a => {
+                    a.classList.remove('active', 'btn-primary');
+                    a.classList.add('btn-light');
+                });
+                
+                // Add active class to clicked button
+                e.target.classList.remove('btn-light');
+                e.target.classList.add('active', 'btn-primary');
+                
+                // Hide all product sections first
+                productSections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                });
+                
+                // Show selected product section with animation
+                const targetProduct = e.target.getAttribute('data-product');
+                const targetSection = document.getElementById(targetProduct);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                    // Force a reflow
+                    void targetSection.offsetWidth;
+                    targetSection.classList.add('active');
+                }
+            }
+        });
+    });
+    </script>
+
+    <style>
+    .product-section {
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .product-section.active {
+        display: block;
+        opacity: 1;
+    }
+
+    .product-nav {
+        margin-bottom: 2rem;
+    }
+
+    .product-nav .btn {
+        margin: 0 0.5rem;
+        min-width: 150px;
+        transition: all 0.3s ease;
+    }
+
+    .product-nav .btn.active {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Ensure product sections are visible when active */
+    #hr.active,
+    #finance.active,
+    #analytics.active,
+    #edumanager.active {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    /* Animation for section transitions */
+    .product-section {
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+    }
+
+    .product-section.active {
+        animation-name: fadeIn;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feature-item {
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-5px);
+    }
+    </style>
 
 <?php
 $content = ob_get_clean();

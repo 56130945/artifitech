@@ -114,40 +114,6 @@ ob_start();
 </div>
 <!-- Carousel End -->
 
-<!-- EduManager Spotlight -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h6 class="section-title gradient-text bg-white text-center px-3">EduManager</h6>
-            <h1 class="display-6 mb-4">The Complete Education Management Solution</h1>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="feature-item bg-light rounded text-center p-4 floating">
-                    <i class="fa fa-video fa-3x text-primary mb-4"></i>
-                    <h5 class="mb-3">Virtual Classrooms</h5>
-                    <p class="m-0">Enable seamless online learning with interactive virtual classrooms. Real-time engagement tools and collaboration features.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="feature-item bg-light rounded text-center p-4 floating">
-                    <i class="fa fa-tasks fa-3x text-primary mb-4"></i>
-                    <h5 class="mb-3">Administrative Hub</h5>
-                    <p class="m-0">Streamline operations with integrated HR, finance, and academic administration. Centralized management of all institutional processes.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="feature-item bg-light rounded text-center p-4 floating">
-                    <i class="fa fa-chart-line fa-3x text-primary mb-4"></i>
-                    <h5 class="mb-3">Analytics Dashboard</h5>
-                    <p class="m-0">Make data-driven decisions with real-time analytics. Track performance, attendance, and resource utilization.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- EduManager Spotlight End -->
-
 <!-- Pricing Plans Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -869,7 +835,11 @@ ob_start();
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Show EduManager section by default
-    document.getElementById('edumanager').classList.add('active');
+    const defaultSection = document.getElementById('edumanager');
+    if (defaultSection) {
+        defaultSection.style.display = 'block';
+        defaultSection.classList.add('active');
+    }
     
     const productNav = document.querySelector('.product-nav');
     const pricingSections = document.querySelectorAll('.pricing-section');
@@ -877,7 +847,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set first nav button as active by default
     const defaultButton = productNav.querySelector('[data-product="edumanager"]');
     if (defaultButton) {
-        defaultButton.classList.add('active');
+        defaultButton.classList.remove('btn-light');
+        defaultButton.classList.add('active', 'btn-primary');
     }
     
     productNav.addEventListener('click', function(e) {
@@ -894,17 +865,19 @@ document.addEventListener('DOMContentLoaded', function() {
             e.target.classList.remove('btn-light');
             e.target.classList.add('active', 'btn-primary');
             
-            // Hide all pricing sections
+            // Hide all pricing sections first
             pricingSections.forEach(section => {
                 section.style.display = 'none';
                 section.classList.remove('active');
             });
             
-            // Show selected pricing section
+            // Show selected pricing section with animation
             const targetProduct = e.target.getAttribute('data-product');
             const targetSection = document.getElementById(targetProduct);
             if (targetSection) {
                 targetSection.style.display = 'block';
+                // Force a reflow
+                void targetSection.offsetWidth;
                 targetSection.classList.add('active');
             }
         }
@@ -925,7 +898,13 @@ document.addEventListener('DOMContentLoaded', function() {
     opacity: 1;
 }
 
+.product-nav {
+    margin-bottom: 2rem;
+}
+
 .product-nav .btn {
+    margin: 0 0.5rem;
+    min-width: 150px;
     transition: all 0.3s ease;
 }
 
@@ -934,13 +913,34 @@ document.addEventListener('DOMContentLoaded', function() {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.product-nav {
-    margin-bottom: 2rem;
+/* Ensure pricing sections are visible when active */
+#hr.active,
+#finance.active,
+#analytics.active,
+#edumanager.active {
+    display: block !important;
+    opacity: 1 !important;
 }
 
-.product-nav .btn {
-    margin: 0 0.5rem;
-    min-width: 150px;
+/* Animation for section transitions */
+.pricing-section {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.pricing-section.active {
+    animation-name: fadeIn;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 </style>
 
