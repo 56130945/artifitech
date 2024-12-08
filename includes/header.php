@@ -1,4 +1,9 @@
 <?php if (!isset($page)) $page = ''; ?>
+<!-- Particle Background -->
+<canvas id="particle-canvas"></canvas>
+<link href="css/particles.css" rel="stylesheet">
+<script src="js/particles.js"></script>
+
 <!-- Brand & Contact Start -->
 <div class="container-fluid py-4 px-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="row align-items-center top-bar">
