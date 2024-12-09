@@ -1,5 +1,7 @@
 <?php
-// Include global configuration
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'includes/config.php';
 
 // Set page-specific variables
@@ -10,6 +12,124 @@ $description = "Create your Artifitech account to access our full range of educa
 $og_title = "Register - Artifitech Educational Technology Solutions";
 $og_description = "Create your Artifitech account";
 $og_url = "https://artifitech.com/register";
+
+// Process form submission
+$message = '';
+$messageType = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Log the start of registration process
+    error_log("Registration process started");
+    error_log("POST data: " . print_r($_POST, true));
+
+    // Get and sanitize inputs
+    $firstName = sanitizeInput($_POST['first_name'] ?? '');
+    $lastName = sanitizeInput($_POST['last_name'] ?? '');
+    $email = sanitizeInput($_POST['email'] ?? '');
+    $phone = sanitizeInput($_POST['phone'] ?? '');
+    $institution = sanitizeInput($_POST['institution'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
+
+    error_log("Sanitized inputs received:");
+    error_log("First Name: $firstName");
+    error_log("Last Name: $lastName");
+    error_log("Email: $email");
+    error_log("Phone: $phone");
+    error_log("Institution: $institution");
+
+    // Validate inputs
+    $errors = [];
+    if (empty($firstName)) $errors['first_name'] = 'First name is required';
+    if (empty($lastName)) $errors['last_name'] = 'Last name is required';
+    if (empty($email)) $errors['email'] = 'Email is required';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = 'Invalid email format';
+    if (empty($institution)) $errors['institution'] = 'Institution is required';
+    if (empty($password)) $errors['password'] = 'Password is required';
+    if (strlen($password) < 6) $errors['password'] = 'Password must be at least 6 characters';
+    if ($password !== $confirmPassword) $errors['confirm_password'] = 'Passwords do not match';
+
+    if (!empty($errors)) {
+        error_log("Validation errors found: " . print_r($errors, true));
+        $message = 'Please correct the errors below.';
+        $messageType = 'danger';
+    } else {
+        error_log("Validation passed, attempting database connection");
+        try {
+            $conn = getDBConnection();
+            if (!$conn) {
+                throw new Exception("Database connection failed");
+            }
+            error_log("Database connection successful");
+
+            // Check if email already exists
+            $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+            error_log("Checking for existing email: $email");
+            $stmt->execute([$email]);
+            if ($stmt->fetch()) {
+                error_log("Email already exists: $email");
+                $message = 'Email already registered';
+                $messageType = 'danger';
+            } else {
+                error_log("Email is unique, proceeding with registration");
+                // Hash password
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                error_log("Password hashed successfully");
+
+                // Insert new user
+                $sql = "INSERT INTO users (first_name, last_name, email, phone, institution, password, created_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, NOW())";
+                error_log("Preparing SQL: $sql");
+                
+                $stmt = $conn->prepare($sql);
+                error_log("Statement prepared successfully");
+                
+                $params = [
+                    $firstName,
+                    $lastName,
+                    $email,
+                    $phone,
+                    $institution,
+                    $hashedPassword
+                ];
+                error_log("Parameters ready: " . print_r($params, true));
+                
+                $stmt->execute($params);
+                error_log("User inserted successfully");
+
+                $userId = $conn->lastInsertId();
+                error_log("New user ID: $userId");
+
+                // Set session variables
+                $_SESSION['user_id'] = $userId;
+                $_SESSION['user_email'] = $email;
+                $_SESSION['user_name'] = $firstName . ' ' . $lastName;
+                error_log("Session variables set");
+
+                // Redirect to home page
+                error_log("Redirecting to index.php");
+                header('Location: index.php');
+                exit;
+            }
+        } catch (PDOException $e) {
+            error_log("Database error occurred:");
+            error_log("Error message: " . $e->getMessage());
+            error_log("Error code: " . $e->getCode());
+            error_log("SQL State: " . $e->errorInfo[0]);
+            error_log("Stack trace: " . $e->getTraceAsString());
+            
+            $message = 'An error occurred during registration. Please try again.';
+            $messageType = 'danger';
+        } catch (Exception $e) {
+            error_log("General error occurred:");
+            error_log("Error message: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            
+            $message = 'An error occurred during registration. Please try again.';
+            $messageType = 'danger';
+        }
+    }
+}
 
 // Start output buffering
 ob_start();
@@ -39,63 +159,84 @@ ob_start();
                         <h4 class="mb-3">Create Your Account</h4>
                         <p class="text-muted mb-4">Join Artifitech and get access to our comprehensive educational technology solutions</p>
                     </div>
-                    <form>
+                    
+                    <?php if (!empty($message)): ?>
+                    <div class="alert alert-<?php echo $messageType; ?> mb-4">
+                        <?php echo $message; ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <form method="POST" action="register.php">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control border-0" id="firstName" placeholder="First Name">
+                                    <input type="text" class="form-control <?php echo isset($errors['first_name']) ? 'is-invalid' : ''; ?>" 
+                                           id="firstName" name="first_name" placeholder="First Name" 
+                                           value="<?php echo htmlspecialchars($firstName ?? ''); ?>" required>
                                     <label for="firstName">First Name</label>
+                                    <?php if (isset($errors['first_name'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['first_name']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control border-0" id="lastName" placeholder="Last Name">
+                                    <input type="text" class="form-control <?php echo isset($errors['last_name']) ? 'is-invalid' : ''; ?>" 
+                                           id="lastName" name="last_name" placeholder="Last Name" 
+                                           value="<?php echo htmlspecialchars($lastName ?? ''); ?>" required>
                                     <label for="lastName">Last Name</label>
+                                    <?php if (isset($errors['last_name'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['last_name']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control border-0" id="email" placeholder="Your Email">
+                                    <input type="email" class="form-control <?php echo isset($errors['email']) ? 'is-invalid' : ''; ?>" 
+                                           id="email" name="email" placeholder="Your Email" 
+                                           value="<?php echo htmlspecialchars($email ?? ''); ?>" required>
                                     <label for="email">Email Address</label>
+                                    <?php if (isset($errors['email'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['email']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="tel" class="form-control border-0" id="phone" placeholder="Phone Number">
-                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" 
+                                           placeholder="Phone Number" value="<?php echo htmlspecialchars($phone ?? ''); ?>">
+                                    <label for="phone">Phone Number (Optional)</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <select class="form-select border-0" id="institution">
-                                        <option value="">Select your institution type</option>
-                                        <option value="school">School</option>
-                                        <option value="college">College</option>
-                                        <option value="university">University</option>
-                                        <option value="corporate">Corporate Training</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                    <label for="institution">Institution Type</label>
+                                    <input type="text" class="form-control <?php echo isset($errors['institution']) ? 'is-invalid' : ''; ?>" 
+                                           id="institution" name="institution" placeholder="Institution" 
+                                           value="<?php echo htmlspecialchars($institution ?? ''); ?>" required>
+                                    <label for="institution">Institution</label>
+                                    <?php if (isset($errors['institution'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['institution']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="password" class="form-control border-0" id="password" placeholder="Password">
+                                    <input type="password" class="form-control <?php echo isset($errors['password']) ? 'is-invalid' : ''; ?>" 
+                                           id="password" name="password" placeholder="Password" required>
                                     <label for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control border-0" id="confirmPassword" placeholder="Confirm Password">
-                                    <label for="confirmPassword">Confirm Password</label>
+                                    <?php if (isset($errors['password'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['password']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="terms">
-                                    <label class="form-check-label" for="terms">
-                                        I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
-                                    </label>
+                                <div class="form-floating">
+                                    <input type="password" class="form-control <?php echo isset($errors['confirm_password']) ? 'is-invalid' : ''; ?>" 
+                                           id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <?php if (isset($errors['confirm_password'])): ?>
+                                        <div class="invalid-feedback"><?php echo $errors['confirm_password']; ?></div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -114,35 +255,6 @@ ob_start();
     </div>
 </div>
 <!-- Register End -->
-
-<style>
-.form-control, .form-select {
-    border: 1px solid #ced4da;
-    padding: 0.75rem;
-}
-
-.form-control:focus, .form-select:focus {
-    box-shadow: none;
-    border-color: #2124B1;
-}
-
-.form-check-input:checked {
-    background-color: #2124B1;
-    border-color: #2124B1;
-}
-
-.form-check-input:focus {
-    box-shadow: none;
-    border-color: #2124B1;
-}
-
-.form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 16px 12px;
-}
-</style>
 
 <?php
 $content = ob_get_clean();

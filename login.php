@@ -1,5 +1,7 @@
 <?php
-// Include global configuration
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'includes/config.php';
 
 // Set page-specific variables
@@ -10,6 +12,78 @@ $description = "Login to your Artifitech account to access our educational techn
 $og_title = "Login - Artifitech Educational Technology Solutions";
 $og_description = "Access your Artifitech account";
 $og_url = "https://artifitech.com/login";
+
+// Process login form
+$message = '';
+$messageType = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log("Login attempt started");
+    
+    // Get and sanitize inputs
+    $email = sanitizeInput($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $remember = isset($_POST['remember']);
+
+    error_log("Login attempt for email: " . $email);
+
+    if (empty($email) || empty($password)) {
+        $message = 'Email and password are required';
+        $messageType = 'danger';
+        error_log("Empty email or password");
+    } else {
+        try {
+            $conn = getDBConnection();
+            if (!$conn) {
+                throw new Exception("Database connection failed");
+            }
+
+            // Get user from database
+            $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            error_log("User query executed");
+
+            if (!$user || !password_verify($password, $user['password'])) {
+                $message = 'Invalid email or password';
+                $messageType = 'danger';
+                error_log("Invalid credentials for email: " . $email);
+            } else {
+                error_log("Valid credentials for user ID: " . $user['id']);
+
+                // Set session variables
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+
+                // Handle remember me
+                if ($remember) {
+                    $token = bin2hex(random_bytes(32));
+                    $expires = time() + (30 * 24 * 60 * 60); // 30 days
+
+                    // Store token in database
+                    $stmt = $conn->prepare("INSERT INTO remember_tokens (user_id, token, expires) VALUES (?, ?, ?)");
+                    $stmt->execute([$user['id'], password_hash($token, PASSWORD_DEFAULT), date('Y-m-d H:i:s', $expires)]);
+
+                    // Set cookie
+                    setcookie('remember_token', $token, $expires, '/', '', true, true);
+                    error_log("Remember me token set for user ID: " . $user['id']);
+                }
+
+                // Redirect to dashboard
+                error_log("Redirecting to back_office/dashboard.php");
+                header('Location: back_office/dashboard.php');
+                exit;
+            }
+        } catch (Exception $e) {
+            error_log("Login error: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            $message = 'An error occurred during login. Please try again.';
+            $messageType = 'danger';
+        }
+    }
+}
 
 // Start output buffering
 ob_start();
@@ -39,27 +113,37 @@ ob_start();
                         <h4 class="mb-3">Welcome Back</h4>
                         <p class="text-muted mb-4">Login to access your account and manage your services</p>
                     </div>
-                    <form>
+
+                    <?php if (!empty($message)): ?>
+                    <div class="alert alert-<?php echo $messageType; ?> mb-4">
+                        <?php echo $message; ?>
+                    </div>
+                    <?php endif; ?>
+
+                    <form method="POST" action="login.php">
                         <div class="row g-3">
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control border-0" id="email" placeholder="Your Email">
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           placeholder="Your Email" required 
+                                           value="<?php echo htmlspecialchars($email ?? ''); ?>">
                                     <label for="email">Email Address</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="password" class="form-control border-0" id="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="password" name="password" 
+                                           placeholder="Password" required>
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="d-flex justify-content-between">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="remember">
+                                        <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                         <label class="form-check-label" for="remember">Remember me</label>
                                     </div>
-                                    <a href="#" class="text-primary">Forgot Password?</a>
+                                    <a href="forgot-password.php" class="text-primary">Forgot Password?</a>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -78,28 +162,6 @@ ob_start();
     </div>
 </div>
 <!-- Login End -->
-
-<style>
-.form-control {
-    border: 1px solid #ced4da;
-    padding: 0.75rem;
-}
-
-.form-control:focus {
-    box-shadow: none;
-    border-color: #2124B1;
-}
-
-.form-check-input:checked {
-    background-color: #2124B1;
-    border-color: #2124B1;
-}
-
-.form-check-input:focus {
-    box-shadow: none;
-    border-color: #2124B1;
-}
-</style>
 
 <?php
 $content = ob_get_clean();

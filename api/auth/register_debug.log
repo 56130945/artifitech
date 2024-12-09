@@ -1,0 +1,27 @@
+[2024-12-09 20:46:55] Registration attempt started
+[2024-12-09 20:46:55] POST data: Array
+(
+    [csrf_token] => f6ad3113ecba12891295d2b472dd3c61b202ee4aeaf4cfa346e910ca87cf4dac
+    [first_name] => Vuyani
+    [last_name] => Khoza
+    [email] => vgkhoza@ehlanzenicollege.co.za
+    [phone] => 0760549424
+    [institution] => college
+    [password] => password
+    [confirm_password] => password
+    [terms] => on
+)
+
+[2024-12-09 20:46:55] Sanitized inputs received
+[2024-12-09 20:46:55] First Name: Vuyani
+[2024-12-09 20:46:55] Last Name: Khoza
+[2024-12-09 20:46:55] Email: vgkhoza@ehlanzenicollege.co.za
+[2024-12-09 20:46:55] Phone: 0760549424
+[2024-12-09 20:46:55] Institution: college
+[2024-12-09 20:46:55] Database connection successful
+[2024-12-09 20:46:55] Email check passed
+[2024-12-09 20:46:55] Password hashed
+[2024-12-09 20:46:55] Attempting to insert user
+[2024-12-09 20:46:55] Error occurred: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone' in 'INSERT INTO'
+[2024-12-09 20:46:55] Stack trace: #0 C:\xampp\htdocs\artifitech\api\auth\register.php(102): PDOStatement->execute(Array)
+#1 {main}

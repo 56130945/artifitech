@@ -1,118 +1,121 @@
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
-    const loginModal = document.getElementById('loginModal');
-    const registerModal = document.getElementById('registerModal');
+    const loginMessage = document.getElementById('loginMessage');
+    const registerMessage = document.getElementById('registerMessage');
 
-    // Close modal functionality
-    document.querySelectorAll('.close').forEach(closeBtn => {
-        closeBtn.addEventListener('click', () => {
-            loginModal.style.display = 'none';
-            registerModal.style.display = 'none';
+    // Helper function to show messages
+    const showMessage = (element, message, type) => {
+        element.style.display = 'block';
+        const alert = element.querySelector('.alert');
+        alert.textContent = message;
+        alert.className = `alert alert-${type}`;
+    };
+
+    // Login form handler
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                const formData = new FormData(loginForm);
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store the token
+                    localStorage.setItem('token', data.token);
+                    showMessage(loginMessage, 'Login successful! Redirecting...', 'success');
+                    
+                    // Redirect to dashboard after 1 second
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.php';
+                    }, 1000);
+                } else {
+                    showMessage(loginMessage, data.message || 'Login failed. Please check your credentials.', 'danger');
+                }
+            } catch (error) {
+                showMessage(loginMessage, 'An error occurred. Please try again.', 'danger');
+                console.error('Login error:', error);
+            }
         });
-    });
+    }
 
-    // Close modal when clicking outside
-    window.addEventListener('click', (event) => {
-        if (event.target === loginModal) {
-            loginModal.style.display = 'none';
-        }
-        if (event.target === registerModal) {
-            registerModal.style.display = 'none';
-        }
-    });
-
-    // Login form submission
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = loginForm.querySelector('input[type="email"]').value;
-        const password = loginForm.querySelector('input[type="password"]').value;
-
-        try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Store the token
-                localStorage.setItem('token', data.token);
-                
-                // Close modal
-                loginModal.style.display = 'none';
-                
-                // Show success message
-                alert('Successfully logged in!');
-                
-                // Refresh page or update UI
-                window.location.reload();
-            } else {
-                alert(data.message || 'Login failed. Please try again.');
+    // Registration form handler
+    if (registerForm) {
+        // Password validation
+        const validatePassword = () => {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, 'Passwords do not match!', 'danger');
+                return false;
             }
-        } catch (error) {
-            console.error('Login error:', error);
-            alert('An error occurred during login. Please try again.');
-        }
-    });
-
-    // Register form submission
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = registerForm.querySelector('input[type="email"]').value;
-        const password = registerForm.querySelector('input[type="password"]').value;
-        const confirmPassword = registerForm.querySelectorAll('input[type="password"]')[1].value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match!');
-            return;
-        }
-
-        try {
-            const response = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Store the token
-                localStorage.setItem('token', data.token);
-                
-                // Close modal
-                registerModal.style.display = 'none';
-                
-                // Show success message
-                alert('Successfully registered!');
-                
-                // Refresh page or update UI
-                window.location.reload();
-            } else {
-                alert(data.message || 'Registration failed. Please try again.');
+            
+            if (password.length < 6) {
+                showMessage(registerMessage, 'Password must be at least 6 characters long!', 'danger');
+                return false;
             }
-        } catch (error) {
-            console.error('Registration error:', error);
-            alert('An error occurred during registration. Please try again.');
-        }
-    });
+            
+            return true;
+        };
 
-    // Function to show login modal
-    window.showLoginModal = () => {
-        loginModal.style.display = 'block';
-    };
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validatePassword()) {
+                return;
+            }
 
-    // Function to show register modal
-    window.showRegisterModal = () => {
-        registerModal.style.display = 'block';
-    };
+            try {
+                const formData = new FormData(registerForm);
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showMessage(registerMessage, 'Registration successful! Redirecting to login...', 'success');
+                    
+                    // Clear form
+                    registerForm.reset();
+                    
+                    // Redirect to login page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = '/login.php';
+                    }, 2000);
+                } else {
+                    showMessage(registerMessage, data.message || 'Registration failed. Please try again.', 'danger');
+                }
+            } catch (error) {
+                showMessage(registerMessage, 'An error occurred. Please try again.', 'danger');
+                console.error('Registration error:', error);
+            }
+        });
+
+        // Real-time password validation
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        
+        [passwordInput, confirmPasswordInput].forEach(input => {
+            input.addEventListener('input', () => {
+                if (passwordInput.value && confirmPasswordInput.value) {
+                    validatePassword();
+                }
+            });
+        });
+    }
 }); 
