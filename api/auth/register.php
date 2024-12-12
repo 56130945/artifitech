@@ -39,7 +39,6 @@ $firstName = sanitizeInput($_POST['first_name'] ?? '');
 $lastName = sanitizeInput($_POST['last_name'] ?? '');
 $email = sanitizeInput($_POST['email'] ?? '');
 $phone = sanitizeInput($_POST['phone'] ?? '');
-$institution = sanitizeInput($_POST['institution'] ?? '');
 $password = $_POST['password'] ?? '';
 $confirmPassword = $_POST['confirm_password'] ?? '';
 
@@ -48,7 +47,6 @@ logDebug("First Name: $firstName");
 logDebug("Last Name: $lastName");
 logDebug("Email: $email");
 logDebug("Phone: $phone");
-logDebug("Institution: $institution");
 
 // Validate inputs
 $errors = [];
@@ -57,7 +55,6 @@ if (empty($firstName)) $errors['first_name'] = 'First name is required';
 if (empty($lastName)) $errors['last_name'] = 'Last name is required';
 if (empty($email)) $errors['email'] = 'Email is required';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = 'Invalid email format';
-if (empty($institution)) $errors['institution'] = 'Institution is required';
 if (empty($password)) $errors['password'] = 'Password is required';
 if (strlen($password) < 6) $errors['password'] = 'Password must be at least 6 characters';
 if ($password !== $confirmPassword) $errors['confirm_password'] = 'Passwords do not match';
@@ -94,8 +91,8 @@ try {
 
     // Insert new user
     $stmt = $conn->prepare("
-        INSERT INTO users (first_name, last_name, email, phone, institution, password, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, NOW())
+        INSERT INTO users (first_name, last_name, email, phone, password, user_type, created_at)
+        VALUES (?, ?, ?, ?, ?, 'customer', NOW())
     ");
     
     logDebug("Attempting to insert user");
@@ -104,7 +101,6 @@ try {
         $lastName,
         $email,
         $phone,
-        $institution,
         $hashedPassword
     ]);
 

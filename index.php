@@ -949,212 +949,150 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<!-- News & Notices Start -->
+<!-- News & Events Section Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="row g-5">
-            <!-- Latest News Section -->
-            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="section-title position-relative mb-4">
-                    <h6 class="position-relative text-primary ps-4">Latest News</h6>
-                    <h3 class="mb-0">Stay Updated with Artifitech</h3>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="blog-item bg-light rounded">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" src="img/blog-1.jpg" alt="">
-                                <div class="blog-date">
-                                    <h5 class="text-white fw-bold mb-0">23</h5>
-                                    <small class="text-white">Jan</small>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="mb-3">New Features Added to EduManager LMS</h5>
-                                <p class="mb-4">Explore the latest updates to our Learning Management System...</p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="">Read More</a>
-                            </div>
-                        </div>
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h6 class="section-title bg-white text-center text-primary px-3">Latest Updates</h6>
+            <h1 class="display-6 mb-4">News, Notices & Events</h1>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Latest News Column -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-light p-4 h-100">
+                    <h3 class="mb-4 text-primary">Latest News</h3>
+                    <div class="news-item mb-4">
+                        <img src="img/news-1.jpg" class="img-fluid rounded mb-3" alt="News Image">
+                        <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>15 Nov 2023</div>
+                        <h5>AI Integration in Education</h5>
+                        <p class="text-muted">Discover how our AI solutions are revolutionizing the education sector...</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
                     </div>
-                    <div class="col-md-6">
-                        <div class="blog-item bg-light rounded">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" src="img/blog-2.jpg" alt="">
-                                <div class="blog-date">
-                                    <h5 class="text-white fw-bold mb-0">20</h5>
-                                    <small class="text-white">Jan</small>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <h5 class="mb-3">Introducing Our New Analytics Suite</h5>
-                                <p class="mb-4">Discover powerful insights with our new analytics tools...</p>
-                                <a class="btn btn-primary rounded-pill py-2 px-4" href="">Read More</a>
-                            </div>
-                        </div>
+                    <div class="news-item">
+                        <img src="img/news-2.jpg" class="img-fluid rounded mb-3" alt="News Image">
+                        <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>10 Nov 2023</div>
+                        <h5>New Features in EduManager</h5>
+                        <p class="text-muted">Explore the latest features added to our flagship LMS platform...</p>
+                        <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
                     </div>
                 </div>
             </div>
-            <!-- Important Notices Section -->
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="section-title position-relative mb-4">
-                    <h6 class="position-relative text-primary ps-4">Notices</h6>
-                    <h3 class="mb-0">Important Updates</h3>
-                </div>
-                <div class="bg-light rounded p-4">
-                    <div class="notice-item mb-3 pb-3 border-bottom">
-                        <div class="d-flex mb-2">
-                            <i class="fa fa-bell text-primary me-2 mt-1"></i>
-                            <h6 class="mb-0">System Maintenance Notice</h6>
+
+            <!-- Important Notices Column -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="bg-light p-4 h-100">
+                    <h3 class="mb-4 text-primary">Important Notices</h3>
+                    <div class="notice-item mb-4">
+                        <div class="d-flex align-items-center bg-white rounded p-3 shadow-sm">
+                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-bell text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">System Maintenance Notice</h6>
+                                <small class="text-muted">Scheduled maintenance on Nov 20</small>
+                            </div>
                         </div>
-                        <small class="text-body">Scheduled maintenance on January 25th, 2024</small>
                     </div>
-                    <div class="notice-item mb-3 pb-3 border-bottom">
-                        <div class="d-flex mb-2">
-                            <i class="fa fa-info-circle text-primary me-2 mt-1"></i>
-                            <h6 class="mb-0">New Course Registration Open</h6>
+                    <div class="notice-item mb-4">
+                        <div class="d-flex align-items-center bg-white rounded p-3 shadow-sm">
+                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-star text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">New Feature Release</h6>
+                                <small class="text-muted">Virtual classroom updates</small>
+                            </div>
                         </div>
-                        <small class="text-body">Register for February 2024 intake now</small>
                     </div>
                     <div class="notice-item">
-                        <div class="d-flex mb-2">
-                            <i class="fa fa-calendar text-primary me-2 mt-1"></i>
-                            <h6 class="mb-0">Upcoming Webinar</h6>
+                        <div class="d-flex align-items-center bg-white rounded p-3 shadow-sm">
+                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                <i class="fa fa-certificate text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">Certification Program</h6>
+                                <small class="text-muted">New courses available</small>
+                            </div>
                         </div>
-                        <small class="text-body">Join our AI in Education webinar on Jan 30th</small>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- News & Notices End -->
 
-<!-- Upcoming Events Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="section-title text-center position-relative mb-5">
-            <h6 class="position-relative d-inline text-primary ps-4">Events</h6>
-            <h3 class="mb-0">Upcoming Events & Workshops</h3>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="event-item bg-light rounded">
-                    <div class="p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
-                                    <i class="fa fa-calendar-alt"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <small class="text-body">Jan 28, 2024</small>
-                                    <h6 class="mb-0">2:00 PM - 4:00 PM</h6>
-                                </div>
+            <!-- Upcoming Events Column -->
+            <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-light p-4 h-100">
+                    <h3 class="mb-4 text-primary">Upcoming Events</h3>
+                    <div class="event-item mb-4">
+                        <div class="position-relative overflow-hidden rounded">
+                            <img src="img/event-1.jpg" class="img-fluid w-100" alt="Event Image">
+                            <div class="event-overlay">
+                                <a href="#" class="btn btn-outline-light">Join Now</a>
                             </div>
-                            <span class="bg-primary text-white rounded-pill py-1 px-3">Free</span>
                         </div>
-                        <h5 class="mb-3">EduManager Workshop</h5>
-                        <p class="mb-4">Learn how to maximize your use of EduManager LMS features...</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
+                        <div class="pt-3">
+                            <div class="d-flex mb-2">
+                                <small class="me-3"><i class="far fa-calendar-alt text-primary me-2"></i>25 Nov 2023</small>
+                                <small><i class="far fa-clock text-primary me-2"></i>10:00 AM</small>
+                            </div>
+                            <h5 class="mb-2">EdTech Summit 2023</h5>
+                            <p class="text-muted">Join us for the biggest EdTech event of the year</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="event-item bg-light rounded">
-                    <div class="p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
-                                    <i class="fa fa-calendar-alt"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <small class="text-body">Feb 2, 2024</small>
-                                    <h6 class="mb-0">10:00 AM - 12:00 PM</h6>
-                                </div>
+                    <div class="event-item">
+                        <div class="position-relative overflow-hidden rounded">
+                            <img src="img/event-2.jpg" class="img-fluid w-100" alt="Event Image">
+                            <div class="event-overlay">
+                                <a href="#" class="btn btn-outline-light">Register Now</a>
                             </div>
-                            <span class="bg-primary text-white rounded-pill py-1 px-3">Premium</span>
                         </div>
-                        <h5 class="mb-3">Analytics Masterclass</h5>
-                        <p class="mb-4">Deep dive into educational data analytics and reporting...</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="event-item bg-light rounded">
-                    <div class="p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="d-flex align-items-center">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 45px; height: 45px;">
-                                    <i class="fa fa-calendar-alt"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <small class="text-body">Feb 5, 2024</small>
-                                    <h6 class="mb-0">3:00 PM - 5:00 PM</h6>
-                                </div>
+                        <div class="pt-3">
+                            <div class="d-flex mb-2">
+                                <small class="me-3"><i class="far fa-calendar-alt text-primary me-2"></i>30 Nov 2023</small>
+                                <small><i class="far fa-clock text-primary me-2"></i>2:00 PM</small>
                             </div>
-                            <span class="bg-primary text-white rounded-pill py-1 px-3">Free</span>
+                            <h5 class="mb-2">EduManager Workshop</h5>
+                            <p class="text-muted">Learn advanced features of our LMS platform</p>
                         </div>
-                        <h5 class="mb-3">HR System Training</h5>
-                        <p class="mb-4">Introduction to our new HR management features...</p>
-                        <a class="btn btn-primary rounded-pill py-2 px-4" href="">Register Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Upcoming Events End -->
+<!-- News & Events Section End -->
 
 <style>
-.quick-access-item {
-    text-decoration: none;
-    color: var(--dark);
-    transition: all 0.3s ease;
-}
-
-.quick-access-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.blog-item {
-    transition: all 0.3s ease;
-}
-
-.blog-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.blog-date {
+/* Add these styles to your existing CSS */
+.event-overlay {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background: #2124B1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    right: 20px;
-    bottom: -30px;
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: 0.5s;
 }
 
-.notice-item {
-    transition: all 0.3s ease;
+.event-item:hover .event-overlay {
+    opacity: 1;
+}
+
+.news-item img, .event-item img {
+    transition: 0.5s;
+}
+
+.news-item:hover img, .event-item:hover img {
+    transform: scale(1.05);
 }
 
 .notice-item:hover {
-    transform: translateX(5px);
-}
-
-.event-item {
-    transition: all 0.3s ease;
-}
-
-.event-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    transition: 0.3s;
 }
 </style>
 

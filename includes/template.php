@@ -1,7 +1,18 @@
 <?php
 // Define base path based on the current script location
 $is_back_office = strpos($_SERVER['SCRIPT_NAME'], '/back_office/') !== false;
-$base_path = $is_back_office ? '../' : '';
+$is_user_portal = strpos($_SERVER['SCRIPT_NAME'], '/user-portal/') !== false;
+
+if ($is_back_office) {
+    $base_path = '../';
+    $includes_path = '../includes/';
+} elseif ($is_user_portal) {
+    $base_path = '../';
+    $includes_path = '../includes/';
+} else {
+    $base_path = '';
+    $includes_path = 'includes/';
+}
 
 // Common meta defaults (can be overridden by individual pages)
 $title = $title ?? "Artifitech - Leading Educational Technology Solutions Provider";
@@ -61,8 +72,10 @@ $og_url = $og_url ?? "https://artifitech.com";
     <?php 
     if ($is_back_office) {
         include $base_path . 'back_office/header.php';
+    } elseif ($is_user_portal) {
+        include $base_path . 'user-portal/includes/header.php';
     } else {
-        include $base_path . 'includes/header.php';
+        include $includes_path . 'header.php';
     }
     ?>
 
@@ -71,8 +84,10 @@ $og_url = $og_url ?? "https://artifitech.com";
     <?php 
     if ($is_back_office) {
         include $base_path . 'back_office/footer.php';
+    } elseif ($is_user_portal) {
+        include $base_path . 'user-portal/includes/footer.php';
     } else {
-        include $base_path . 'includes/footer.php';
+        include $includes_path . 'footer.php';
     }
     ?>
 

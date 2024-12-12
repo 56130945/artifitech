@@ -27,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lastName = sanitizeInput($_POST['last_name'] ?? '');
     $email = sanitizeInput($_POST['email'] ?? '');
     $phone = sanitizeInput($_POST['phone'] ?? '');
-    $institution = sanitizeInput($_POST['institution'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
@@ -36,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("Last Name: $lastName");
     error_log("Email: $email");
     error_log("Phone: $phone");
-    error_log("Institution: $institution");
 
     // Validate inputs
     $errors = [];
@@ -44,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($lastName)) $errors['last_name'] = 'Last name is required';
     if (empty($email)) $errors['email'] = 'Email is required';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors['email'] = 'Invalid email format';
-    if (empty($institution)) $errors['institution'] = 'Institution is required';
     if (empty($password)) $errors['password'] = 'Password is required';
     if (strlen($password) < 6) $errors['password'] = 'Password must be at least 6 characters';
     if ($password !== $confirmPassword) $errors['confirm_password'] = 'Passwords do not match';
@@ -63,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log("Database connection successful");
 
             // Check if email already exists
-            $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt = $conn->prepare("SELECT id FROM customers WHERE email = ?");
             error_log("Checking for existing email: $email");
             $stmt->execute([$email]);
             if ($stmt->fetch()) {
@@ -77,20 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 error_log("Password hashed successfully");
 
                 // Insert new user
-                $sql = "INSERT INTO users (first_name, last_name, email, phone, institution, password, created_at) 
-                        VALUES (?, ?, ?, ?, ?, ?, NOW())";
+                $sql = "INSERT INTO customers (username, email, password_hash, first_name, last_name, phone, is_active, created_at) 
+                        VALUES (?, ?, ?, ?, ?, ?, 1, NOW())";
                 error_log("Preparing SQL: $sql");
                 
                 $stmt = $conn->prepare($sql);
                 error_log("Statement prepared successfully");
                 
+                // Generate username from email
+                $username = strtolower(explode('@', $email)[0]);
+                
                 $params = [
+                    $username,
+                    $email,
+                    $hashedPassword,
                     $firstName,
                     $lastName,
-                    $email,
-                    $phone,
-                    $institution,
-                    $hashedPassword
+                    $phone
                 ];
                 error_log("Parameters ready: " . print_r($params, true));
                 
@@ -104,11 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $userId;
                 $_SESSION['user_email'] = $email;
                 $_SESSION['user_name'] = $firstName . ' ' . $lastName;
+                $_SESSION['user_type'] = 'customer';
                 error_log("Session variables set");
 
-                // Redirect to home page
-                error_log("Redirecting to index.php");
-                header('Location: index.php');
+                // Redirect to user portal dashboard
+                error_log("Redirecting to user portal dashboard");
+                header('Location: user-portal/dashboard.php');
                 exit;
             }
         } catch (PDOException $e) {
@@ -117,6 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log("Error code: " . $e->getCode());
             error_log("SQL State: " . $e->errorInfo[0]);
             error_log("Stack trace: " . $e->getTraceAsString());
+            error_log("SQL Query: " . $sql);
+            error_log("Parameters: " . print_r($params, true));
             
             $message = 'An error occurred during registration. Please try again.';
             $messageType = 'danger';
@@ -158,6 +161,11 @@ ob_start();
                     <div class="text-center mb-4">
                         <h4 class="mb-3">Create Your Account</h4>
                         <p class="text-muted mb-4">Join Artifitech and get access to our comprehensive educational technology solutions</p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            This registration is for customers interested in our flagship products and academy courses only.
+                            For administrative access, please contact the system administrator.
+                        </div>
                     </div>
                     
                     <?php if (!empty($message)): ?>
@@ -206,17 +214,6 @@ ob_start();
                                     <input type="tel" class="form-control" id="phone" name="phone" 
                                            placeholder="Phone Number" value="<?php echo htmlspecialchars($phone ?? ''); ?>">
                                     <label for="phone">Phone Number (Optional)</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control <?php echo isset($errors['institution']) ? 'is-invalid' : ''; ?>" 
-                                           id="institution" name="institution" placeholder="Institution" 
-                                           value="<?php echo htmlspecialchars($institution ?? ''); ?>" required>
-                                    <label for="institution">Institution</label>
-                                    <?php if (isset($errors['institution'])): ?>
-                                        <div class="invalid-feedback"><?php echo $errors['institution']; ?></div>
-                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="col-12">
