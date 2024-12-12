@@ -1,5 +1,15 @@
 <?php
+// Include global configuration
 require_once 'includes/config.php';
+
+// Set page-specific variables
+$page = 'dashboard';
+$title = "Artifitech - Dashboard | Welcome " . htmlspecialchars($_SESSION['user_name']);
+$keywords = "Dashboard, User Account, Profile";
+$description = "Manage your Artifitech account and access your services.";
+$og_title = "Artifitech Dashboard";
+$og_description = "Access your Artifitech account and services";
+$og_url = "https://artifitech.com/dashboard";
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -33,15 +43,33 @@ try {
     error_log("Dashboard error: " . $e->getMessage());
 }
 
-// Set page-specific variables
-$page = 'dashboard';
-$title = "Artifitech - Dashboard | Welcome " . htmlspecialchars($_SESSION['user_name']);
-$keywords = "Dashboard, User Account, Profile";
-$description = "Manage your Artifitech account and access your services.";
-
 // Start output buffering
 ob_start();
 ?>
+
+<!-- Add this right after the opening body tag -->
+<div class="preloader">
+    <div class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+</div>
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-3">Dashboard</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="index.php">Home</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
 
 <!-- Particle Background -->
 <canvas id="particle-canvas"></canvas>
@@ -96,20 +124,6 @@ ob_start();
     </div>
 </div>
 <!-- Brand & Contact End -->
-
-<!-- Page Header Start -->
-<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-4 text-white animated slideInDown mb-3">Dashboard</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" href="index.php">Home</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">Dashboard</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-<!-- Page Header End -->
 
 <!-- Dashboard Start -->
 <div class="container-xxl py-5">
