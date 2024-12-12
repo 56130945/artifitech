@@ -28,7 +28,7 @@ try {
     }
     
     // Get total users count
-    $stmt = $conn->query("SELECT COUNT(*) FROM users");
+    $stmt = $conn->query("SELECT COUNT(*) FROM customers WHERE is_active = 1");
     if ($stmt) {
         $total_users = $stmt->fetchColumn();
     }
@@ -96,6 +96,17 @@ try {
     if ($stmt) {
         $monthly_revenue = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    // Get recent registrations
+    $stmt = $conn->prepare("
+        SELECT c.first_name, c.last_name, c.email, c.created_at
+        FROM customers c
+        WHERE c.is_active = 1
+        ORDER BY c.created_at DESC
+        LIMIT 5
+    ");
+    $stmt->execute();
+    $recent_registrations = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
 } catch (Exception $e) {
     error_log("Error in dashboard.php: " . $e->getMessage());
@@ -229,6 +240,53 @@ ob_start();
         <div class="card border-0 shadow-sm wow fadeInUp" data-wow-delay="0.1s">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h5 class="card-title mb-0">Recent Registrations</h5>
+                    <a href="users.php" class="btn btn-link p-0">View All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (empty($recent_registrations)): ?>
+                            <tr>
+                                <td colspan="3" class="text-center py-4">
+                                    <p class="text-muted mb-0">No recent registrations found</p>
+                                </td>
+                            </tr>
+                            <?php else: ?>
+                            <?php foreach ($recent_registrations as $user): ?>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary text-white rounded-circle p-2 me-3">
+                                            <?php echo strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1)); ?>
+                                        </div>
+                                        <div>
+                                            <h6 class="mb-0"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm wow fadeInUp" data-wow-delay="0.2s">
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-4">
                     <h5 class="card-title mb-0">Recent Enrollments</h5>
                     <a href="enrollments.php" class="btn btn-link p-0">View All</a>
                 </div>
@@ -288,7 +346,7 @@ ob_start();
         </div>
     </div>
     <div class="col-md-6">
-        <div class="card border-0 shadow-sm wow fadeInUp" data-wow-delay="0.2s">
+        <div class="card border-0 shadow-sm wow fadeInUp" data-wow-delay="0.3s">
             <div class="card-body">
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h5 class="card-title mb-0">Popular Courses</h5>

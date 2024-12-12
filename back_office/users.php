@@ -35,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $success = "User deleted successfully";
                 break;
             case 'activate':
-                $stmt = $conn->prepare("UPDATE users SET status = 'active' WHERE id = ?");
+                $stmt = $conn->prepare("UPDATE customers SET is_active = 1 WHERE id = ?");
                 $stmt->execute([$userId]);
                 $success = "User activated successfully";
                 break;
             case 'deactivate':
-                $stmt = $conn->prepare("UPDATE users SET status = 'inactive' WHERE id = ? AND id != ?");
+                $stmt = $conn->prepare("UPDATE customers SET is_active = 0 WHERE id = ? AND id != ?");
                 $stmt->execute([$userId, $_SESSION['user_id']]);
                 $success = "User deactivated successfully";
                 break;
@@ -63,7 +63,7 @@ try {
     }
     
     // Get total users count
-    $stmt = $conn->query("SELECT COUNT(*) FROM users");
+    $stmt = $conn->query("SELECT COUNT(*) FROM customers");
     if ($stmt) {
         $total_users = $stmt->fetchColumn();
         $total_pages = ceil($total_users / $items_per_page);
@@ -71,8 +71,8 @@ try {
     
     // Get users for current page
     $stmt = $conn->prepare("
-        SELECT id, first_name, last_name, email, institution, created_at, status 
-        FROM users 
+        SELECT id, first_name, last_name, email, phone, created_at, is_active as status 
+        FROM customers 
         ORDER BY created_at DESC 
         LIMIT ? OFFSET ?
     ");

@@ -46,7 +46,7 @@ if (isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])) {
 <div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
         <a href="dashboard.php" class="navbar-brand p-0">
-            <h1 class="m-0">Artifitech</h1>
+            <img src="../img/logo.png" alt="Artifitech Logo" style="height: 50px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
