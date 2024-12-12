@@ -2,17 +2,21 @@
 .auth-modal .modal-content {
     border-radius: 15px;
     border: none;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .auth-modal .modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border-bottom: none;
-    padding: 20px 30px;
+    padding: 25px 30px;
 }
 
 .auth-modal .modal-title {
+    font-family: var(--heading-font);
     font-weight: 600;
-    color: var(--dark);
+    color: var(--light);
+    letter-spacing: 0.5px;
 }
 
 .auth-modal .modal-body {
@@ -42,19 +46,20 @@
 }
 
 .auth-modal .btn-submit {
-    width: 100%;
-    padding: 12px;
-    border-radius: 25px;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: var(--light);
-    font-weight: 500;
-    border: 1px solid var(--primary);
+    font-weight: 600;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.2);
 }
 
 .auth-modal .btn-submit:hover {
-    background: transparent;
-    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.3);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
 }
 
 .auth-modal .modal-footer {
@@ -85,32 +90,33 @@
 }
 
 .social-login .btn-social {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 0 5px;
+    margin: 0 8px;
     color: var(--light);
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-facebook {
-    background: #3b5998;
+    background: linear-gradient(135deg, #4267B2, #3b5998);
 }
 
 .btn-google {
-    background: #db4437;
+    background: linear-gradient(135deg, #EA4335, #db4437);
 }
 
 .btn-twitter {
-    background: #1da1f2;
+    background: linear-gradient(135deg, #1DA1F2, #0d8ed9);
 }
 
 .social-login .btn-social:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Divider */

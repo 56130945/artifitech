@@ -41,7 +41,7 @@
     color: var(--primary);
     background: transparent;
     border: 2px solid var(--primary);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.1);
 }
 
 .btn-login::before {
@@ -61,10 +61,11 @@
 }
 
 .btn-login:hover {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: var(--light);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.3);
+    border-color: transparent;
 }
 
 .btn-login:hover::before {
@@ -74,9 +75,9 @@
 /* Register Button */
 .btn-register {
     color: var(--light);
-    background: linear-gradient(45deg, #950D12, #c01f25);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border: none;
-    box-shadow: 0 4px 15px rgba(149, 13, 18, 0.2);
+    box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.2);
 }
 
 .btn-register::before {
@@ -97,7 +98,8 @@
 
 .btn-register:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(149, 13, 18, 0.4);
+    box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
 }
 
 .btn-register:hover::before {

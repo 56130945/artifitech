@@ -36,10 +36,17 @@ if (!$conn) {
 }
 
 try {
-    // Get user from database
-    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password FROM users WHERE email = ?");
+    // First check administrators table
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password_hash as password, 'admin' as user_type FROM administrators WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // If not found in administrators, check users table
+    if (!$user) {
+        $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password, 'user' as user_type FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     if (!$user || !password_verify($password, $user['password'])) {
         http_response_code(401);
@@ -51,6 +58,7 @@ try {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['user_email'] = $user['email'];
     $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+    $_SESSION['user_type'] = $user['user_type'];
 
     // Set remember me cookie if requested
     if ($remember) {
@@ -70,7 +78,8 @@ try {
         'message' => 'Login successful',
         'user' => [
             'name' => $_SESSION['user_name'],
-            'email' => $_SESSION['user_email']
+            'email' => $_SESSION['user_email'],
+            'type' => $_SESSION['user_type']
         ]
     ]);
 

@@ -38,10 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception("Database connection failed");
             }
 
-            // Get user from database
-            $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password FROM users WHERE email = ?");
+            // First check administrators table
+            $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password_hash as password, 'admin' as user_type FROM administrators WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // If not found in administrators, check users table
+            if (!$user) {
+                $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password, 'user' as user_type FROM users WHERE email = ?");
+                $stmt->execute([$email]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
 
             error_log("User query executed");
 
@@ -56,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_email'] = $user['email'];
                 $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+                $_SESSION['user_type'] = $user['user_type'];
 
                 // Handle remember me
                 if ($remember) {
@@ -71,9 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     error_log("Remember me token set for user ID: " . $user['id']);
                 }
 
-                // Redirect to dashboard
-                error_log("Redirecting to back_office/dashboard.php");
-                header('Location: back_office/dashboard.php');
+                // Redirect based on user type
+                if ($user['user_type'] === 'admin') {
+                    error_log("Redirecting admin to back_office/dashboard.php");
+                    header('Location: back_office/dashboard.php');
+                } else {
+                    error_log("Redirecting user to dashboard.php");
+                    header('Location: dashboard.php');
+                }
                 exit;
             }
         } catch (Exception $e) {
