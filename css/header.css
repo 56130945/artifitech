@@ -24,28 +24,40 @@
 
 /* Navbar Styling */
 .navbar {
-    background-color: var(--dark);
-    padding: 0;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+    background: var(--white);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
 }
 
-.navbar-nav .nav-link {
-    margin-right: 30px;
-    padding: 25px 0;
-    color: var(--light);
-    font-size: 15px;
+.navbar-brand {
+    font-family: var(--heading-font);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary) !important;
+}
+
+.navbar-brand img {
+    height: 45px;
+    transition: all 0.3s ease;
+}
+
+.nav-link {
     font-weight: 500;
-    text-transform: uppercase;
-    outline: none;
+    color: var(--text-primary) !important;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    color: var(--primary);
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent) !important;
 }
 
-.navbar-toggler {
-    border: none;
-    color: var(--light);
+/* Sticky Header */
+.navbar.sticky-top {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 /* Search Bar */

@@ -58,46 +58,51 @@ ob_start();
 </div>
 
 <!-- Carousel Start -->
-<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+<div class="container-fluid p-0 mb-5">
     <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">
-                <img class="img-fluid" src="img/carousel-1.jpg" alt="Image">
-            </button>
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="1" aria-label="Slide 2">
-                <img class="img-fluid" src="img/carousel-2.jpg" alt="Image">
-            </button>
-            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="2" aria-label="Slide 3">
-                <img class="img-fluid" src="img/carousel-3.jpg" alt="Image">
-            </button>
-        </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                 <div class="carousel-caption">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-4 animated zoomIn">Welcome to Artifitech</h4>
-                        <h1 class="display-1 text-white mb-0 animated zoomIn">Transforming Business Through Technology</h1>
-                        <p class="fs-5 text-white mb-4 animated zoomIn">Artifitech delivers innovative solutions in AI, IoT, Cloud Computing, and Extended Reality to empower businesses and educational institutions across South Africa and beyond.</p>
-                        <a href="#contact" class="btn btn-primary py-3 px-5 animated zoomIn">Get Started</a>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 text-center">
+                                <h4 class="text-white text-uppercase mb-4 animated zoomIn">Welcome to Artifitech</h4>
+                                <h1 class="display-1 text-white mb-4 animated slideInDown">Transforming Business Through Technology</h1>
+                                <p class="fs-5 text-white mb-4 animated zoomIn">Artifitech delivers innovative solutions in AI, IoT, Cloud Computing, and Extended Reality.</p>
+                                <a href="" class="btn btn-primary py-3 px-5 animated zoomIn">Learn More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                 <div class="carousel-caption">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
-                        <h1 class="display-1 text-white mb-0 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 text-center">
+                                <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leaders In</h4>
+                                <h1 class="display-1 text-white mb-4 animated slideInDown">Educational Technology Solutions</h1>
+                                <p class="fs-5 text-white mb-4 animated zoomIn">Empowering institutions with cutting-edge learning management systems.</p>
+                                <a href="" class="btn btn-primary py-3 px-5 animated zoomIn">Discover More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="w-100" src="img/carousel-3.jpg" alt="Image">
                 <div class="carousel-caption">
-                    <div class="p-3" style="max-width: 900px;">
-                        <h4 class="text-white text-uppercase mb-4 animated zoomIn">We Are Leader In</h4>
-                        <h1 class="display-1 text-white mb-0 animated zoomIn">Creative & Innovative Digital Solution</h1>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8 text-center">
+                                <h4 class="text-white text-uppercase mb-4 animated zoomIn">Innovation & Excellence</h4>
+                                <h1 class="display-1 text-white mb-4 animated slideInDown">Creative Digital Solutions</h1>
+                                <p class="fs-5 text-white mb-4 animated zoomIn">Building the future of education through innovative technology.</p>
+                                <a href="" class="btn btn-primary py-3 px-5 animated zoomIn">Get Started</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

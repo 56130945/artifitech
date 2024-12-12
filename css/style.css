@@ -1,7 +1,10 @@
 /********** Template CSS **********/
 :root {
-    --primary: #009CFF;
-    --secondary: #777777;
+    --primary: #dc3545;
+    --primary-dark: #c01f25;
+    --primary-light: #e45862;
+    --secondary: #25D366;
+    --secondary-dark: #1fab52;
     --light: #F8F8F8;
     --dark: #252525;
     --heading-font: 'Orbitron', sans-serif;
@@ -34,16 +37,117 @@
 
 /*** Button ***/
 .btn {
-    font-weight: 500;
-    transition: .5s;
-    font-family: var(--body-font);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn.btn-primary {
-    color: #FFFFFF;
+/* Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.2);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+/* Secondary/Contact Button */
+.btn-contact {
+    background: #fff;
+    color: var(--dark);
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.btn-contact i {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-contact.whatsapp i {
+    background: var(--secondary);
+}
+
+.btn-contact.phone i {
+    background: var(--primary);
+}
+
+.btn-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Button with Icon */
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-icon i {
+    font-size: 1.2em;
+}
+
+/* Button Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: calc(50% - 10px);
+    right: 20px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.8s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .btn-contact {
+    background: var(--bg-secondary);
+    color: var(--text-white);
+}
+
+[data-theme="dark"] .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
 }
 
 .btn-square {
@@ -83,55 +187,106 @@
 }
 
 .navbar .navbar-nav .nav-link {
-    margin-right: 30px;
-    padding: 20px 0;
-    color: #FFFFFF;
+    margin-right: 15px;
+    padding: 10px 20px;
+    color: var(--dark);
     font-weight: 500;
-    outline: none;
-    font-family: var(--body-font);
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
 }
 
 .navbar .navbar-nav .nav-link:hover,
 .navbar .navbar-nav .nav-link.active {
+    color: var(--white);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Dark navbar styles */
+.navbar.bg-dark .navbar-nav .nav-link {
+    color: var(--light);
+}
+
+.navbar.bg-dark .navbar-nav .nav-link:hover,
+.navbar.bg-dark .navbar-nav .nav-link.active {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+}
+
+/* Dropdown styles */
+.navbar .dropdown-menu {
+    margin-top: 5px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.navbar .dropdown-item {
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
     color: var(--dark);
 }
 
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    color: var(--white);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    transform: translateX(5px);
+}
+
+/* Mobile navigation */
+@media (max-width: 991.98px) {
+    .navbar .navbar-nav {
+        margin-top: 15px;
+        padding: 10px;
+    }
+
+    .navbar .navbar-nav .nav-link {
+        margin: 5px 0;
+        padding: 12px 25px;
+    }
+
+    .navbar .navbar-nav .dropdown-menu {
+        margin: 5px 15px;
+        background: rgba(6, 163, 218, 0.05);
+    }
+}
+
+/* Sticky navbar animation */
 .navbar.sticky-top {
     top: -100px;
     transition: .5s;
+    background: var(--white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 991.98px) {
-    .navbar .navbar-nav .nav-link {
-        margin-right: 0;
-        padding: 8px 0;
-    }
-
-    .navbar .navbar-nav {
-        margin-top: 8px;
-        border-top: 1px solid rgba(256, 256, 256, .1)
-    }
+[data-theme="dark"] .navbar.sticky-top {
+    background: var(--bg-secondary);
 }
 
-@media (min-width: 992px) {
-    .navbar .nav-item .dropdown-menu {
-        display: block;
-        visibility: hidden;
-        top: 100%;
-        transform: rotateX(-75deg);
-        transform-origin: 0% 0%;
-        transition: .5s;
-        opacity: 0;
-    }
+[data-theme="dark"] .navbar .navbar-nav .nav-link {
+    color: var(--text-white);
+}
 
-    .navbar .nav-item:hover .dropdown-menu {
-        transform: rotateX(0deg);
-        visibility: visible;
-        transition: .5s;
-        opacity: 1;
-    }
+[data-theme="dark"] .navbar .dropdown-menu {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .navbar .dropdown-item {
+    color: var(--text-white);
+}
+
+[data-theme="dark"] .navbar .dropdown-item:hover {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
 }
 
 
@@ -570,4 +725,206 @@ body {
     font-family: var(--heading-font);
     font-weight: 700;
     letter-spacing: 1px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background: var(--white);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+html {
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+@media (max-width: 768px) {
+    html { font-size: 14px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+    h5 { font-size: 1.1rem; }
+    h6 { font-size: 1rem; }
+}
+
+/* Hero Section Styles */
+.carousel-inner {
+    max-height: 600px;
+    position: relative;
+}
+
+.carousel-item {
+    height: 600px;
+    transition: transform .6s ease-in-out;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Hero Content Positioning */
+.carousel-caption {
+    position: absolute;
+    top: 80%;
+    transform: translateY(-50%);
+    bottom: auto;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+/* Make sure text is visible */
+.carousel-caption h4,
+.carousel-caption h1,
+.carousel-caption p {
+    position: relative;
+    z-index: 11;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-caption .container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Hero Content Styling */
+.carousel-caption h4 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-caption h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-caption p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation Classes */
+.carousel .animated {
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+}
+
+.carousel .animated.infinite {
+    animation-iteration-count: infinite;
+}
+
+.carousel-caption .zoomIn {
+    animation-delay: 0.3s;
+}
+
+.carousel-caption .slideInDown {
+    animation-delay: 0.5s;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .carousel-inner,
+    .carousel-item {
+        height: 500px;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .carousel-inner,
+    .carousel-item {
+        height: 400px;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 2rem;
+    }
+    
+    .carousel-caption h4 {
+        font-size: 1.1rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 1rem;
+    }
+    
+    .carousel-caption .btn {
+        padding: 0.5rem 1.5rem !important;
+        font-size: 0.9rem;
+    }
+}
 }

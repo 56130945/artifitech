@@ -90,6 +90,40 @@
 </nav>
 <!-- Navbar End -->
 
+<div class="modal-overlay" id="blackFridayOverlay">
+    <div class="black-friday-modal">
+        <button class="close-btn" id="closeBlackFriday">&times;</button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Black Friday Sale!</h2>
+            </div>
+            <div class="modal-body">
+                <span class="discount-badge">Save 50% OFF</span>
+                <p>Don't miss out on our biggest sale of the year!</p>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <p class="countdown-number" id="days">00</p>
+                        <p class="countdown-label">Days</p>
+                    </div>
+                    <div class="countdown-item">
+                        <p class="countdown-number" id="hours">00</p>
+                        <p class="countdown-label">Hours</p>
+                    </div>
+                    <div class="countdown-item">
+                        <p class="countdown-number" id="minutes">00</p>
+                        <p class="countdown-label">Minutes</p>
+                    </div>
+                    <div class="countdown-item">
+                        <p class="countdown-number" id="seconds">00</p>
+                        <p class="countdown-label">Seconds</p>
+                    </div>
+                </div>
+                <button class="cta-button">Shop Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
 .auth-buttons {
     display: flex;

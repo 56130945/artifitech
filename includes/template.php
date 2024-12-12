@@ -43,6 +43,10 @@ $og_url = $og_url ?? "https://artifitech.com";
 
     <!-- Template Stylesheet -->
     <link href="<?php echo $base_path; ?>css/style.css" rel="stylesheet">
+    <link href="<?php echo $base_path; ?>css/auth-buttons.css" rel="stylesheet">
+    <link href="<?php echo $base_path; ?>css/form-validation.css" rel="stylesheet">
+    <link href="<?php echo $base_path; ?>css/header.css" rel="stylesheet">
+    <link href="<?php echo $base_path; ?>css/black-friday-modal.css" rel="stylesheet">
 </head>
 
 <body>

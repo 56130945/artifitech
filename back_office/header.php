@@ -15,17 +15,44 @@ if (!isset($_SESSION['user_id'])) {
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="dashboard.php" class="nav-item nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>">Dashboard</a>
-            <a href="profile.php" class="nav-item nav-link <?php echo $page === 'profile' ? 'active' : ''; ?>">Profile</a>
-            <a href="courses.php" class="nav-item nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>">My Courses</a>
-            <a href="certificates.php" class="nav-item nav-link <?php echo $page === 'certificates' ? 'active' : ''; ?>">Certificates</a>
+            <a href="dashboard.php" class="nav-item nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>">
+                <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+            </a>
+            <a href="users.php" class="nav-item nav-link <?php echo $page === 'users' ? 'active' : ''; ?>">
+                <i class="fa fa-users me-2"></i>Users
+            </a>
+            <a href="courses.php" class="nav-item nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>">
+                <i class="fa fa-graduation-cap me-2"></i>Courses
+            </a>
+            <a href="enrollments.php" class="nav-item nav-link <?php echo $page === 'enrollments' ? 'active' : ''; ?>">
+                <i class="fa fa-user-graduate me-2"></i>Enrollments
+            </a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More</a>
                 <div class="dropdown-menu m-0">
-                    <a href="settings.php" class="dropdown-item">Settings</a>
-                    <a href="support.php" class="dropdown-item">Support</a>
+                    <a href="certificates.php" class="dropdown-item <?php echo $page === 'certificates' ? 'active' : ''; ?>">
+                        <i class="fa fa-certificate me-2"></i>Certificates
+                    </a>
+                    <a href="reports.php" class="dropdown-item <?php echo $page === 'reports' ? 'active' : ''; ?>">
+                        <i class="fa fa-chart-bar me-2"></i>Reports
+                    </a>
+                    <a href="settings.php" class="dropdown-item <?php echo $page === 'settings' ? 'active' : ''; ?>">
+                        <i class="fa fa-cog me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fa fa-user-circle me-2"></i><?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                </a>
+                <div class="dropdown-menu m-0">
+                    <a href="profile.php" class="dropdown-item">
+                        <i class="fa fa-user me-2"></i>Profile
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a href="../logout.php" class="dropdown-item text-danger">Logout</a>
+                    <a href="../logout.php" class="dropdown-item text-danger">
+                        <i class="fa fa-sign-out-alt me-2"></i>Logout
+                    </a>
                 </div>
             </div>
         </div>

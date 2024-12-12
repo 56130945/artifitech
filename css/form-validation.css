@@ -1,11 +1,15 @@
 /* Form validation styles */
 .contact-form .form-control {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-family: var(--body-font);
 }
 
 .contact-form .form-control:focus {
-    border-color: #06A3DA;
-    box-shadow: 0 0 0 0.2rem rgba(6, 163, 218, 0.25);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(6, 163, 218, 0.15);
 }
 
 .contact-form .form-control.is-valid {
@@ -28,8 +32,8 @@
 
 .contact-form .invalid-feedback {
     display: none;
-    color: #dc3545;
     font-size: 0.875rem;
+    color: var(--danger);
     margin-top: 0.25rem;
 }
 

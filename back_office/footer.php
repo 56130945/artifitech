@@ -1,32 +1,32 @@
 <!-- Footer Start -->
-<div class="container-fluid bg-dark text-body footer mt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-3">
-        <div class="row g-3">
+<div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="row g-5">
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-3">Quick Links</h5>
+                <h5 class="text-light mb-4">Quick Links</h5>
                 <a class="btn btn-link" href="dashboard.php">Dashboard</a>
-                <a class="btn btn-link" href="profile.php">Profile</a>
-                <a class="btn btn-link" href="courses.php">My Courses</a>
-                <a class="btn btn-link" href="certificates.php">Certificates</a>
+                <a class="btn btn-link" href="users.php">Users</a>
+                <a class="btn btn-link" href="courses.php">Courses</a>
+                <a class="btn btn-link" href="enrollments.php">Enrollments</a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-3">Help & Support</h5>
-                <a class="btn btn-link" href="support.php">Get Support</a>
-                <a class="btn btn-link" href="faq.php">FAQs</a>
+                <h5 class="text-light mb-4">Management</h5>
+                <a class="btn btn-link" href="certificates.php">Certificates</a>
+                <a class="btn btn-link" href="reports.php">Reports</a>
                 <a class="btn btn-link" href="settings.php">Settings</a>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-3">Contact Us</h5>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+27 123 456 789</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>support@artifitech.com</p>
+                <h5 class="text-light mb-4">Contact</h5>
+                <p><i class="fa fa-phone-alt me-3"></i>+27 123 456 789</p>
+                <p><i class="fa fa-envelope me-3"></i>support@artifitech.com</p>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-3">Follow Us</h5>
+                <h5 class="text-light mb-4">Follow Us</h5>
                 <div class="d-flex pt-2">
-                    <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-outline-secondary rounded-circle me-1" href="#"><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-square btn-outline-secondary rounded-circle me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-square btn-outline-secondary rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
