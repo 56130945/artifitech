@@ -1,21 +1,24 @@
 <?php
 require_once '../includes/config.php';
+require_once '../includes/db.php';
+require_once 'includes/admin_auth_check.php';
 
-// Check if user is logged in and is admin
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../login.php');
-    exit;
-}
-
-// Set page variables
+// Set page-specific variables
 $page = 'enrollments';
-$title = 'Enrollment Management - Artifitech Admin';
+$title = "Enrollment Management - Artifitech Admin";
+$description = "Manage course enrollments and student access";
 
 // Initialize variables
 $enrollments = [];
-$total_pages = 1;
 $error = null;
-$courses = [];
+$success = null;
+$total_pages = 1;
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
+    header('Location: ../login.php');
+    exit;
+}
 
 // Handle enrollment actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

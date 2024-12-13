@@ -1,7 +1,7 @@
 <?php
 require_once '../includes/config.php';
 require_once '../includes/db.php';
-require_once '../includes/auth_check.php';
+require_once 'includes/admin_auth_check.php';
 
 // Set page-specific variables
 $page = 'users';
@@ -33,17 +33,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         switch ($action) {
             case 'delete':
-                $stmt = $conn->prepare("DELETE FROM users WHERE id = ? AND id != ?");
+                $stmt = $conn->prepare("DELETE FROM customers WHERE id = ? AND id != ?");
                 $stmt->execute([$userId, $_SESSION['user_id']]);
                 $success = "User deleted successfully";
                 break;
             case 'activate':
-                $stmt = $conn->prepare("UPDATE users SET is_active = 1 WHERE id = ?");
+                $stmt = $conn->prepare("UPDATE customers SET is_active = 1 WHERE id = ?");
                 $stmt->execute([$userId]);
                 $success = "User activated successfully";
                 break;
             case 'deactivate':
-                $stmt = $conn->prepare("UPDATE users SET is_active = 0 WHERE id = ? AND id != ?");
+                $stmt = $conn->prepare("UPDATE customers SET is_active = 0 WHERE id = ? AND id != ?");
                 $stmt->execute([$userId, $_SESSION['user_id']]);
                 $success = "User deactivated successfully";
                 break;
@@ -66,7 +66,7 @@ try {
     }
     
     // Get total users count
-    $stmt = $conn->query("SELECT COUNT(*) FROM users");
+    $stmt = $conn->query("SELECT COUNT(*) FROM customers");
     if ($stmt) {
         $total_users = $stmt->fetchColumn();
         $total_pages = ceil($total_users / $items_per_page);
@@ -74,8 +74,8 @@ try {
     
     // Get users for current page
     $stmt = $conn->prepare("
-        SELECT id, first_name, last_name, email, phone, created_at, is_active 
-        FROM users 
+        SELECT id, first_name, last_name, email, phone, institution, created_at, is_active 
+        FROM customers 
         ORDER BY created_at DESC 
         LIMIT ? OFFSET ?
     ");
@@ -148,16 +148,25 @@ ob_start();
                         <td>
                             <div class="d-flex align-items-center">
                                 <div class="bg-primary text-white rounded-circle p-2 me-3">
-                                    <?php echo strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1)); ?>
+                                    <?php 
+                                        $first = $user['first_name'] ? substr($user['first_name'], 0, 1) : '';
+                                        $last = $user['last_name'] ? substr($user['last_name'], 0, 1) : '';
+                                        echo strtoupper($first . $last); 
+                                    ?>
                                 </div>
                                 <div>
-                                    <h6 class="mb-0"><?php echo htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></h6>
+                                    <h6 class="mb-0">
+                                        <?php 
+                                            $fullName = trim(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''));
+                                            echo htmlspecialchars($fullName ?: 'N/A'); 
+                                        ?>
+                                    </h6>
                                 </div>
                             </div>
                         </td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td><?php echo htmlspecialchars($user['institution']); ?></td>
-                        <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
+                        <td><?php echo htmlspecialchars($user['email'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($user['institution'] ?? 'N/A'); ?></td>
+                        <td><?php echo $user['created_at'] ? date('M d, Y', strtotime($user['created_at'])) : 'N/A'; ?></td>
                         <td>
                             <?php if ($user['is_active'] == 1): ?>
                                 <span class="badge bg-success">Active</span>

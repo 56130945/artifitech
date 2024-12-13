@@ -1,21 +1,24 @@
 <?php
 require_once '../includes/config.php';
+require_once '../includes/db.php';
+require_once 'includes/admin_auth_check.php';
 
-// Check if user is logged in and is admin
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../login.php');
-    exit;
-}
-
-// Set page variables
+// Set page-specific variables
 $page = 'courses';
-$title = 'Course Management - Artifitech Admin';
+$title = "Course Management - Artifitech Admin";
+$description = "Manage courses and their content";
 
 // Initialize variables
 $courses = [];
-$total_pages = 1;
 $error = null;
 $success = null;
+$total_pages = 1;
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
+    header('Location: ../login.php');
+    exit;
+}
 
 // Handle course actions (if any)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
