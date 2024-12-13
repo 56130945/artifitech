@@ -17,9 +17,7 @@ $title = $title ?? "Artifitech Admin - Dashboard";
     <meta charset="utf-8">
     <title><?php echo htmlspecialchars($title); ?></title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Artifitech Admin Dashboard" name="keywords">
-    <meta content="Artifitech administration and management system" name="description">
-
+    
     <!-- Favicon -->
     <link href="../img/favicon.ico" rel="icon">
     
@@ -34,104 +32,187 @@ $title = $title ?? "Artifitech Admin - Dashboard";
 
     <!-- Libraries Stylesheet -->
     <link href="../lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
-
-    <!-- Admin Specific Styles -->
-    <style>
-        .admin-content {
-            min-height: calc(100vh - 90px);
-            padding: 2rem;
-            margin-top: 90px;
-            background-color: #F7FAFF;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            right: 0;
-            left: 0;
-            z-index: 1030;
-        }
-
-        .navbar-light {
-            background: #FFFFFF;
-            box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-        }
-
-        .admin-card {
-            background: #FFFFFF;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-        }
-
-        .admin-stats {
-            transition: .5s;
-        }
-
-        .admin-stats:hover {
-            transform: translateY(-5px);
-        }
-
-        .table-container {
-            background: #FFFFFF;
-            border-radius: 5px;
-            box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-            padding: 1.5rem;
-        }
-
-        .page-title {
-            color: var(--dark);
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Ensure footer stays at bottom */
-        .footer {
-            margin-top: auto;
-        }
-
-        @media (max-width: 991.98px) {
-            .admin-content {
-                margin-top: 70px;
-                padding: 1rem;
-            }
-        }
-    </style>
+    <link href="../css/back-office.css" rel="stylesheet">
+    <link href="../css/dashboard-common.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="../img/logo.png" alt="Logo" class="logo">
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'dashboard' ? 'active' : ''; ?>" href="dashboard.php">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'users' ? 'active' : ''; ?>" href="users.php">
+                                <i class="fas fa-users"></i>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Management</div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>" href="courses.php">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Courses</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'enrollments' ? 'active' : ''; ?>" href="enrollments.php">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Enrollments</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'certificates' ? 'active' : ''; ?>" href="certificates.php">
+                                <i class="fas fa-certificate"></i>
+                                <span>Certificates</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">System</div>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'settings' ? 'active' : ''; ?>" href="settings.php">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'activity-logs' ? 'active' : ''; ?>" href="activity-logs.php">
+                                <i class="fas fa-history"></i>
+                                <span>Activity Logs</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="admin-content">
+            <!-- Top Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <button type="button" class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title"><?php echo htmlspecialchars($title); ?></h1>
+                </div>
+                <div class="header-right">
+                    <div class="header-search">
+                        <form action="search.php" method="GET">
+                            <input type="text" name="q" placeholder="Search...">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="header-notifications">
+                        <button type="button" class="notifications-toggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge">3</span>
+                        </button>
+                        <div class="notifications-dropdown">
+                            <div class="notifications-header">
+                                <h6>Notifications</h6>
+                                <a href="notifications.php">View All</a>
+                            </div>
+                            <div class="notifications-list">
+                                <!-- Notifications will be dynamically loaded -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-profile">
+                        <button type="button" class="profile-toggle">
+                            <img src="../img/admin-avatar.png" alt="Profile" class="profile-image">
+                            <span class="profile-name"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="profile-dropdown">
+                            <a href="profile.php"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="settings.php"><i class="fas fa-cog"></i> Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="../logout.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="admin-main">
+                <?php echo $content ?? ''; ?>
+            </main>
+
+            <!-- Footer -->
+            <footer class="admin-footer">
+                <div class="container-fluid bg-dark text-light">
+                    <div class="container">
+                        <div class="row gx-5">
+                            <div class="col-lg-4 col-md-6 footer-about">
+                                <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+                                    <a href="../index.php" class="navbar-brand">
+                                        <img src="../img/logo.png" alt="Artifitech Logo" class="img-fluid mb-3" style="height: 60px;">
+                                    </a>
+                                    <p class="mt-3 mb-4">Manage your Artifitech platform efficiently.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <h5 class="text-light mb-4">Quick Links</h5>
+                                <a class="btn btn-link" href="dashboard.php">Dashboard</a>
+                                <a class="btn btn-link" href="users.php">Users</a>
+                                <a class="btn btn-link" href="courses.php">Courses</a>
+                                <a class="btn btn-link" href="enrollments.php">Enrollments</a>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <h5 class="text-light mb-4">Contact</h5>
+                                <p><i class="fa fa-phone-alt me-3"></i>+27 123 456 789</p>
+                                <p><i class="fa fa-envelope me-3"></i>support@artifitech.com</p>
+                                <div class="d-flex pt-2">
+                                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href="#"><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href="#"><i class="fab fa-youtube"></i></a>
+                                    <a class="btn btn-square btn-outline-secondary rounded-circle me-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid text-white" style="background: #061429;">
+                    <div class="container text-center">
+                        <div class="row justify-content-end">
+                            <div class="col-lg-8 col-md-6">
+                                <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
+                                    <p class="mb-0">&copy; <?php echo date('Y'); ?> <a class="text-white border-bottom" href="#">Artifitech</a>. All Rights Reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-    <!-- Spinner End -->
-
-    <!-- Navbar Start -->
-    <?php include 'header.php'; ?>
-    <!-- Navbar End -->
-
-    <!-- Content Start -->
-    <div class="admin-content">
-        <?php echo $content ?? ''; ?>
-    </div>
-    <!-- Content End -->
-
-    <!-- Footer Start -->
-    <?php include 'footer.php'; ?>
-    <!-- Footer End -->
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -139,39 +220,40 @@ $title = $title ?? "Artifitech Admin - Dashboard";
     <script src="../lib/wow/wow.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>
-    <script src="../lib/counterup/counterup.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="../lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
-
-    <!-- Admin Javascript -->
     <script>
-        $(document).ready(function() {
-            // Initialize WOW.js
-            new WOW().init();
-
-            // Initialize CounterUp
-            $('.counter').counterUp({
-                delay: 10,
-                time: 2000
-            });
-
-            // Back to top button
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 100) {
-                    $('.back-to-top').fadeIn('slow');
-                } else {
-                    $('.back-to-top').fadeOut('slow');
-                }
-            });
-            $('.back-to-top').click(function () {
-                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
-                return false;
-            });
+    $(document).ready(function() {
+        // Toggle sidebar on mobile
+        $('.sidebar-toggle').click(function() {
+            $('.admin-sidebar').toggleClass('show');
         });
+
+        // Toggle notifications dropdown
+        $('.notifications-toggle').click(function(e) {
+            e.stopPropagation();
+            $('.notifications-dropdown').toggleClass('show');
+            $('.profile-dropdown').removeClass('show');
+        });
+
+        // Toggle profile dropdown
+        $('.profile-toggle').click(function(e) {
+            e.stopPropagation();
+            $('.profile-dropdown').toggleClass('show');
+            $('.notifications-dropdown').removeClass('show');
+        });
+
+        // Close dropdowns when clicking outside
+        $(document).click(function() {
+            $('.notifications-dropdown, .profile-dropdown').removeClass('show');
+        });
+
+        // Prevent dropdown close when clicking inside
+        $('.notifications-dropdown, .profile-dropdown').click(function(e) {
+            e.stopPropagation();
+        });
+    });
     </script>
 </body>
 

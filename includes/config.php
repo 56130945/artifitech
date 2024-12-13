@@ -1,4 +1,22 @@
 <?php
+session_start();
+
+// Database configuration
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'artifitech');
+define('DB_USER', 'root'); // Change this to your database username
+define('DB_PASS', '');     // Change this to your database password
+
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Time zone
+date_default_timezone_set('Africa/Johannesburg');
+
+// Site URL
+define('SITE_URL', 'http://localhost/artifitech');
+
 // Define base URL
 $base_url = '/artifitech';
 
@@ -13,33 +31,6 @@ $og_url = "https://artifitech.com";
 // Initialize additional CSS and JS variables
 $additional_css = '';
 $additional_js = '';
-
-// Database Configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'artifitech');
-
-// Start session if not already started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Database connection function
-function getDBConnection() {
-    try {
-        $conn = new PDO(
-            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
-            DB_USER,
-            DB_PASS
-        );
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conn;
-    } catch(PDOException $e) {
-        error_log("Connection failed: " . $e->getMessage());
-        return null;
-    }
-}
 
 // Security functions
 function sanitizeInput($data) {

@@ -1,7 +1,15 @@
 <!-- Footer Start -->
-<div class="container-fluid bg-dark text-body footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
+<div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row gx-5">
+            <div class="col-lg-4 col-md-6 footer-about">
+                <div class="d-flex flex-column align-items-center justify-content-center text-center h-100 bg-primary p-4">
+                    <a href="../index.php" class="navbar-brand">
+                        <img src="../img/logo.png" alt="Artifitech Logo" class="img-fluid mb-3" style="height: 60px;">
+                    </a>
+                    <p class="mt-3 mb-4">Manage your Artifitech platform efficiently.</p>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-light mb-4">Quick Links</h5>
                 <a class="btn btn-link" href="dashboard.php">Dashboard</a>
@@ -31,14 +39,13 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a href="../index.php">Artifitech</a>, All Right Reserved.
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    Logged in as <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+</div>
+<div class="container-fluid text-white" style="background: #061429;">
+    <div class="container text-center">
+        <div class="row justify-content-end">
+            <div class="col-lg-8 col-md-6">
+                <div class="d-flex align-items-center justify-content-center" style="height: 75px;">
+                    <p class="mb-0">&copy; <?php echo date('Y'); ?> <a class="text-white border-bottom" href="#">Artifitech</a>. All Rights Reserved.</p>
                 </div>
             </div>
         </div>

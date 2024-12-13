@@ -1,0 +1,70 @@
+:root {
+  /* Colors */
+  --primary: #06A3DA;
+  --primary-dark: #0487B1;
+  --primary-rgb: 6, 163, 218;
+  --secondary: #34AD54;
+  --secondary-rgb: 52, 173, 84;
+  --dark: #0B2154;
+  --light: #ffffff;
+  
+  /* Layout */
+  --header-height: 70px;
+  --sidebar-width: 280px;
+  
+  /* Fonts */
+  --heading-font: 'Orbitron', sans-serif;
+  --body-font: 'Exo 2', sans-serif;
+}
+
+/* Common Dashboard Layout */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem;
+  margin-top: var(--header-height);
+  margin-left: var(--sidebar-width);
+  background: #f7faff;
+  min-height: calc(100vh - var(--header-height));
+}
+
+/* Cards */
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: none;
+  box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Stats */
+.stats-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--light);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* Tables */
+.dashboard-table {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --border-color: #404040;
+} 

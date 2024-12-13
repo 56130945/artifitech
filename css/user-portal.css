@@ -1,0 +1,135 @@
+/* User Portal Layout */
+.portal-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: var(--portal-bg);
+}
+
+/* Portal Sidebar */
+.portal-sidebar {
+    width: var(--portal-sidebar-width);
+    background: var(--portal-card-bg);
+    border-right: 1px solid var(--portal-border);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.portal-sidebar .logo-container {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--portal-border);
+}
+
+.portal-sidebar .logo-container img {
+    height: 40px;
+}
+
+.portal-nav {
+    padding: 1.5rem 0;
+}
+
+.nav-section {
+    margin-bottom: 1.5rem;
+}
+
+.nav-section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.nav-item {
+    padding: 0 1rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-primary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link i {
+    width: 20px;
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+}
+
+/* Portal Main Content */
+.portal-main {
+    flex: 1;
+    margin-left: var(--portal-sidebar-width);
+    padding: 2rem;
+    background: var(--portal-bg);
+}
+
+/* Course Cards */
+.course-card {
+    background: var(--portal-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+.course-content {
+    padding: 1.5rem;
+}
+
+.course-progress {
+    padding: 1rem 1.5rem;
+    background: rgba(var(--primary-rgb), 0.05);
+    border-top: 1px solid var(--portal-border);
+}
+
+/* Progress Bars */
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+.progress-bar {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .portal-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .portal-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .portal-main {
+        margin-left: 0;
+    }
+} 
+} 
