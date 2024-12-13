@@ -1,21 +1,24 @@
 <?php
 require_once '../includes/config.php';
+require_once '../includes/db.php';
+require_once '../includes/auth_check.php';
 
-// Check if user is logged in and is admin
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../login.php');
-    exit;
-}
-
-// Set page variables
+// Set page-specific variables
 $page = 'users';
-$title = 'User Management - Artifitech Admin';
+$title = "User Management - Artifitech Admin";
+$description = "Manage users and their access levels";
 
 // Initialize variables
 $users = [];
-$total_pages = 1;
 $error = null;
 $success = null;
+$total_pages = 1;
+
+// Check if user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
+    header('Location: ../login.php');
+    exit;
+}
 
 // Handle user actions (if any)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,12 +38,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $success = "User deleted successfully";
                 break;
             case 'activate':
-                $stmt = $conn->prepare("UPDATE customers SET is_active = 1 WHERE id = ?");
+                $stmt = $conn->prepare("UPDATE users SET is_active = 1 WHERE id = ?");
                 $stmt->execute([$userId]);
                 $success = "User activated successfully";
                 break;
             case 'deactivate':
-                $stmt = $conn->prepare("UPDATE customers SET is_active = 0 WHERE id = ? AND id != ?");
+                $stmt = $conn->prepare("UPDATE users SET is_active = 0 WHERE id = ? AND id != ?");
                 $stmt->execute([$userId, $_SESSION['user_id']]);
                 $success = "User deactivated successfully";
                 break;
@@ -63,7 +66,7 @@ try {
     }
     
     // Get total users count
-    $stmt = $conn->query("SELECT COUNT(*) FROM customers");
+    $stmt = $conn->query("SELECT COUNT(*) FROM users");
     if ($stmt) {
         $total_users = $stmt->fetchColumn();
         $total_pages = ceil($total_users / $items_per_page);
@@ -71,8 +74,8 @@ try {
     
     // Get users for current page
     $stmt = $conn->prepare("
-        SELECT id, first_name, last_name, email, phone, created_at, is_active as status 
-        FROM customers 
+        SELECT id, first_name, last_name, email, phone, created_at, is_active 
+        FROM users 
         ORDER BY created_at DESC 
         LIMIT ? OFFSET ?
     ");
@@ -156,7 +159,7 @@ ob_start();
                         <td><?php echo htmlspecialchars($user['institution']); ?></td>
                         <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
                         <td>
-                            <?php if ($user['status'] === 'active'): ?>
+                            <?php if ($user['is_active'] == 1): ?>
                                 <span class="badge bg-success">Active</span>
                             <?php else: ?>
                                 <span class="badge bg-warning">Inactive</span>
@@ -171,7 +174,7 @@ ob_start();
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <?php if ($user['id'] != $_SESSION['user_id']): ?>
-                                <?php if ($user['status'] === 'active'): ?>
+                                <?php if ($user['is_active'] == 1): ?>
                                 <form method="POST" class="d-inline">
                                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
                                     <input type="hidden" name="action" value="deactivate">
