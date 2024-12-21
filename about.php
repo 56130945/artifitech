@@ -21,58 +21,6 @@ $additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></scr
 ob_start();
 ?>
 
-<!-- Page Header Start -->
-<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-4 text-white animated slideInDown mb-3">About Us</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">About</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-<!-- Page Header End -->
-
-<!-- Facts Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5">
-                    <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Years Experience</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">1</h1>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5">
-                    <i class="fa fa-users-cog fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Team Members</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">20</h1>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5">
-                    <i class="fa fa-users fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">Target Institutions</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">50</h1>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="fact-item bg-light rounded text-center h-100 p-5">
-                    <i class="fa fa-check fa-4x text-primary mb-4"></i>
-                    <h5 class="mb-3">African Markets</h5>
-                    <h1 class="display-5 mb-0" data-toggle="counter-up">3</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Facts End -->
-
 <!-- About Start -->
 <div class="container-xxl py-5">
     <div class="container">

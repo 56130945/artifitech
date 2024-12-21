@@ -4,11 +4,11 @@ require_once 'includes/config.php';
 
 // Set page-specific variables
 $page = 'contact';
-$title = "Artifitech - Contact Us | Educational Technology Solutions";
-$keywords = "Contact Artifitech, Support, Sales Inquiry, Technical Support, Educational Technology";
-$description = "Get in touch with Artifitech for all your educational technology needs. Contact our team for support, sales inquiries, or partnership opportunities.";
-$og_title = "Contact Artifitech - Educational Technology Solutions";
-$og_description = "Reach out to our team for educational technology solutions";
+$title = "Artifitech - Contact Us | Get in Touch";
+$keywords = "Contact Artifitech, Support, Sales Inquiries, Technical Support";
+$description = "Get in touch with Artifitech for any inquiries about our educational technology solutions. We're here to help!";
+$og_title = "Contact Artifitech - We're Here to Help";
+$og_description = "Reach out to our team for support and inquiries";
 $og_url = "https://artifitech.com/contact";
 
 // Add Black Friday Modal CSS with correct path
@@ -20,21 +20,6 @@ $additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></scr
 // Start output buffering
 ob_start();
 ?>
-
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container text-center py-5">
-            <h1 class="display-4 text-white animated slideInDown mb-3">Contact</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb justify-content-center mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="index.php">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-    <!-- Page Header End -->
 
     <!-- Contact Start -->
     <div class="container-xxl py-5">

@@ -59,21 +59,27 @@ $title = $title ?? "Artifitech User Portal";
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>" href="courses.php">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>My Courses</span>
+                            <a class="nav-link <?php echo $page === 'profile' ? 'active' : ''; ?>" href="profile.php">
+                                <i class="fas fa-user"></i>
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'subscriptions' ? 'active' : ''; ?>" href="subscriptions.php">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Subscriptions</span>
                             </a>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="nav-section">
-                    <div class="nav-section-title">Learning</div>
+                    <div class="nav-section-title">Academy</div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page === 'browse-courses' ? 'active' : ''; ?>" href="browse-courses.php">
-                                <i class="fas fa-book"></i>
-                                <span>Browse Courses</span>
+                            <a class="nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>" href="courses.php">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>My Courses</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -86,18 +92,12 @@ $title = $title ?? "Artifitech User Portal";
                 </div>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">Account</div>
+                    <div class="nav-section-title">Help</div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link <?php echo $page === 'profile' ? 'active' : ''; ?>" href="profile.php">
-                                <i class="fas fa-user"></i>
-                                <span>Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php echo $page === 'subscriptions' ? 'active' : ''; ?>" href="subscriptions.php">
-                                <i class="fas fa-credit-card"></i>
-                                <span>Subscriptions</span>
+                            <a class="nav-link" href="support.php">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Support</span>
                             </a>
                         </li>
                     </ul>

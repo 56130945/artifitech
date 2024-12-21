@@ -106,7 +106,7 @@ ob_start();
             <div class="stats-value">
                 <?php echo count($availableCourses); ?>
             </div>
-            <div class="stats-label">Available Courses</div>
+            <div class="stats-label">Explorer Courses</div>
         </div>
 
         <div class="stats-card">
@@ -216,10 +216,10 @@ ob_start();
         </div>
     </div>
 
-    <!-- Available Courses -->
+    <!-- Explorer Courses -->
     <div class="table-card">
         <div class="table-header">
-            <h5 class="table-title">Available Courses</h5>
+            <h5 class="table-title">Explorer Courses</h5>
             <a href="browse-courses.php" class="btn btn-sm btn-primary">Browse All</a>
         </div>
         <div class="table-responsive">
@@ -256,7 +256,82 @@ ob_start();
             </table>
         </div>
     </div>
-</div>
+
+    <!-- Explore Products -->
+    <div class="table-card mt-4">
+        <div class="table-header">
+            <h5 class="table-title">Explore Products</h5>
+            <a href="browse-products.php" class="btn btn-sm btn-primary">Browse All</a>
+        </div>
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($availableProducts)): ?>
+                        <?php foreach ($availableProducts as $product): ?>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <?php if (!empty($product['icon_url'])): ?>
+                                            <img src="<?php echo htmlspecialchars($product['icon_url']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($product['name']); ?>" 
+                                                 class="product-icon me-3">
+                                        <?php endif; ?>
+                                        <div>
+                                            <h6 class="mb-0"><?php echo htmlspecialchars($product['name'] ?? ''); ?></h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="text-muted">
+                                        <?php 
+                                            $description = $product['description'] ?? '';
+                                            echo htmlspecialchars(strlen($description) > 100 ? 
+                                                substr($description, 0, 97) . '...' : 
+                                                $description); 
+                                        ?>
+                                    </small>
+                                </td>
+                                <td>
+                                    <div>
+                                        <h6 class="mb-0">R<?php echo number_format($product['monthly_price'] ?? 0, 2); ?>/month</h6>
+                                        <small class="text-muted">
+                                            or R<?php echo number_format(($product['yearly_price'] ?? 0) / 12, 2); ?>/month billed annually
+                                        </small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="product-details.php?id=<?php echo $product['id']; ?>" 
+                                       class="btn btn-sm btn-primary">Learn More</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4" class="text-center py-4">
+                                <p class="mb-0">No products available at the moment.</p>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<style>
+.product-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+</style>
 
 <?php
 $content = ob_get_clean();

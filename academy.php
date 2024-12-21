@@ -4,30 +4,16 @@ require_once 'includes/config.php';
 
 // Set page-specific variables
 $page = 'academy';
-$title = "Artifitech Academy - Professional Training & Certification";
-$keywords = "Artifitech Academy, Professional Training, Software Certification, EduManager Training, HR System Training";
-$description = "Join Artifitech Academy for professional training and certification in our suite of enterprise solutions. Master EduManager LMS, HR Systems, and more.";
-$og_title = "Artifitech Academy - Professional Training & Certification";
-$og_description = "Get certified in Artifitech's enterprise solutions through our professional training programs";
+$title = "Artifitech Academy | Learn Essential Tech Skills";
+$keywords = "Tech Academy, Online Learning, Digital Skills, Professional Development";
+$description = "Join Artifitech Academy to learn essential tech skills and advance your career with our expert-led courses.";
+$og_title = "Artifitech Academy - Professional Tech Education";
+$og_description = "Advance your career with our comprehensive tech education programs";
 $og_url = "https://artifitech.com/academy";
 
 // Start output buffering
 ob_start();
 ?>
-
-<!-- Page Header Start -->
-<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-4 text-white animated slideInDown mb-3">All the skills you need in one place</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a class="text-white" href="index.php">Home</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">Academy</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-<!-- Page Header End -->
 
 <!-- Category Navigation Start -->
 <div class="container-xxl py-3">

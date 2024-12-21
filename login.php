@@ -29,68 +29,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare("SELECT * FROM administrators WHERE email = ? AND is_active = 1");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
-        $isAdmin = true;
-
-        // If not found in administrators, check customers table
-        if (!$user) {
-            $stmt = $conn->prepare("SELECT * FROM customers WHERE email = ? AND is_active = 1");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch();
-            $isAdmin = false;
-        }
 
         if ($user && password_verify($password, $user['password_hash'])) {
+            // Admin login successful
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_type'] = 'admin';
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-            $_SESSION['user_type'] = $isAdmin ? 'admin' : 'customer';
-
-            // Update last login
-            $table = $isAdmin ? 'administrators' : 'customers';
-            $stmt = $conn->prepare("UPDATE {$table} SET last_login = NOW() WHERE id = ?");
-            $stmt->execute([$user['id']]);
 
             // Log the successful login
-            $stmt = $conn->prepare("
-                INSERT INTO auth_logs (user_type, user_id, action, ip_address, user_agent) 
-                VALUES (?, ?, 'login', ?, ?)
-            ");
-            $stmt->execute([
-                $isAdmin ? 'admin' : 'customer',
-                $user['id'],
-                $_SERVER['REMOTE_ADDR'],
-                $_SERVER['HTTP_USER_AGENT']
-            ]);
+            logAuthActivity('admin', $user['id'], 'login');
 
+            // Handle remember me
             if ($remember) {
-                $token = bin2hex(random_bytes(32));
-                $expires = time() + (30 * 24 * 60 * 60); // 30 days
-
-                $stmt = $conn->prepare("
-                    INSERT INTO remember_me_tokens (user_type, user_id, token, expires_at) 
-                    VALUES (?, ?, ?, ?)
-                ");
-                $stmt->execute([
-                    $isAdmin ? 'admin' : 'customer',
-                    $user['id'],
-                    password_hash($token, PASSWORD_DEFAULT),
-                    date('Y-m-d H:i:s', $expires)
-                ]);
-
-                setcookie('remember_token', $token, $expires, '/', '', true, true);
+                createRememberMeToken('admin', $user['id']);
             }
 
-            header('Location: ' . ($isAdmin ? 'back_office/dashboard.php' : 'user-portal/dashboard.php'));
+            header('Location: back_office/dashboard.php');
             exit;
-        } else {
-            $message = 'Invalid email or password';
-            $messageType = 'danger';
         }
-    } catch (PDOException $e) {
+
+        // If not found in administrators, try customers table
+        $stmt = $conn->prepare("SELECT * FROM customers WHERE email = ? AND is_active = 1");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            // Customer login successful
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_type'] = 'customer';
+            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+
+            // Log the successful login
+            logAuthActivity('customer', $user['id'], 'login');
+
+            // Handle remember me
+            if ($remember) {
+                createRememberMeToken('customer', $user['id']);
+            }
+
+            // Check if there's a checkout redirect
+            if (isset($_GET['redirect']) && $_GET['redirect'] === 'checkout') {
+                $product_id = $_GET['product_id'] ?? '';
+                $plan = $_GET['plan'] ?? '';
+                header("Location: user-portal/checkout.php?product_id=$product_id&plan=$plan");
+            } else {
+                header('Location: user-portal/dashboard.php');
+            }
+            exit;
+        }
+
+        // If we get here, login failed
+        $message = "Invalid email or password.";
+        $messageType = "error";
+        logAuthActivity('unknown', null, 'failed_login', ['email' => $email]);
+
+    } catch (Exception $e) {
+        $message = "An error occurred. Please try again later.";
+        $messageType = "error";
         error_log("Login error: " . $e->getMessage());
-        $message = 'An error occurred during login. Please try again.';
-        $messageType = 'danger';
     }
+}
+
+// Check for remember me cookie
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
+    try {
+        $token = $_COOKIE['remember_token'];
+        
+        // Check token in remember_me_tokens table
+        $stmt = $conn->prepare("
+            SELECT * FROM remember_me_tokens 
+            WHERE token = ? AND expires_at > NOW()
+        ");
+        $stmt->execute([$token]);
+        $tokenData = $stmt->fetch();
+
+        if ($tokenData) {
+            if ($tokenData['user_type'] === 'admin') {
+                $stmt = $conn->prepare("SELECT * FROM administrators WHERE id = ? AND is_active = 1");
+            } else {
+                $stmt = $conn->prepare("SELECT * FROM customers WHERE id = ? AND is_active = 1");
+            }
+            
+            $stmt->execute([$tokenData['user_id']]);
+            $user = $stmt->fetch();
+
+            if ($user) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_type'] = $tokenData['user_type'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+
+                // Refresh the remember me token
+                createRememberMeToken($tokenData['user_type'], $user['id']);
+            }
+        }
+    } catch (Exception $e) {
+        error_log("Remember me token error: " . $e->getMessage());
+    }
+}
+
+// Redirect if already logged in
+if (isset($_SESSION['user_id'])) {
+    if ($_SESSION['user_type'] === 'admin') {
+        header('Location: back_office/dashboard.php');
+    } else {
+        header('Location: user-portal/dashboard.php');
+    }
+    exit;
 }
 
 // Start output buffering
@@ -114,17 +161,17 @@ ob_start();
 <!-- Login Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="row g-5 justify-content-center">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="bg-light rounded h-100 p-5">
-                    <div class="section-title text-center position-relative pb-3 mb-4 mx-auto" style="max-width: 600px;">
-                        <h3 class="mb-0">Welcome Back!</h3>
-                        <p class="mb-0">Please login to access your account</p>
+                    <div class="text-center mb-4">
+                        <h4 class="mb-3">Welcome Back</h4>
+                        <p class="text-muted mb-4">Access your Artifitech account to manage your educational technology solutions</p>
                     </div>
 
-                    <?php if (!empty($message)): ?>
-                    <div class="alert alert-<?php echo $messageType; ?> mb-4">
-                        <?php echo $message; ?>
+                    <?php if ($message): ?>
+                    <div class="alert alert-<?php echo $messageType === 'error' ? 'danger' : 'success'; ?> mb-4">
+                        <?php echo htmlspecialchars($message); ?>
                     </div>
                     <?php endif; ?>
 
@@ -139,25 +186,25 @@ ob_start();
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" 
-                                           name="password" placeholder="Password" required>
+                                    <input type="password" class="form-control" id="password" name="password" 
+                                           placeholder="Password" required>
                                     <label for="password">Password</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="form-check">
+                                <div class="form-check mb-3">
                                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                     <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Login</button>
+                                <button class="btn btn-primary rounded-pill py-3 px-5 w-100" type="submit">
+                                    Login
+                                </button>
                             </div>
                             <div class="col-12 text-center">
-                                <p class="text-muted mb-0">Don't have an account? <a href="register.php">Register here</a></p>
-                                <p class="text-muted mt-2 mb-0">
-                                    <a href="forgot-password.php">Forgot your password?</a>
-                                </p>
+                                <a href="forgot-password.php" class="text-primary">Forgot your password?</a>
+                                <p class="text-muted mt-3 mb-0">Don't have an account? <a href="register.php" class="text-primary">Register here</a></p>
                             </div>
                         </div>
                     </form>
@@ -170,4 +217,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-include 'includes/template.php'; 
+include 'includes/template.php';
+?> 
