@@ -21,31 +21,91 @@ $additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></scr
 ob_start();
 ?>
 
-<!-- Black Friday Modal -->
-<div class="black-friday-overlay" id="modalOverlay">
-    <div class="black-friday-modal" role="dialog" aria-labelledby="modalTitle">
-        <button class="black-friday-close" id="closeButton" aria-label="Close">&times;</button>
-        <div class="black-friday-content">
-            <h1 class="black-friday-header" id="modalTitle">🎉 Black Friday Special 🚀</h1>
-            <div class="black-friday-body">
-                <h2>70% OFF EduManager LMS</h2>
-                <p>Transform your institution with South Africa's leading Learning Management System</p>
-                <ul class="black-friday-features">
-                    <li>✓ Virtual Classrooms</li>
-                    <li>✓ Advanced Analytics</li>
-                    <li>✓ Student Management</li>
-                    <li>✓ 24/7 Support</li>
+<!-- Christmas Modal -->
+<div class="christmas-overlay" id="modalOverlay">
+    <div class="christmas-modal" role="dialog" aria-labelledby="modalTitle">
+        <div class="christmas-decoration decoration-top-left"></div>
+        <div class="christmas-decoration decoration-top-right"></div>
+        <button class="christmas-close" id="closeButton" aria-label="Close">&times;</button>
+        <div class="christmas-content">
+            <h1 class="christmas-header" id="modalTitle">🎄 Christmas Special 🎅</h1>
+            <div class="christmas-body">
+                <h2>Season's Greetings!</h2>
+                <p>Celebrate the festive season with our special Christmas offer</p>
+                <ul class="christmas-features">
+                    <li>🎁 50% OFF EduManager LMS</li>
+                    <li>🎄 Free Setup & Migration</li>
+                    <li>⭐ Premium Support Package</li>
+                    <li>🎅 Bonus Holiday Training Sessions</li>
                 </ul>
-                <p class="black-friday-price">
+                <p class="christmas-price">
                     <span class="original-price">R4,999/mo</span>
-                    <span class="new-price">R1,499/mo</span>
+                    <span class="new-price">R2,499/mo</span>
                 </p>
-                <p class="offer-ends">Offer ends in 48 hours!</p>
-                <a href="products.php" class="black-friday-cta">Get Started Now</a>
+                <p class="offer-ends">Limited Time Offer - Valid until December 25th!</p>
+                <a href="products.php" class="christmas-cta">Claim Your Gift Now</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+// Function to create snowflakes
+function createSnowflakes() {
+    const numberOfSnowflakes = 50;
+    const overlay = document.getElementById('modalOverlay');
+    
+    for (let i = 0; i < numberOfSnowflakes; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = '❄';
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+        snowflake.style.opacity = Math.random();
+        snowflake.style.fontSize = Math.random() * 20 + 10 + 'px';
+        overlay.appendChild(snowflake);
+    }
+}
+
+// Function to show modal
+function showModal() {
+    const modal = document.getElementById('modalOverlay');
+    if (modal) {
+        modal.style.display = 'block';
+        createSnowflakes();
+    }
+}
+
+// Function to hide modal
+function hideModal() {
+    const modal = document.getElementById('modalOverlay');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Initialize modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Show modal after a delay
+    setTimeout(showModal, 3000);
+
+    // Close modal when clicking close button
+    const closeButton = document.getElementById('closeButton');
+    if (closeButton) {
+        closeButton.addEventListener('click', hideModal);
+    }
+
+    // Close modal when clicking outside
+    const modalOverlay = document.getElementById('modalOverlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideModal();
+            }
+        });
+    }
+});
+</script>
 
 <!-- Add this right after the opening body tag -->
 <div class="preloader">

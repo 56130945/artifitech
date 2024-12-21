@@ -127,7 +127,9 @@ ob_start();
             <div class="table-card">
                 <div class="table-header">
                     <h5 class="table-title">Your Active Courses</h5>
-                    <a href="courses.php" class="btn btn-sm btn-primary">View All</a>
+                    <a href="courses.php" class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye me-2"></i>View All
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="admin-table">
@@ -143,17 +145,29 @@ ob_start();
                             <?php if (!empty($activeCourses)): ?>
                                 <?php foreach ($activeCourses as $course): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($course['name'] ?? ''); ?></td>
                                         <td>
-                                            <div class="progress" style="height: 8px; width: 100px;">
-                                                <div class="progress-bar bg-primary" role="progressbar" 
+                                            <div class="d-flex align-items-center">
+                                                <img src="../img/courses/<?php echo strtolower(str_replace(' ', '-', $course['name'])); ?>.jpg" 
+                                                     class="me-3" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;" 
+                                                     alt="<?php echo htmlspecialchars($course['name']); ?>">
+                                                <div>
+                                                    <h6 class="mb-0"><?php echo htmlspecialchars($course['name'] ?? ''); ?></h6>
+                                                    <small class="text-muted">Course</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="width: 100px;">
+                                                <div class="progress-bar" role="progressbar" 
                                                      style="width: <?php echo $course['progress'] ?? 0; ?>%"></div>
                                             </div>
                                         </td>
                                         <td><span class="badge bg-success">Active</span></td>
                                         <td>
                                             <a href="course.php?id=<?php echo $course['id']; ?>" 
-                                               class="btn btn-sm btn-primary">Continue</a>
+                                               class="btn btn-sm btn-primary">
+                                                <i class="fas fa-play me-2"></i>Continue
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -162,6 +176,9 @@ ob_start();
                                     <td colspan="4" class="text-center py-4">
                                         <i class="fas fa-book-open fa-2x text-muted mb-3"></i>
                                         <p class="mb-0">You haven't enrolled in any courses yet.</p>
+                                        <a href="browse-courses.php" class="btn btn-sm btn-primary mt-3">
+                                            Browse Courses
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -176,7 +193,9 @@ ob_start();
             <div class="table-card">
                 <div class="table-header">
                     <h5 class="table-title">Your Active Subscriptions</h5>
-                    <a href="subscriptions.php" class="btn btn-sm btn-primary">View All</a>
+                    <a href="subscriptions.php" class="btn btn-sm btn-primary">
+                        <i class="fas fa-eye me-2"></i>View All
+                    </a>
                 </div>
                 <div class="table-responsive">
                     <table class="admin-table">
@@ -192,12 +211,24 @@ ob_start();
                             <?php if (!empty($activeSubscriptions)): ?>
                                 <?php foreach ($activeSubscriptions as $subscription): ?>
                                     <tr>
-                                        <td><?php echo htmlspecialchars($subscription['product_name'] ?? ''); ?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="../img/products/<?php echo strtolower(str_replace(' ', '-', $subscription['product_name'])); ?>.png" 
+                                                     class="me-3" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;" 
+                                                     alt="<?php echo htmlspecialchars($subscription['product_name']); ?>">
+                                                <div>
+                                                    <h6 class="mb-0"><?php echo htmlspecialchars($subscription['product_name'] ?? ''); ?></h6>
+                                                    <small class="text-muted">Subscription</small>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td><?php echo $subscription['renewal_date'] ? date('M d, Y', strtotime($subscription['renewal_date'])) : ''; ?></td>
                                         <td><span class="badge bg-success">Active</span></td>
                                         <td>
                                             <a href="subscription.php?id=<?php echo $subscription['id']; ?>" 
-                                               class="btn btn-sm btn-primary">Manage</a>
+                                               class="btn btn-sm btn-primary">
+                                                <i class="fas fa-cog me-2"></i>Manage
+                                            </a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -206,6 +237,9 @@ ob_start();
                                     <td colspan="4" class="text-center py-4">
                                         <i class="fas fa-cube fa-2x text-muted mb-3"></i>
                                         <p class="mb-0">You don't have any active subscriptions.</p>
+                                        <a href="../products.php" class="btn btn-sm btn-primary mt-3">
+                                            View Products
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endif; ?>
@@ -220,7 +254,9 @@ ob_start();
     <div class="table-card">
         <div class="table-header">
             <h5 class="table-title">Explorer Courses</h5>
-            <a href="browse-courses.php" class="btn btn-sm btn-primary">Browse All</a>
+            <a href="browse-courses.php" class="btn btn-sm btn-primary">
+                <i class="fas fa-search me-2"></i>Browse All
+            </a>
         </div>
         <div class="table-responsive">
             <table class="admin-table">
@@ -236,19 +272,32 @@ ob_start();
                     <?php if (!empty($availableCourses)): ?>
                         <?php foreach ($availableCourses as $course): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($course['name'] ?? ''); ?></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="../img/courses/<?php echo strtolower(str_replace(' ', '-', $course['name'])); ?>.jpg" 
+                                             class="me-3" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;" 
+                                             alt="<?php echo htmlspecialchars($course['name']); ?>">
+                                        <div>
+                                            <h6 class="mb-0"><?php echo htmlspecialchars($course['name'] ?? ''); ?></h6>
+                                            <small class="text-muted">New Course</small>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td><?php echo htmlspecialchars($course['duration'] ?? ''); ?></td>
                                 <td><?php echo htmlspecialchars($course['students_count'] ?? '0'); ?> students</td>
                                 <td>
                                     <a href="course-details.php?id=<?php echo $course['id']; ?>" 
-                                       class="btn btn-sm btn-primary">Enroll Now</a>
+                                       class="btn btn-sm btn-primary">
+                                        <i class="fas fa-plus me-2"></i>Enroll Now
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
                             <td colspan="4" class="text-center py-4">
-                                <p class="mb-0">No courses available at the moment.</p>
+                                <i class="fas fa-graduation-cap fa-2x text-muted mb-3"></i>
+                                <p class="mb-0">No new courses available at the moment.</p>
                             </td>
                         </tr>
                     <?php endif; ?>
@@ -256,84 +305,9 @@ ob_start();
             </table>
         </div>
     </div>
-
-    <!-- Explore Products -->
-    <div class="table-card mt-4">
-        <div class="table-header">
-            <h5 class="table-title">Explore Products</h5>
-            <a href="browse-products.php" class="btn btn-sm btn-primary">Browse All</a>
-        </div>
-        <div class="table-responsive">
-            <table class="admin-table">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($availableProducts)): ?>
-                        <?php foreach ($availableProducts as $product): ?>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <?php if (!empty($product['icon_url'])): ?>
-                                            <img src="<?php echo htmlspecialchars($product['icon_url']); ?>" 
-                                                 alt="<?php echo htmlspecialchars($product['name']); ?>" 
-                                                 class="product-icon me-3">
-                                        <?php endif; ?>
-                                        <div>
-                                            <h6 class="mb-0"><?php echo htmlspecialchars($product['name'] ?? ''); ?></h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <small class="text-muted">
-                                        <?php 
-                                            $description = $product['description'] ?? '';
-                                            echo htmlspecialchars(strlen($description) > 100 ? 
-                                                substr($description, 0, 97) . '...' : 
-                                                $description); 
-                                        ?>
-                                    </small>
-                                </td>
-                                <td>
-                                    <div>
-                                        <h6 class="mb-0">R<?php echo number_format($product['monthly_price'] ?? 0, 2); ?>/month</h6>
-                                        <small class="text-muted">
-                                            or R<?php echo number_format(($product['yearly_price'] ?? 0) / 12, 2); ?>/month billed annually
-                                        </small>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="product-details.php?id=<?php echo $product['id']; ?>" 
-                                       class="btn btn-sm btn-primary">Learn More</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="4" class="text-center py-4">
-                                <p class="mb-0">No products available at the moment.</p>
-                            </td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-<style>
-.product-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-}
-</style>
+</div>
 
 <?php
 $content = ob_get_clean();
-include 'includes/template.php';
+include '../includes/user_portal_template.php';
 ?> 
