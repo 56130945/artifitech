@@ -110,13 +110,95 @@ ob_start();
 </div>
 <?php endif; ?>
 
+<!-- Page Header Start -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3 mb-2 text-gray-800">Course Management</h1>
+        <p class="mb-4">Create, edit, and manage your courses</p>
+    </div>
+    <div>
+        <a href="course_create.php" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Create New Course
+        </a>
+    </div>
+</div>
+
+<!-- Search and Filter Start -->
+<div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="search" placeholder="Search courses..." 
+                       value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="category">
+                    <option value="">All Categories</option>
+                    <option value="Technology" <?php echo isset($_GET['category']) && $_GET['category'] === 'Technology' ? 'selected' : ''; ?>>Technology</option>
+                    <option value="Management" <?php echo isset($_GET['category']) && $_GET['category'] === 'Management' ? 'selected' : ''; ?>>Management</option>
+                    <option value="Education" <?php echo isset($_GET['category']) && $_GET['category'] === 'Education' ? 'selected' : ''; ?>>Education</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="status">
+                    <option value="">All Status</option>
+                    <option value="published" <?php echo isset($_GET['status']) && $_GET['status'] === 'published' ? 'selected' : ''; ?>>Published</option>
+                    <option value="draft" <?php echo isset($_GET['status']) && $_GET['status'] === 'draft' ? 'selected' : ''; ?>>Draft</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Bulk Actions Start -->
+<div class="mb-3">
+    <div class="btn-group">
+        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+            Bulk Actions
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <form method="POST" class="dropdown-item" onsubmit="return confirm('Are you sure you want to publish selected courses?');">
+                    <input type="hidden" name="action" value="bulk_publish">
+                    <button type="submit" class="btn btn-link text-success p-0">
+                        <i class="fas fa-eye me-2"></i> Publish Selected
+                    </button>
+                </form>
+            </li>
+            <li>
+                <form method="POST" class="dropdown-item" onsubmit="return confirm('Are you sure you want to unpublish selected courses?');">
+                    <input type="hidden" name="action" value="bulk_unpublish">
+                    <button type="submit" class="btn btn-link text-warning p-0">
+                        <i class="fas fa-eye-slash me-2"></i> Unpublish Selected
+                    </button>
+                </form>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form method="POST" class="dropdown-item" onsubmit="return confirm('Are you sure you want to delete selected courses? This action cannot be undone.');">
+                    <input type="hidden" name="action" value="bulk_delete">
+                    <button type="submit" class="btn btn-link text-danger p-0">
+                        <i class="fas fa-trash me-2"></i> Delete Selected
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <!-- Courses Table Start -->
-<div class="card border-0 shadow-sm wow fadeInUp" data-wow-delay="0.1s">
+<div class="card border-0 shadow-sm">
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th>
+                            <input type="checkbox" class="form-check-input" id="selectAll">
+                        </th>
                         <th>Course</th>
                         <th>Category</th>
                         <th>Price</th>
@@ -128,13 +210,17 @@ ob_start();
                 <tbody>
                     <?php if (empty($courses)): ?>
                     <tr>
-                        <td colspan="6" class="text-center py-4">
+                        <td colspan="7" class="text-center py-4">
                             <p class="text-muted mb-0">No courses found</p>
                         </td>
                     </tr>
                     <?php else: ?>
                     <?php foreach ($courses as $course): ?>
                     <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input course-select" 
+                                   name="selected_courses[]" value="<?php echo $course['id']; ?>">
+                        </td>
                         <td>
                             <div class="d-flex align-items-center">
                                 <?php if (!empty($course['thumbnail'])): ?>
@@ -156,7 +242,7 @@ ob_start();
                                 <?php echo ucfirst(htmlspecialchars($course['category'])); ?>
                             </span>
                         </td>
-                        <td>$<?php echo number_format($course['price'], 2); ?></td>
+                        <td>R<?php echo number_format($course['price'], 2); ?></td>
                         <td>
                             <span class="badge bg-info">
                                 <?php echo number_format($course['enrollment_count']); ?> students
@@ -175,6 +261,16 @@ ob_start();
                                    class="btn btn-sm btn-outline-primary"
                                    title="Edit Course">
                                     <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="course_content.php?id=<?php echo $course['id']; ?>" 
+                                   class="btn btn-sm btn-outline-info"
+                                   title="Manage Content">
+                                    <i class="fas fa-list"></i>
+                                </a>
+                                <a href="course_stats.php?id=<?php echo $course['id']; ?>" 
+                                   class="btn btn-sm btn-outline-secondary"
+                                   title="View Statistics">
+                                    <i class="fas fa-chart-bar"></i>
                                 </a>
                                 <?php if ($course['status'] === 'published'): ?>
                                 <form method="POST" class="d-inline">
@@ -229,9 +325,36 @@ ob_start();
             </ul>
         </nav>
         <?php endif; ?>
-        <!-- Pagination End -->
     </div>
 </div>
+
+<script>
+// Handle select all checkbox
+document.getElementById('selectAll').addEventListener('change', function() {
+    const checkboxes = document.getElementsByClassName('course-select');
+    for (let checkbox of checkboxes) {
+        checkbox.checked = this.checked;
+    }
+});
+
+// Update select all checkbox when individual checkboxes change
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('course-select')) {
+        const selectAll = document.getElementById('selectAll');
+        const checkboxes = document.getElementsByClassName('course-select');
+        let allChecked = true;
+        
+        for (let checkbox of checkboxes) {
+            if (!checkbox.checked) {
+                allChecked = false;
+                break;
+            }
+        }
+        
+        selectAll.checked = allChecked;
+    }
+});
+</script>
 
 <style>
 .bg-primary-gradient {
@@ -259,13 +382,22 @@ ob_start();
 
 .table th {
     font-weight: 600;
-    font-family: 'Exo 2', sans-serif;
-    color: #2124B1;
+    background-color: #f8f9fa;
 }
 
 .badge {
-    padding: 0.5rem 0.75rem;
     font-weight: 500;
+    padding: 0.5em 0.75em;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-item .btn-link {
+    text-decoration: none;
+    width: 100%;
+    text-align: left;
 }
 </style>
 

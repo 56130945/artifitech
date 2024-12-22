@@ -160,30 +160,31 @@ INSERT INTO `admin_settings` (`id`, `setting_key`, `setting_value`, `setting_des
 
 CREATE TABLE `auth_logs` (
   `id` int(11) NOT NULL,
-  `user_type` enum('customer','admin','unknown') NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `user_type` varchar(50) NOT NULL,
   `action` varchar(50) NOT NULL,
-  `details` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`details`)),
   `ip_address` varchar(45) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `user_agent` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 --
 -- Dumping data for table `auth_logs`
 --
 
-INSERT INTO `auth_logs` (`id`, `user_type`, `user_id`, `action`, `details`, `ip_address`, `created_at`) VALUES
-(1, 'unknown', NULL, 'failed_login', '{\"email\":\"user1@gmail.com\"}', '::1', '2024-12-22 13:51:00'),
-(2, 'unknown', NULL, 'failed_login', '{\"email\":\"test@example.com\"}', '::1', '2024-12-22 13:52:51'),
-(3, 'unknown', NULL, 'failed_login', '{\"email\":\"test@example.com\"}', '::1', '2024-12-22 13:53:04'),
-(4, 'customer', 2, 'login', NULL, '::1', '2024-12-22 13:56:13'),
-(5, 'customer', 2, 'login', NULL, '::1', '2024-12-22 14:29:29'),
-(6, 'customer', 2, 'login', NULL, '::1', '2024-12-22 14:37:52'),
-(7, 'customer', 2, 'login', NULL, '::1', '2024-12-22 14:55:30'),
-(8, 'customer', 2, 'login', NULL, '::1', '2024-12-22 14:58:02'),
-(9, 'customer', 2, 'login', NULL, '::1', '2024-12-22 15:00:37'),
-(10, 'customer', 2, 'login', NULL, '::1', '2024-12-22 15:05:27'),
-(11, 'customer', 2, 'login', NULL, '::1', '2024-12-22 15:12:26');
+INSERT INTO `auth_logs` (`id`, `user_id`, `user_type`, `action`, `ip_address`, `user_agent`, `created_at`) VALUES
+(1, NULL, 'unknown', 'failed_login', '{\"email\":\"user1@gmail.com\"}', '::1', '2024-12-22 13:51:00', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(2, NULL, 'unknown', 'failed_login', '{\"email\":\"test@example.com\"}', '::1', '2024-12-22 13:52:51', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(3, NULL, 'unknown', 'failed_login', '{\"email\":\"test@example.com\"}', '::1', '2024-12-22 13:53:04', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(4, 2, 'customer', 'login', NULL, '::1', '2024-12-22 13:56:13', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(5, 2, 'customer', 'login', NULL, '::1', '2024-12-22 14:29:29', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(6, 2, 'customer', 'login', NULL, '::1', '2024-12-22 14:37:52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(7, 2, 'customer', 'login', NULL, '::1', '2024-12-22 14:55:30', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(8, 2, 'customer', 'login', NULL, '::1', '2024-12-22 14:58:02', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(9, 2, 'customer', 'login', NULL, '::1', '2024-12-22 15:00:37', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(10, 2, 'customer', 'login', NULL, '::1', '2024-12-22 15:05:27', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'),
+(11, 2, 'customer', 'login', NULL, '::1', '2024-12-22 15:12:26', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -252,28 +253,81 @@ CREATE TABLE `certificates` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password_hash`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Test', 'User', 'test@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
+(2, 'user1', 'Khoza', 'user1@gmail.com', '$2y$10$52SzJlMKefFUz2up6rTK9ODgRHtsqoJLVYKGL6fjKYnk69OQm/Xg6', 1, '2024-12-22 13:53:56', '2024-12-22 13:53:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `courses`
 --
 
 CREATE TABLE `courses` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `short_description` text DEFAULT NULL,
   `description` text DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT 0.00,
+  `thumbnail` varchar(255) DEFAULT NULL,
   `duration` varchar(50) DEFAULT NULL,
-  `status` enum('active','inactive') DEFAULT 'active',
+  `status` enum('draft','published') DEFAULT 'draft',
   `students_count` int(11) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `name`, `description`, `duration`, `status`, `students_count`, `created_at`, `updated_at`) VALUES
-(1, 'Introduction to Educational Technology', 'Learn the basics of EdTech', '6 weeks', 'active', 150, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
-(2, 'Advanced Learning Management', 'Master LMS administration', '8 weeks', 'active', 75, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
-(3, 'Digital Classroom Strategies', 'Modern teaching techniques', '4 weeks', 'active', 200, '2024-12-22 13:49:11', '2024-12-22 13:49:11');
+INSERT INTO `courses` (`id`, `title`, `name`, `short_description`, `description`, `category`, `price`, `duration`, `status`, `students_count`, `created_at`, `updated_at`) VALUES
+(1, 'Introduction to Educational Technology', 'Introduction to Educational Technology', 'Get started with educational technology fundamentals', 'Learn the basics of EdTech', 'Technology', 499.00, '6 weeks', 'published', 150, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
+(2, 'Advanced Learning Management', 'Advanced Learning Management', 'Master advanced LMS administration techniques', 'Master LMS administration', 'Management', 799.00, '8 weeks', 'published', 75, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
+(3, 'Digital Classroom Strategies', 'Digital Classroom Strategies', 'Learn modern teaching techniques for digital classrooms', 'Modern teaching techniques', 'Education', 599.00, '4 weeks', 'published', 200, '2024-12-22 13:49:11', '2024-12-22 13:49:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_courses`
+--
+
+CREATE TABLE `user_courses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
+  `progress` int(11) DEFAULT 0,
+  `status` enum('active', 'completed', 'cancelled') DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `course_id` (`course_id`),
+  CONSTRAINT `user_courses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_courses_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -285,65 +339,32 @@ CREATE TABLE `course_content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `content_type` enum('video','document','quiz','assignment') NOT NULL,
+  `type` enum('lesson','quiz','assignment') DEFAULT 'lesson',
   `content` text DEFAULT NULL,
-  `sequence` int(11) NOT NULL,
-  `duration` int(11) DEFAULT NULL COMMENT 'Duration in minutes',
-  `is_required` tinyint(1) DEFAULT 1,
+  `duration` varchar(50) DEFAULT NULL,
+  `order_number` int(11) DEFAULT 0,
+  `status` enum('draft','published') DEFAULT 'draft',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
   CONSTRAINT `course_content_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course_content`
 --
 
-INSERT INTO `course_content` (course_id, title, content_type, content, sequence, duration, is_required) VALUES
--- Content for "Introduction to Educational Technology"
-(1, 'Welcome to EdTech', 'video', 'Introduction to the course and overview of educational technology', 1, 15, 1),
-(1, 'Understanding LMS Basics', 'document', 'Comprehensive guide to Learning Management Systems', 2, 30, 1),
-(1, 'Basic Features Quiz', 'quiz', 'Test your knowledge of basic LMS features', 3, 20, 1),
-(1, 'Your First EdTech Project', 'assignment', 'Create a simple online lesson using basic tools', 4, 60, 1),
-
--- Content for "Advanced Learning Management"
-(2, 'Advanced LMS Features', 'video', 'Deep dive into advanced LMS functionality', 1, 25, 1),
-(2, 'Integration Techniques', 'document', 'Guide to integrating third-party tools', 2, 45, 1),
-(2, 'Advanced Features Assessment', 'quiz', 'Test your knowledge of advanced features', 3, 30, 1),
-(2, 'Custom LMS Setup', 'assignment', 'Set up a customized LMS environment', 4, 90, 1),
-
--- Content for "Digital Classroom Strategies"
-(3, 'Modern Teaching Methods', 'video', 'Overview of contemporary teaching strategies', 1, 20, 1),
-(3, 'Engagement Techniques', 'document', 'Guide to increasing student engagement', 2, 40, 1),
-(3, 'Teaching Methods Quiz', 'quiz', 'Assessment of teaching strategies', 3, 25, 1),
-(3, 'Create Engaging Lesson', 'assignment', 'Design an engaging digital lesson', 4, 75, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customers`
---
-
-CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `is_active` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password_hash`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'Test', 'User', 'test@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '2024-12-22 13:49:11', '2024-12-22 13:49:11'),
-(2, 'user1', 'Khoza', 'user1@gmail.com', '$2y$10$52SzJlMKefFUz2up6rTK9ODgRHtsqoJLVYKGL6fjKYnk69OQm/Xg6', 1, '2024-12-22 13:53:56', '2024-12-22 13:53:56');
+INSERT INTO `course_content` (`course_id`, `title`, `type`, `content`, `duration`, `order_number`, `status`) VALUES
+(1, 'Introduction to EdTech Tools', 'lesson', 'Overview of common educational technology tools and their applications', '45 minutes', 1, 'published'),
+(1, 'Digital Assessment Methods', 'lesson', 'Learn about different methods of digital assessment', '60 minutes', 2, 'published'),
+(1, 'Module 1 Quiz', 'quiz', 'Test your knowledge of EdTech fundamentals', '30 minutes', 3, 'published'),
+(2, 'LMS Administration Basics', 'lesson', 'Understanding core LMS administration concepts', '90 minutes', 1, 'published'),
+(2, 'User Management', 'lesson', 'Managing users and permissions in an LMS', '60 minutes', 2, 'published'),
+(2, 'Course Setup Assignment', 'assignment', 'Create a sample course structure', '120 minutes', 3, 'published'),
+(3, 'Digital Classroom Setup', 'lesson', 'Setting up an effective digital classroom environment', '45 minutes', 1, 'published'),
+(3, 'Student Engagement Strategies', 'lesson', 'Techniques for keeping students engaged in digital learning', '60 minutes', 2, 'published'),
+(3, 'Teaching Methods Quiz', 'quiz', 'Test your understanding of digital teaching methods', '30 minutes', 3, 'published');
 
 -- --------------------------------------------------------
 
@@ -615,27 +636,6 @@ CREATE TABLE `transactions` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_courses`
---
-
-CREATE TABLE `user_courses` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `progress` int(11) DEFAULT 0,
-  `status` enum('active', 'completed', 'cancelled') DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `course_id` (`course_id`),
-  CONSTRAINT `user_courses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `user_courses_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 

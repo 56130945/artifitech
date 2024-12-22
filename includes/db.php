@@ -29,25 +29,36 @@ function closeDBConnection() {
 }
 
 // Authentication logging
-function logAuthActivity($user_type, $user_id, $action, $details = []) {
+function logAuthActivity($userId, $userType, $action, $details = null) {
     try {
         $conn = getDBConnection();
         if (!$conn) {
             throw new Exception("Database connection failed");
         }
 
-        $stmt = $conn->prepare("
-            INSERT INTO auth_logs (user_type, user_id, action, details, ip_address, created_at)
-            VALUES (?, ?, ?, ?, ?, NOW())
-        ");
-        
-        $details_json = !empty($details) ? json_encode($details) : null;
-        $ip_address = $_SERVER['REMOTE_ADDR'] ?? null;
-        
-        $stmt->execute([$user_type, $user_id, $action, $details_json, $ip_address]);
+        $query = "
+            INSERT INTO auth_logs (
+                user_id, user_type, action, details, 
+                ip_address, user_agent
+            ) VALUES (
+                ?, ?, ?, ?, 
+                ?, ?
+            )
+        ";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute([
+            $userId,
+            $userType,
+            $action,
+            $details,
+            $_SERVER['REMOTE_ADDR'] ?? null,
+            $_SERVER['HTTP_USER_AGENT'] ?? null
+        ]);
+
         return true;
     } catch (Exception $e) {
-        error_log("Auth logging error: " . $e->getMessage());
+        error_log("Error logging auth activity: " . $e->getMessage());
         return false;
     }
 }
