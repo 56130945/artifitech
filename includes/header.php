@@ -78,12 +78,31 @@
                     </button>
                     <div class="search-results"></div>
                 </div>
-                <a href="login.php" class="btn-login <?php echo ($page === 'login') ? 'active' : ''; ?>">
-                    <i class="bi bi-person"></i> Login
-                </a>
-                <a href="register.php" class="btn-register <?php echo ($page === 'register') ? 'active' : ''; ?>">
-                    <i class="bi bi-person-plus"></i> Register
-                </a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <div class="dropdown">
+                        <button class="btn-user dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                            <?php echo htmlspecialchars($_SESSION['user_name']); ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <?php if ($_SESSION['user_type'] === 'admin'): ?>
+                                <li><a class="dropdown-item" href="<?php echo $base_url; ?>/back_office/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="<?php echo $base_url; ?>/user-portal/dashboard.php"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+                            <?php endif; ?>
+                            <li><a class="dropdown-item" href="<?php echo $base_url; ?>/user-portal/profile.php"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="<?php echo $base_url; ?>/logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                <?php else: ?>
+                    <a href="login.php" class="btn-login <?php echo ($page === 'login') ? 'active' : ''; ?>">
+                        <i class="bi bi-person"></i> Login
+                    </a>
+                    <a href="register.php" class="btn-register <?php echo ($page === 'register') ? 'active' : ''; ?>">
+                        <i class="bi bi-person-plus"></i> Register
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -143,4 +162,83 @@
         display: flex !important;
     }
 }
+
+.btn-user {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #2124B1;
+    background: transparent;
+    border: 2px solid #2124B1;
+    gap: 0.5rem;
+}
+
+.btn-user:hover {
+    color: #fff;
+    background: #2124B1;
+}
+
+.btn-user i {
+    font-size: 1.2rem;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.dropdown-item i {
+    opacity: 0.7;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #dc3545;
+    color: #fff !important;
+}
+
+.dropdown-item.text-danger:hover i {
+    color: #fff;
+}
 </style> 
+
+<script>
+    let warningTimeout;
+    let logoutTimeout;
+
+    function resetTimers() {
+        clearTimeout(warningTimeout);
+        clearTimeout(logoutTimeout);
+
+        // Show warning after 40 seconds
+        warningTimeout = setTimeout(() => {
+            alert('You will be logged out in 20 seconds due to inactivity.');
+        }, 40000);
+
+        // Auto logout after 60 seconds
+        logoutTimeout = setTimeout(() => {
+            window.location.href = '<?php echo $base_url; ?>/logout.php';
+        }, 60000);
+    }
+
+    // Reset timers on any user interaction
+    window.onload = resetTimers;
+    document.onmousemove = resetTimers;
+    document.onkeypress = resetTimers;
+
+    // Ensure logout happens even if the alert is shown
+    window.onfocus = resetTimers;
+</script> 
