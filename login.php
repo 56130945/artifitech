@@ -25,31 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $conn = getDBConnection();
         
-        // First, try to find the user in administrators table
-        $stmt = $conn->prepare("SELECT * FROM administrators WHERE email = ? AND is_active = 1");
-        $stmt->execute([$email]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // Admin login successful
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_type'] = 'admin';
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
-
-            // Log the successful login
-            logAuthActivity('admin', $user['id'], 'login');
-
-            // Handle remember me
-            if ($remember) {
-                createRememberMeToken('admin', $user['id']);
-            }
-
-            header('Location: back_office/dashboard.php');
-            exit;
-        }
-
-        // If not found in administrators, try customers table
+        // Try to find the user in customers table first
         $stmt = $conn->prepare("SELECT * FROM customers WHERE email = ? AND is_active = 1");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
@@ -73,16 +49,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_GET['redirect']) && $_GET['redirect'] === 'checkout') {
                 $product_id = $_GET['product_id'] ?? '';
                 $plan = $_GET['plan'] ?? '';
-                header("Location: user-portal/checkout.php?product_id=$product_id&plan=$plan");
+                header("Location: $base_url/user-portal/checkout.php?product_id=$product_id&plan=$plan");
             } else {
-                header('Location: user-portal/dashboard.php');
+                header("Location: $base_url/user-portal/dashboard.php");
             }
+            exit;
+        }
+
+        // If not found in customers, try administrators table
+        $stmt = $conn->prepare("SELECT * FROM administrators WHERE email = ? AND is_active = 1");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password_hash'])) {
+            // Admin login successful
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_type'] = 'admin';
+            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+
+            // Log the successful login
+            logAuthActivity('admin', $user['id'], 'login');
+
+            // Handle remember me
+            if ($remember) {
+                createRememberMeToken('admin', $user['id']);
+            }
+
+            header("Location: $base_url/back_office/dashboard.php");
             exit;
         }
 
         // If we get here, login failed
         $message = "Invalid email or password.";
         $messageType = "error";
+        error_log("Login failed for email: " . $email); // Add logging
         logAuthActivity('unknown', null, 'failed_login', ['email' => $email]);
 
     } catch (Exception $e) {
@@ -144,62 +145,49 @@ if (isset($_SESSION['user_id'])) {
 ob_start();
 ?>
 
-<!-- Login Start -->
+<!-- Login Section Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="col-lg-6">
                 <div class="bg-light rounded h-100 p-5">
                     <div class="text-center mb-4">
-                        <h4 class="mb-3">Welcome Back</h4>
-                        <p class="text-muted mb-4">Access your Artifitech account to manage your educational technology solutions</p>
+                        <h4 class="mb-3">Login to Your Account</h4>
+                        <?php if ($message): ?>
+                            <div class="alert alert-<?php echo $messageType === 'error' ? 'danger' : 'success'; ?>" role="alert">
+                                <?php echo htmlspecialchars($message); ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
-                    <?php if ($message): ?>
-                    <div class="alert alert-<?php echo $messageType === 'error' ? 'danger' : 'success'; ?> mb-4">
-                        <?php echo htmlspecialchars($message); ?>
-                    </div>
-                    <?php endif; ?>
-
-                    <form method="POST" action="login.php">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" name="email" 
-                                           placeholder="Your Email" value="<?php echo htmlspecialchars($email); ?>" required>
-                                    <label for="email">Email Address</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" name="password" 
-                                           placeholder="Password" required>
-                                    <label for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                    <label class="form-check-label" for="remember">Remember me</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary rounded-pill py-3 px-5 w-100" type="submit">
-                                    Login
-                                </button>
-                            </div>
-                            <div class="col-12 text-center">
-                                <a href="forgot-password.php" class="text-primary">Forgot your password?</a>
-                                <p class="text-muted mt-3 mb-0">Don't have an account? <a href="register.php" class="text-primary">Register here</a></p>
+                    <form method="POST" action="">
+                        <div class="mb-4">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary rounded-pill py-3 px-5 w-100">Login</button>
                     </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0">Don't have an account? <a href="register.php">Register now</a></p>
+                        <p class="mt-2"><a href="forgot-password.php">Forgot your password?</a></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Login End -->
+<!-- Login Section End -->
 
 <?php
 $content = ob_get_clean();

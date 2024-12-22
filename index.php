@@ -117,6 +117,14 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
+<!-- Product Navigation -->
+<div class="product-nav text-center mb-5">
+    <a href="#edumanager" class="btn btn-primary active" data-product="edumanager">EduManager LMS</a>
+    <a href="#hr" class="btn btn-light" data-product="hr">HR System</a>
+    <a href="#finance" class="btn btn-light" data-product="finance">Financial System</a>
+    <a href="#analytics" class="btn btn-light" data-product="analytics">Analytics Suite</a>
+</div>
+
 <!-- Pricing Plans Start -->
 <div class="container-fluid py-5" style="margin-top: 2rem;">
     <div class="row g-0">
@@ -126,14 +134,14 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="bg-light p-4 rounded shadow-hover mb-4">
                 <h3 class="mb-4 text-primary">Latest News</h3>
                 <div class="news-item mb-4">
-                    <img src="img/news-1.jpg" class="img-fluid rounded mb-3" alt="News Image">
+                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="News Image">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>15 Nov 2023</div>
                     <h5>AI Integration in Education</h5>
                     <p class="text-muted">Discover how our AI solutions are revolutionizing the education sector...</p>
                     <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
                 </div>
                 <div class="news-item">
-                    <img src="img/news-2.jpg" class="img-fluid rounded mb-3" alt="News Image">
+                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="News Image">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>10 Nov 2023</div>
                     <h5>New Features in EduManager</h5>
                     <p class="text-muted">Explore the latest features added to our flagship LMS platform...</p>
@@ -185,20 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h6 class="section-title bg-white text-center text-primary px-3">Pricing Plans</h6>
                 <h1 class="display-6 mb-4">Choose the Perfect Solution for Your Institution</h1>
-            </div>
-
-            <!-- Product Navigation -->
-            <div class="row g-4 mb-5">
-                <div class="col-12">
-                    <div class="product-nav wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="d-flex justify-content-center flex-wrap gap-3">
-                            <a href="#edumanager" class="btn btn-primary rounded-pill px-4 active" data-product="edumanager">EduManager LMS</a>
-                            <a href="#hr" class="btn btn-light rounded-pill px-4" data-product="hr">HR System</a>
-                            <a href="#finance" class="btn btn-light rounded-pill px-4" data-product="finance">Financial System</a>
-                            <a href="#analytics" class="btn btn-light rounded-pill px-4" data-product="analytics">Analytics Suite</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- EduManager Pricing -->
@@ -257,9 +251,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="text-center mt-4">
                                 <?php if (isset($_SESSION['user_id'])): ?>
-                                    <a href="user-portal/checkout.php?product_id=1&plan=starter" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=1&plan=starter" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=checkout&product_id=1&plan=starter" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=1&plan=starter" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -326,9 +320,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="text-center mt-4">
                                 <?php if (isset($_SESSION['user_id'])): ?>
-                                    <a href="user-portal/checkout.php?product_id=2&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=2&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=checkout&product_id=2&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=2&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -394,9 +388,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="text-center mt-4">
                                 <?php if (isset($_SESSION['user_id'])): ?>
-                                    <a href="user-portal/checkout.php?product_id=3&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=3&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php else: ?>
-                                    <a href="login.php?redirect=checkout&product_id=3&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=3&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -451,7 +445,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=4&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=4&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -508,7 +506,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=5&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=5&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -564,7 +566,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=6&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=6&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -618,7 +624,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=7&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=7&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -675,7 +685,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=8&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=8&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -731,7 +745,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=9&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=9&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -785,7 +803,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=10&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=10&plan=basic" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -842,7 +864,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=11&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=11&plan=professional" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -898,7 +924,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </div>
                             </div>
                             <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php if (isset($_SESSION['user_id'])): ?>
+                                    <a href="<?php echo $base_url; ?>/user-portal/checkout.php?product_id=12&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php else: ?>
+                                    <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&product_id=12&plan=enterprise" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -912,7 +942,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h3 class="mb-4 text-primary">Upcoming Events</h3>
                 <div class="event-item mb-4">
                     <div class="position-relative overflow-hidden rounded">
-                        <img src="img/event-1.jpg" class="img-fluid w-100" alt="Event Image">
+                        <img src="img/index/news-1.jpg.png" class="img-fluid w-100" alt="Event Image">
                         <div class="event-overlay">
                             <a href="#" class="btn btn-outline-light">Join Now</a>
                         </div>
@@ -928,7 +958,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div class="event-item">
                     <div class="position-relative overflow-hidden rounded">
-                        <img src="img/event-2.jpg" class="img-fluid w-100" alt="Event Image">
+                        <img src="img/index/news-1.jpg.png" class="img-fluid w-100" alt="Event Image">
                         <div class="event-overlay">
                             <a href="#" class="btn btn-outline-light">Register Now</a>
                         </div>
@@ -951,45 +981,84 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Add JavaScript for tab switching -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Show EduManager section by default
-    const defaultSection = document.getElementById('edumanager');
-    if (defaultSection) {
-        defaultSection.style.display = 'block';
-        defaultSection.classList.add('active');
-    }
-    
-    const productNav = document.querySelector('.product-nav');
+    // Get all pricing sections
     const pricingSections = document.querySelectorAll('.pricing-section');
     
-    // Set first nav button as active by default
-    const defaultButton = productNav.querySelector('[data-product="edumanager"]');
-    if (defaultButton) {
-        defaultButton.classList.remove('btn-light');
-        defaultButton.classList.add('active', 'btn-primary');
+    // Hide all sections except edumanager by default
+    pricingSections.forEach(section => {
+        if (section.id === 'edumanager') {
+            section.style.display = 'block';
+            section.classList.add('active');
+        } else {
+            section.style.display = 'none';
+            section.classList.remove('active');
+        }
+    });
+    
+    // Get product navigation buttons
+    const productButtons = document.querySelectorAll('.product-nav [data-product]');
+    
+    // Set first button as active by default
+    if (productButtons.length > 0) {
+        productButtons[0].classList.remove('btn-light');
+        productButtons[0].classList.add('active', 'btn-primary');
     }
     
-    productNav.addEventListener('click', function(e) {
+    // Handle hash change (direct URL access)
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1); // Remove the # symbol
+        if (hash) {
+            const targetSection = document.getElementById(hash);
+            if (targetSection) {
+                // Hide all sections
+                pricingSections.forEach(section => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                targetSection.style.display = 'block';
+                setTimeout(() => targetSection.classList.add('active'), 10);
+                
+                // Update navigation buttons
+                productButtons.forEach(button => {
+                    if (button.getAttribute('data-product') === hash) {
+                        button.classList.remove('btn-light');
+                        button.classList.add('active', 'btn-primary');
+                    } else {
+                        button.classList.remove('active', 'btn-primary');
+                        button.classList.add('btn-light');
+                    }
+                });
+            }
+        }
+    }
+    
+    // Handle click events on product navigation
+    document.querySelector('.product-nav').addEventListener('click', function(e) {
         if (e.target.matches('[data-product]')) {
             e.preventDefault();
             
+            const targetProduct = e.target.getAttribute('data-product');
+            window.location.hash = targetProduct;
+            
             // Remove active class from all buttons
-            productNav.querySelectorAll('a').forEach(a => {
-                a.classList.remove('active', 'btn-primary');
-                a.classList.add('btn-light');
+            productButtons.forEach(button => {
+                button.classList.remove('active', 'btn-primary');
+                button.classList.add('btn-light');
             });
             
             // Add active class to clicked button
             e.target.classList.remove('btn-light');
             e.target.classList.add('active', 'btn-primary');
             
-            // Hide all pricing sections first
+            // Hide all sections first
             pricingSections.forEach(section => {
                 section.style.display = 'none';
                 section.classList.remove('active');
             });
             
-            // Show selected pricing section with animation
-            const targetProduct = e.target.getAttribute('data-product');
+            // Show selected section with animation
             const targetSection = document.getElementById(targetProduct);
             if (targetSection) {
                 targetSection.style.display = 'block';
@@ -999,6 +1068,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
+    // Handle initial hash on page load
+    if (window.location.hash) {
+        handleHashChange();
+    }
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
 });
 </script>
 
@@ -1011,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .pricing-section.active {
-    display: block;
+    display: block !important;
     opacity: 1;
 }
 
@@ -1028,15 +1105,6 @@ document.addEventListener('DOMContentLoaded', function() {
 .product-nav .btn.active {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Ensure pricing sections are visible when active */
-#hr.active,
-#finance.active,
-#analytics.active,
-#edumanager.active {
-    display: block !important;
-    opacity: 1 !important;
 }
 
 /* Animation for section transitions */

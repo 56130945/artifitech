@@ -139,19 +139,6 @@ try {
 ob_start();
 ?>
 
-<!-- Page Header Start -->
-<div class="page-header wow fadeIn" data-wow-delay="0.1s">
-    <div class="d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="display-6 text-white mb-0">Enrollment Management</h1>
-            <p class="text-white-50 mb-0">Manage course enrollments and student access</p>
-        </div>
-        <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exportModal">
-            <i class="fas fa-download me-2"></i>Export Data
-        </button>
-    </div>
-</div>
-
 <?php if ($error): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <?php echo htmlspecialchars($error); ?>

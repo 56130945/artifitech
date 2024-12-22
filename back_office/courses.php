@@ -96,19 +96,6 @@ try {
 ob_start();
 ?>
 
-<!-- Page Header Start -->
-<div class="page-header wow fadeIn" data-wow-delay="0.1s">
-    <div class="d-flex align-items-center justify-content-between">
-        <div>
-            <h1 class="display-6 text-white mb-0">Course Management</h1>
-            <p class="text-white-50 mb-0">Manage all courses from here</p>
-        </div>
-        <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addCourseModal">
-            <i class="fas fa-plus me-2"></i>Add New Course
-        </button>
-    </div>
-</div>
-
 <?php if ($error): ?>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <?php echo htmlspecialchars($error); ?>

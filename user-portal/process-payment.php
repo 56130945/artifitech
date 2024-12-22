@@ -1,147 +1,88 @@
 <?php
 require_once '../includes/config.php';
 require_once '../includes/db.php';
-
-// Import Stripe namespaces
-use Stripe\Stripe;
-use Stripe\Customer;
-use Stripe\Subscription;
-use Stripe\Exception\ApiErrorException;
+require_once '../config/stripe-config.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    http_response_code(403);
+    http_response_code(401);
     echo json_encode(['error' => 'Unauthorized']);
     exit();
 }
 
-header('Content-Type: application/json');
+// Get JSON input
+$input = json_decode(file_get_contents('php://input'), true);
 
 try {
-    // Get JSON input
-    $input = json_decode(file_get_contents('php://input'), true);
-    
-    // Validate input
-    if (!isset($input['payment_method_id']) || !isset($input['product_id']) || !isset($input['plan'])) {
-        throw new Exception('Missing required parameters');
-    }
-
+    // Get database connection using PDO
     $conn = getDBConnection();
-    
+    if (!$conn) {
+        throw new Exception("Database connection failed");
+    }
+
+    // Validate input
+    if (!isset($input['product_id']) || !isset($input['plan']) || !isset($input['payment_method_id'])) {
+        throw new Exception('Missing required fields');
+    }
+
+    $product_id = $input['product_id'];
+    $plan = $input['plan'];
+    $payment_method_id = $input['payment_method_id'];
+
     // Get product details
-    $stmt = $conn->prepare("
-        SELECT * FROM products 
-        WHERE id = ? AND status = 'active'
-    ");
-    $stmt->execute([$input['product_id']]);
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ? AND status = 'active'");
+    $stmt->execute([$product_id]);
     $product = $stmt->fetch();
-    
+
     if (!$product) {
-        throw new Exception('Invalid product');
+        throw new Exception('Product not found or inactive');
     }
 
-    // Get user details
-    $stmt = $conn->prepare("
-        SELECT * FROM customers 
-        WHERE id = ? AND is_active = 1
-    ");
-    $stmt->execute([$_SESSION['user_id']]);
-    $user = $stmt->fetch();
+    // Calculate amount with VAT
+    $amount = $product['monthly_price'] * 1.15;
 
-    if (!$user) {
-        throw new Exception('Invalid user');
-    }
+    // Create payment intent using mock Stripe
+    $paymentIntent = MockStripe::createPaymentIntent($amount * 100); // Amount in cents
 
-    // Initialize Stripe
-    require_once '../vendor/autoload.php';
-    
-    // Check if STRIPE_SECRET_KEY is defined
-    if (!defined('STRIPE_SECRET_KEY')) {
-        throw new Exception('Stripe secret key is not configured');
-    }
-    
-    Stripe::setApiKey(STRIPE_SECRET_KEY);
+    // Simulate payment confirmation
+    $paymentConfirmation = MockStripe::confirmPayment($paymentIntent['id']);
 
-    // Create or get Stripe customer
-    if (!$user['stripe_customer_id']) {
-        $stripe_customer = Customer::create([
-            'email' => $user['email'],
-            'payment_method' => $input['payment_method_id'],
-            'invoice_settings' => [
-                'default_payment_method' => $input['payment_method_id'],
-            ],
-        ]);
+    if ($paymentConfirmation['status'] === 'succeeded') {
+        // Start transaction
+        $conn->beginTransaction();
 
-        // Save Stripe customer ID
+        // Create order
         $stmt = $conn->prepare("
-            UPDATE customers 
-            SET stripe_customer_id = ? 
-            WHERE id = ?
+            INSERT INTO orders (customer_id, product_id, plan, amount, status, payment_id)
+            VALUES (?, ?, ?, ?, 'completed', ?)
         ");
-        $stmt->execute([$stripe_customer->id, $user['id']]);
-    } else {
-        $stripe_customer = Customer::retrieve($user['stripe_customer_id']);
-        
-        // Update default payment method
-        Customer::update($stripe_customer->id, [
-            'invoice_settings' => [
-                'default_payment_method' => $input['payment_method_id'],
-            ],
+        $stmt->execute([
+            $_SESSION['user_id'],
+            $product_id,
+            $plan,
+            $amount,
+            $paymentIntent['id']
         ]);
+
+        // Commit transaction
+        $conn->commit();
+
+        // Return success response
+        echo json_encode([
+            'success' => true,
+            'payment_intent_id' => $paymentIntent['id']
+        ]);
+    } else {
+        throw new Exception('Payment failed');
     }
 
-    // Calculate price in cents
-    $price_in_cents = (int)($product['monthly_price'] * 100);
-
-    // Create subscription
-    $subscription = Subscription::create([
-        'customer' => $stripe_customer->id,
-        'items' => [[
-            'price_data' => [
-                'currency' => 'zar',
-                'product' => $product['stripe_product_id'],
-                'unit_amount' => $price_in_cents,
-                'recurring' => [
-                    'interval' => 'month',
-                ],
-            ],
-        ]],
-        'payment_behavior' => 'default_incomplete',
-        'expand' => ['latest_invoice.payment_intent'],
-    ]);
-
-    // Save subscription to database
-    $stmt = $conn->prepare("
-        INSERT INTO subscriptions (
-            user_id, product_id, stripe_subscription_id, 
-            plan_type, status, monthly_price, 
-            start_date, renewal_date
-        ) VALUES (?, ?, ?, ?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL 1 MONTH))
-    ");
-    $stmt->execute([
-        $user['id'],
-        $product['id'],
-        $subscription->id,
-        $input['plan'],
-        'active',
-        $product['monthly_price']
-    ]);
-
-    echo json_encode([
-        'success' => true,
-        'subscription' => [
-            'id' => $subscription->id,
-            'client_secret' => $subscription->latest_invoice->payment_intent->client_secret,
-        ],
-    ]);
-
-} catch (ApiErrorException $e) {
-    // Handle Stripe API errors
-    error_log("Stripe API error: " . $e->getMessage());
-    http_response_code(500);
-    echo json_encode(['error' => $e->getMessage()]);
 } catch (Exception $e) {
+    // Rollback transaction if started
+    if ($conn && $conn->inTransaction()) {
+        $conn->rollBack();
+    }
+
     error_log("Payment processing error: " . $e->getMessage());
-    http_response_code(500);
+    http_response_code(400);
     echo json_encode(['error' => $e->getMessage()]);
 } 

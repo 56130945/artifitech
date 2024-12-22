@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once 'includes/config.php';
+require_once 'includes/db.php';
 
 // Set page-specific variables
 $page = 'register';
@@ -13,9 +14,14 @@ $og_title = "Register - Artifitech Educational Technology Solutions";
 $og_description = "Create your Artifitech account";
 $og_url = "https://artifitech.com/register";
 
-// Process form submission
+// Initialize variables
 $message = '';
 $messageType = '';
+$firstName = '';
+$lastName = '';
+$email = '';
+$phone = '';
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Log the start of registration process
@@ -37,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("Phone: $phone");
 
     // Validate inputs
-    $errors = [];
     if (empty($firstName)) $errors['first_name'] = 'First name is required';
     if (empty($lastName)) $errors['last_name'] = 'Last name is required';
     if (empty($email)) $errors['email'] = 'Email is required';
@@ -73,27 +78,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 error_log("Password hashed successfully");
 
-                // Insert new user
-                $sql = "INSERT INTO customers (username, email, password_hash, first_name, last_name, phone, is_active, created_at) 
-                        VALUES (?, ?, ?, ?, ?, ?, 1, NOW())";
-                error_log("Preparing SQL: $sql");
-                
-                $stmt = $conn->prepare($sql);
-                error_log("Statement prepared successfully");
-                
-                // Generate username from email
-                $username = strtolower(explode('@', $email)[0]);
-                
+                // Prepare SQL and parameters
+                $sql = "INSERT INTO customers (first_name, last_name, email, password_hash, is_active, created_at) 
+                        VALUES (?, ?, ?, ?, 1, NOW())";
                 $params = [
-                    $username,
-                    $email,
-                    $hashedPassword,
                     $firstName,
                     $lastName,
-                    $phone
+                    $email,
+                    $hashedPassword
                 ];
+
+                error_log("Preparing SQL: $sql");
                 error_log("Parameters ready: " . print_r($params, true));
                 
+                $stmt = $conn->prepare($sql);
                 $stmt->execute($params);
                 error_log("User inserted successfully");
 
@@ -118,8 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log("Error code: " . $e->getCode());
             error_log("SQL State: " . $e->errorInfo[0]);
             error_log("Stack trace: " . $e->getTraceAsString());
-            error_log("SQL Query: " . $sql);
-            error_log("Parameters: " . print_r($params, true));
             
             $message = 'An error occurred during registration. Please try again.';
             $messageType = 'danger';

@@ -72,6 +72,12 @@ $title = $title ?? "Artifitech Admin - Dashboard";
                     <div class="nav-section-title">Management</div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link <?php echo $page === 'content' ? 'active' : ''; ?>" href="content_management.php">
+                                <i class="fas fa-edit"></i>
+                                <span>Content</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link <?php echo $page === 'courses' ? 'active' : ''; ?>" href="courses.php">
                                 <i class="fas fa-graduation-cap"></i>
                                 <span>Courses</span>

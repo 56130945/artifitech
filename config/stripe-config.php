@@ -1,10 +1,43 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-
-// Replace with your Stripe API keys
-$stripe = [
-    'publishable_key' => 'pk_test_your_publishable_key',
-    'secret_key' => 'sk_test_your_secret_key'
-];
-
-\Stripe\Stripe::setApiKey($stripe['secret_key']);
+if (!defined('STRIPE_CONFIG_LOADED')) {
+    define('STRIPE_CONFIG_LOADED', true);
+    
+    $stripe = [
+        'secret_key'      => 'test_key',
+        'publishable_key' => 'test_key'
+    ];
+    
+    class MockStripe {
+        public static function createPaymentIntent($amount, $currency = 'usd') {
+            // Simulate a successful payment intent
+            return [
+                'id' => 'pi_' . uniqid(),
+                'client_secret' => 'test_secret_' . uniqid(),
+                'amount' => $amount,
+                'currency' => $currency,
+                'status' => 'requires_payment_method'
+            ];
+        }
+        
+        public static function confirmPayment($paymentIntentId) {
+            // Simulate payment confirmation
+            return [
+                'id' => $paymentIntentId,
+                'status' => 'succeeded',
+                'amount' => 1000,
+                'currency' => 'usd'
+            ];
+        }
+    }
+    
+    // Create alias for compatibility
+    class Stripe {
+        public static function setApiKey($key) {
+            // Mock implementation
+            return true;
+        }
+    }
+    
+    // Initialize mock payment system
+    Stripe::setApiKey($stripe['secret_key']);
+}

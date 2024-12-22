@@ -9,6 +9,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'customer') {
 
 // Set page title if not set
 $title = $title ?? "Artifitech User Portal";
+
+// Check if it's the checkout page
+$is_checkout = $page === 'checkout';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +40,14 @@ $title = $title ?? "Artifitech User Portal";
 
     <!-- Template Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
+    <?php if (!$is_checkout): ?>
     <link href="../css/back-office.css" rel="stylesheet">
     <link href="../css/dashboard-common.css" rel="stylesheet">
+    <?php endif; ?>
 </head>
 
 <body>
+    <?php if (!$is_checkout): ?>
     <div class="admin-wrapper">
         <!-- Sidebar -->
         <aside class="admin-sidebar">
@@ -104,122 +110,29 @@ $title = $title ?? "Artifitech User Portal";
                 </div>
             </nav>
         </aside>
+    <?php endif; ?>
 
-        <!-- Main Content Area -->
-        <div class="admin-content">
-            <!-- Top Header -->
-            <header class="admin-header">
-                <div class="header-left">
-                    <button type="button" class="sidebar-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h1 class="header-title"><?php echo htmlspecialchars($title); ?></h1>
-                </div>
-                <div class="header-right">
-                    <div class="header-search">
-                        <form action="search.php" method="GET">
-                            <input type="text" name="q" placeholder="Search courses...">
-                            <button type="submit"><i class="fas fa-search"></i></button>
-                        </form>
-                    </div>
-                    <div class="header-notifications">
-                        <button type="button" class="notifications-toggle">
-                            <i class="fas fa-bell"></i>
-                            <span class="badge">2</span>
-                        </button>
-                        <div class="notifications-dropdown">
-                            <div class="notifications-header">
-                                <h6>Notifications</h6>
-                                <a href="notifications.php">View All</a>
-                            </div>
-                            <div class="notifications-list">
-                                <!-- Notifications will be dynamically loaded -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="header-profile">
-                        <button type="button" class="profile-toggle">
-                            <img src="../img/user-avatar.png" alt="Profile" class="profile-image">
-                            <span class="profile-name"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="profile-dropdown">
-                            <a href="profile.php"><i class="fas fa-user"></i> My Profile</a>
-                            <a href="settings.php"><i class="fas fa-cog"></i> Settings</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="../logout.php" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Main Content -->
-            <main class="admin-main">
-                <?php echo $content ?? ''; ?>
-            </main>
-
-            <!-- Footer -->
-            <footer class="admin-footer">
-                <div class="container-fluid text-white" style="background: #061429;">
-                    <div class="container">
-                        <div class="row py-2">
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-center" style="height: 40px;">
-                                    <p class="mb-0">&copy; <?php echo date('Y'); ?> <a class="text-white border-bottom" href="#">Artifitech</a>. All Rights Reserved.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-end">
-                                <a class="text-white me-3" href="privacy.php">Privacy Policy</a>
-                                <a class="text-white me-3" href="terms.php">Terms of Use</a>
-                                <a class="text-white" href="contact.php">Contact</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
+    <!-- Main Content -->
+    <div class="<?php echo $is_checkout ? 'container-fluid' : 'admin-content'; ?>">
+        <?php echo $content; ?>
     </div>
 
+    <?php if (!$is_checkout): ?>
+    </div>
+    <?php endif; ?>
+
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/wow/wow.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
     <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/counterup/counterup.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="../lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
-    <script>
-    $(document).ready(function() {
-        // Toggle sidebar on mobile
-        $('.sidebar-toggle').click(function() {
-            $('.admin-sidebar').toggleClass('show');
-        });
-
-        // Toggle notifications dropdown
-        $('.notifications-toggle').click(function(e) {
-            e.stopPropagation();
-            $('.notifications-dropdown').toggleClass('show');
-            $('.profile-dropdown').removeClass('show');
-        });
-
-        // Toggle profile dropdown
-        $('.profile-toggle').click(function(e) {
-            e.stopPropagation();
-            $('.profile-dropdown').toggleClass('show');
-            $('.notifications-dropdown').removeClass('show');
-        });
-
-        // Close dropdowns when clicking outside
-        $(document).click(function() {
-            $('.notifications-dropdown, .profile-dropdown').removeClass('show');
-        });
-
-        // Prevent dropdown close when clicking inside
-        $('.notifications-dropdown, .profile-dropdown').click(function(e) {
-            e.stopPropagation();
-        });
-    });
-    </script>
 </body>
 </html> 
