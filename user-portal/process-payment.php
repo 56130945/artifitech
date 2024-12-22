@@ -41,13 +41,10 @@ try {
     // Calculate amount with VAT
     $amount = $product['monthly_price'] * 1.15;
 
-    // Create payment intent using mock Stripe
-    $paymentIntent = MockStripe::createPaymentIntent($amount * 100); // Amount in cents
-
     // Simulate payment confirmation
-    $paymentConfirmation = MockStripe::confirmPayment($paymentIntent['id']);
+    $paymentSucceeded = rand(0, 1) === 1; // Randomly succeed or fail
 
-    if ($paymentConfirmation['status'] === 'succeeded') {
+    if ($paymentSucceeded) {
         // Start transaction
         $conn->beginTransaction();
 
@@ -61,7 +58,18 @@ try {
             $product_id,
             $plan,
             $amount,
-            $paymentIntent['id']
+            uniqid('dummy_', true) // Use a unique ID for dummy payment
+        ]);
+
+        // Create subscription
+        $stmt = $conn->prepare("
+            INSERT INTO subscriptions (customer_id, product_id, plan, renewal_date, status)
+            VALUES (?, ?, ?, DATE_ADD(NOW(), INTERVAL 1 MONTH), 'active')
+        ");
+        $stmt->execute([
+            $_SESSION['user_id'],
+            $product_id,
+            $plan
         ]);
 
         // Commit transaction
@@ -70,7 +78,7 @@ try {
         // Return success response
         echo json_encode([
             'success' => true,
-            'payment_intent_id' => $paymentIntent['id']
+            'payment_intent_id' => uniqid('dummy_', true)
         ]);
     } else {
         throw new Exception('Payment failed');

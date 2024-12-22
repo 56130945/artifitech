@@ -213,7 +213,69 @@
 .dropdown-item.text-danger:hover i {
     color: #fff;
 }
+
+/* Modal Custom Styles */
+.modal-content {
+    border-radius: 0.75rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #2124B1;
+    color: #fff;
+    border-bottom: none;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-footer {
+    border-top: none;
+    justify-content: center;
+}
+
+.btn-secondary {
+    background-color: #1b1e8f;
+    border: none;
+    transition: background-color 0.3s ease;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #3a3dbf;
+}
+
+.btn-close {
+    color: #fff;
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    color: #fff;
+    opacity: 1;
+}
 </style> 
+
+<!-- Modal HTML -->
+<div class="modal fade" id="timeoutModal" tabindex="-1" aria-labelledby="timeoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="timeoutModalLabel">Session Timeout Warning</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                You will be logged out in 20 seconds due to inactivity.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Stay Logged In</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     let warningTimeout;
@@ -223,22 +285,43 @@
         clearTimeout(warningTimeout);
         clearTimeout(logoutTimeout);
 
-        // Show warning after 40 seconds
-        warningTimeout = setTimeout(() => {
-            alert('You will be logged out in 20 seconds due to inactivity.');
-        }, 40000);
+        // Check if user is logged in
+        <?php if (isset($_SESSION['user_id'])): ?>
+            // Show warning modal after 40 seconds
+            warningTimeout = setTimeout(() => {
+                const timeoutModal = new bootstrap.Modal(document.getElementById('timeoutModal'));
+                timeoutModal.show();
+            }, 40000);
 
-        // Auto logout after 60 seconds
-        logoutTimeout = setTimeout(() => {
-            window.location.href = '<?php echo $base_url; ?>/logout.php';
-        }, 60000);
+            // Auto logout after 60 seconds
+            logoutTimeout = setTimeout(() => {
+                window.location.href = '<?php echo $base_url; ?>/logout.php';
+            }, 60000);
+        <?php endif; ?>
     }
 
+    // Christmas Modal Logic
+    const christmasModalId = 'christmasModal';
+    const christmasModalInterval = 10 * 60 * 1000; // 10 minutes in milliseconds
+
+    function showChristmasModal() {
+        const lastShown = localStorage.getItem('lastChristmasModalShown');
+        const now = new Date().getTime();
+
+        if (!lastShown || now - lastShown > christmasModalInterval) {
+            const christmasModal = new bootstrap.Modal(document.getElementById(christmasModalId));
+            christmasModal.show();
+            localStorage.setItem('lastChristmasModalShown', now);
+        }
+    }
+
+    // Show Christmas modal on page load
+    window.onload = function() {
+        resetTimers(); // Reset session timeout timers
+        showChristmasModal(); // Show Christmas modal
+    };
+
     // Reset timers on any user interaction
-    window.onload = resetTimers;
     document.onmousemove = resetTimers;
     document.onkeypress = resetTimers;
-
-    // Ensure logout happens even if the alert is shown
-    window.onfocus = resetTimers;
 </script> 

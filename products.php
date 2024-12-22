@@ -46,7 +46,7 @@ ob_start();
                             <i class="fa fa-graduation-cap text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">EduManager LMS</h4>
-                        <p class="mb-4">Complete Learning Management System for modern educational institutions</p>
+                        <p class="mb-4">Complete Learning Management System for modern educational institutions. EduManager LMS offers seamless integration with other educational tools, a user-friendly interface, and customization options to fit your institution's needs. It supports mobile learning and offline access, ensuring education is accessible anytime, anywhere.</p>
                         <div class="row gy-2">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -78,7 +78,6 @@ ob_start();
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="feature-item bg-light rounded h-100 p-5">
                         <img src="img/edumanager.jpg" alt="EduManager Platform" class="img-fluid rounded mb-4">
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -93,7 +92,7 @@ ob_start();
                             <i class="fa fa-users text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">HR System</h4>
-                        <p class="mb-4">Comprehensive HR management solution for educational institutions</p>
+                        <p class="mb-4">Comprehensive HR management solution for educational institutions. Our HR System ensures compliance with labor laws and regulations, provides advanced analytics for workforce planning, and integrates seamlessly with payroll systems to streamline HR processes.</p>
                         <div class="row gy-2">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -125,7 +124,6 @@ ob_start();
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="feature-item bg-light rounded h-100 p-5">
                         <img src="img/hr-system.jpg" alt="HR System" class="img-fluid rounded mb-4">
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +138,7 @@ ob_start();
                             <i class="fa fa-chart-line text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">Financial System</h4>
-                        <p class="mb-4">Advanced financial management and reporting system</p>
+                        <p class="mb-4">Advanced financial management and reporting system. Our Financial System supports multi-currency transactions, ensures international compliance, and offers real-time financial dashboards and reporting. It includes robust security features to protect your financial data.</p>
                         <div class="row gy-2">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -172,7 +170,6 @@ ob_start();
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="feature-item bg-light rounded h-100 p-5">
                         <img src="img/finance-system.jpg" alt="Financial System" class="img-fluid rounded mb-4">
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -187,7 +184,7 @@ ob_start();
                             <i class="fa fa-chart-pie text-primary fs-4"></i>
                         </div>
                         <h4 class="mb-3">Analytics Suite</h4>
-                        <p class="mb-4">Powerful analytics and reporting platform</p>
+                        <p class="mb-4">Powerful analytics and reporting platform. Our Analytics Suite provides AI-driven insights and predictive analytics capabilities, customizable dashboards, and report generation. It integrates with various data sources and tools to deliver comprehensive analytics solutions.</p>
                         <div class="row gy-2">
                             <div class="col-12">
                                 <div class="d-flex align-items-center">
@@ -219,7 +216,6 @@ ob_start();
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="feature-item bg-light rounded h-100 p-5">
                         <img src="img/analytics-suite.jpg" alt="Analytics Suite" class="img-fluid rounded mb-4">
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5">Learn More</a>
                     </div>
                 </div>
             </div>

@@ -63,10 +63,10 @@ $title = "Checkout - " . htmlspecialchars($product['name']);
 $page = 'checkout';
 
 // Initialize Stripe publishable key for the frontend
-$stripePublishableKey = $stripe['publishable_key'];
+// $stripePublishableKey = $stripe['publishable_key'];
 
 // Check if Stripe is available
-$stripeAvailable = file_exists(__DIR__ . '/../vendor/autoload.php');
+// $stripeAvailable = file_exists(__DIR__ . '/../vendor/autoload.php');
 
 // Start output buffering
 ob_start();
@@ -109,7 +109,7 @@ ob_start();
                             </div>
                         </div>
 
-                        <?php if (!$stripeAvailable): ?>
+                        <?php if (false): ?>
                         <div class="text-center py-5">
                             <div class="mb-4">
                                 <i class="fas fa-tools" style="font-size: 3rem; color: #06BBCC;"></i>
@@ -134,16 +134,25 @@ ob_start();
                             <input type="hidden" id="plan" value="<?php echo $plan; ?>">
                             
                             <div class="mb-4">
-                                <label class="form-label text-muted fw-bold mb-3">Card Information</label>
-                                <div id="card-element" class="form-control border bg-white">
-                                    <!-- Stripe Card Element will be inserted here -->
-                                </div>
-                                <div id="card-errors" class="text-danger mt-2 small" role="alert"></div>
+                                <label class="form-label text-muted fw-bold mb-3">Card Number</label>
+                                <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold mb-3">Expiration Date</label>
+                                <input type="text" class="form-control" id="exp-date" placeholder="MM/YY">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label text-muted fw-bold mb-3">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="123">
                             </div>
 
                             <button type="submit" class="btn rounded-pill py-3 px-5 w-100 fw-bold" style="background-color: #06BBCC; color: white;" id="submit-button">
                                 <span id="button-text">Pay Now</span>
                                 <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+                            </button>
+
+                            <button type="button" class="btn rounded-pill py-3 px-5 w-100 fw-bold mt-3" style="background-color: #f44336; color: white;" onclick="window.location.href='../products.php';">
+                                Cancel Payment
                             </button>
                         </form>
 
@@ -155,36 +164,9 @@ ob_start();
                         </div>
 
                         <!-- Add Stripe JS -->
-                        <script src="https://js.stripe.com/v3/"></script>
+                        <!-- <script src="https://js.stripe.com/v3/"></script> -->
                         <script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            // Initialize Stripe
-                            const stripe = Stripe('<?php echo $stripePublishableKey; ?>');
-                            const elements = stripe.elements();
-
-                            // Create card element with updated styling
-                            const card = elements.create('card', {
-                                style: {
-                                    base: {
-                                        fontSize: '16px',
-                                        color: '#06BBCC',
-                                        fontFamily: '"Poppins", sans-serif',
-                                        fontWeight: '400',
-                                        '::placeholder': {
-                                            color: '#6c757d'
-                                        },
-                                        padding: '12px'
-                                    },
-                                    invalid: {
-                                        color: '#dc3545',
-                                        iconColor: '#dc3545'
-                                    }
-                                }
-                            });
-
-                            card.mount('#card-element');
-
-                            // Handle form submission
                             const form = document.getElementById('payment-form');
                             const submitButton = document.getElementById('submit-button');
                             const spinner = document.getElementById('spinner');
@@ -198,47 +180,48 @@ ob_start();
                                 spinner.classList.remove('d-none');
                                 buttonText.textContent = 'Processing...';
 
-                                try {
-                                    const {paymentMethod, error} = await stripe.createPaymentMethod({
-                                        type: 'card',
-                                        card: card,
-                                    });
+                                console.log('Submitting payment form...');
 
-                                    if (error) {
-                                        throw error;
+                                // Simulate payment processing delay
+                                setTimeout(async function() {
+                                    try {
+                                        console.log('Sending payment request...');
+                                        // Simulate sending payment to server
+                                        const response = await fetch('process-payment.php', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                payment_method_id: 'dummy_method',
+                                                product_id: document.getElementById('product-id').value,
+                                                plan: document.getElementById('plan').value
+                                            }),
+                                        });
+
+                                        console.log('Received response:', response);
+                                        const result = await response.json();
+
+                                        console.log('Payment result:', result);
+
+                                        if (result.error) {
+                                            throw new Error(result.error);
+                                        }
+
+                                        // Redirect to success page with order ID
+                                        window.location.href = 'payment-success.php?order_id=' + result.payment_intent_id;
+
+                                    } catch (error) {
+                                        console.error('Payment error:', error);
+                                        const errorElement = document.getElementById('card-errors');
+                                        errorElement.textContent = error.message || 'An error occurred during payment processing.';
+                                        
+                                        // Re-enable form submission
+                                        submitButton.disabled = false;
+                                        spinner.classList.add('d-none');
+                                        buttonText.textContent = 'Pay Now';
                                     }
-
-                                    // Send payment to server
-                                    const response = await fetch('process-payment.php', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify({
-                                            payment_method_id: paymentMethod.id,
-                                            product_id: document.getElementById('product-id').value,
-                                            plan: document.getElementById('plan').value
-                                        }),
-                                    });
-
-                                    const result = await response.json();
-
-                                    if (result.error) {
-                                        throw new Error(result.error);
-                                    }
-
-                                    // Redirect to success page with order ID
-                                    window.location.href = 'payment-success.php?order_id=' + result.payment_intent_id;
-
-                                } catch (error) {
-                                    const errorElement = document.getElementById('card-errors');
-                                    errorElement.textContent = error.message || 'An error occurred during payment processing.';
-                                    
-                                    // Re-enable form submission
-                                    submitButton.disabled = false;
-                                    spinner.classList.add('d-none');
-                                    buttonText.textContent = 'Pay Now';
-                                }
+                                }, 2000); // Simulate 2-second delay
                             });
                         });
                         </script>

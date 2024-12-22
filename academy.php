@@ -26,10 +26,10 @@ ob_start();
             <div class="col-12">
                 <div class="category-nav wow fadeInUp" data-wow-delay="0.1s">
                     <div class="d-flex justify-content-center flex-wrap gap-3">
-                        <a href="#lms" class="btn btn-primary rounded-pill px-4 active" data-category="lms">LMS Solutions</a>
-                        <a href="#hr" class="btn btn-light rounded-pill px-4" data-category="hr">HR Systems</a>
-                        <a href="#finance" class="btn btn-light rounded-pill px-4" data-category="finance">Financial Management</a>
-                        <a href="#analytics" class="btn btn-light rounded-pill px-4" data-category="analytics">Business Analytics</a>
+                        <a href="#ai-ml" class="btn btn-primary rounded-pill px-4 active" data-category="ai-ml">AI & Machine Learning</a>
+                        <a href="#deep-learning" class="btn btn-light rounded-pill px-4" data-category="deep-learning">Deep Learning</a>
+                        <a href="#nlp" class="btn btn-light rounded-pill px-4" data-category="nlp">NLP</a>
+                        <a href="#ai-data-analytics" class="btn btn-light rounded-pill px-4" data-category="ai-data-analytics">AI-Powered Data Analytics</a>
                     </div>
                 </div>
             </div>
@@ -41,14 +41,14 @@ ob_start();
 <!-- Course Sections Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <!-- LMS Solutions Section -->
-        <div id="lms" class="course-section active">
+        <!-- AI & Machine Learning Section -->
+        <div id="ai-ml" class="course-section active">
             <div class="row g-4">
-                <!-- Beginner Level -->
+                <!-- AI & Machine Learning Fundamentals -->
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/edumanager-basic.jpg" alt="EduManager Basics">
+                            <img class="img-fluid" src="img/courses/ai-ml-fundamentals.jpg" alt="AI & Machine Learning Fundamentals">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -57,7 +57,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-primary mb-2">Beginner</span>
-                                <h3 class="mb-0">R999</h3>
+                                <h3 class="mb-0">R1,299</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -65,14 +65,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(1,245)</small>
+                                <small>(60)</small>
                             </div>
-                            <h5 class="mb-4">EduManager LMS Fundamentals</h5>
+                            <h5 class="mb-4">AI & Machine Learning Fundamentals</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>John Smith</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>20 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>50 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Dr. Amanda Davis</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>25 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>60 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -80,7 +87,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/edumanager-intermediate.jpg" alt="EduManager Intermediate">
+                            <img class="img-fluid" src="img/courses/ai-ml-intermediate.jpg" alt="AI & Machine Learning Intermediate">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -89,7 +96,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-success mb-2">Intermediate</span>
-                                <h3 class="mb-0">R1,999</h3>
+                                <h3 class="mb-0">R2,299</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -97,14 +104,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(2,145)</small>
+                                <small>(40)</small>
                             </div>
-                            <h5 class="mb-4">EduManager Advanced Features</h5>
+                            <h5 class="mb-4">AI & Machine Learning Intermediate</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Sarah Johnson</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Dr. Amanda Davis</small>
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>40 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30 Students</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>40 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -112,7 +126,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/edumanager-master.jpg" alt="EduManager Mastery">
+                            <img class="img-fluid" src="img/courses/ai-ml-mastery.jpg" alt="AI & Machine Learning Mastery">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -121,7 +135,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-danger mb-2">Mastery</span>
-                                <h3 class="mb-0">R2,999</h3>
+                                <h3 class="mb-0">R3,299</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -129,28 +143,35 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(1,876)</small>
+                                <small>(20)</small>
                             </div>
-                            <h5 class="mb-4">EduManager Expert Certification</h5>
+                            <h5 class="mb-4">AI & Machine Learning Mastery</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Michael Chen</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Dr. Amanda Davis</small>
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>60 Hrs</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>20 Students</small>
                         </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- HR Systems Section -->
-        <div id="hr" class="course-section">
+        <!-- Deep Learning Section -->
+        <div id="deep-learning" class="course-section">
             <div class="row g-4">
-                <!-- Beginner Level -->
+                <!-- Deep Learning for Professionals -->
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/hr-basic.jpg" alt="HR System Basics">
+                            <img class="img-fluid" src="img/courses/deep-learning-beginner.jpg" alt="Deep Learning for Professionals">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -159,22 +180,29 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-primary mb-2">Beginner</span>
-                                <h3 class="mb-0">R899</h3>
+                                <h3 class="mb-0">R1,499</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small class="fa fa-star-half-alt text-primary"></small>
-                                <small>(987)</small>
+                                <small class="fa fa-star text-primary"></small>
+                                <small>(50)</small>
                             </div>
-                            <h5 class="mb-4">HR System Basics</h5>
+                            <h5 class="mb-4">Deep Learning for Professionals</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Emily Wong</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>15 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>40 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Prof. Mark Nguyen</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>20 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>50 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -182,7 +210,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/hr-intermediate.jpg" alt="HR System Advanced">
+                            <img class="img-fluid" src="img/courses/deep-learning-intermediate.jpg" alt="Deep Learning Intermediate">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -191,7 +219,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-success mb-2">Intermediate</span>
-                                <h3 class="mb-0">R1,799</h3>
+                                <h3 class="mb-0">R2,499</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -199,14 +227,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(1,687)</small>
+                                <small>(30)</small>
                             </div>
-                            <h5 class="mb-4">HR System Advanced Features</h5>
+                            <h5 class="mb-4">Deep Learning Intermediate</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>David Lee</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>35 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>25 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Prof. Mark Nguyen</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>45 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -214,7 +249,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/hr-master.jpg" alt="HR System Mastery">
+                            <img class="img-fluid" src="img/courses/deep-learning-mastery.jpg" alt="Deep Learning Mastery">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -223,7 +258,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-danger mb-2">Mastery</span>
-                                <h3 class="mb-0">R2,799</h3>
+                                <h3 class="mb-0">R3,499</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -231,28 +266,35 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(1,432)</small>
+                                <small>(15)</small>
                             </div>
-                            <h5 class="mb-4">HR System Expert Certification</h5>
+                            <h5 class="mb-4">Deep Learning Mastery</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Sarah Johnson</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>50 Hrs</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Prof. Mark Nguyen</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>60 Hrs</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>15 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Financial Management Section -->
-        <div id="finance" class="course-section">
+        <!-- NLP Section -->
+        <div id="nlp" class="course-section">
             <div class="row g-4">
-                <!-- Beginner Level -->
+                <!-- NLP Essentials -->
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/finance-basic.jpg" alt="Financial System Basics">
+                            <img class="img-fluid" src="img/courses/nlp-beginner.jpg" alt="NLP Essentials">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -269,14 +311,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(856)</small>
+                                <small>(40)</small>
                             </div>
-                            <h5 class="mb-4">Financial System Fundamentals</h5>
+                            <h5 class="mb-4">NLP Essentials</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Robert Taylor</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>25 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>35 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Sarah Johnson</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>20 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>40 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -284,7 +333,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/finance-intermediate.jpg" alt="Financial System Advanced">
+                            <img class="img-fluid" src="img/courses/nlp-intermediate.jpg" alt="NLP Intermediate">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -301,14 +350,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(923)</small>
+                                <small>(25)</small>
                             </div>
-                            <h5 class="mb-4">Advanced Financial Management</h5>
+                            <h5 class="mb-4">NLP Intermediate</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Michael Chen</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>45 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>20 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Sarah Johnson</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>35 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>25 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -316,7 +372,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/finance-master.jpg" alt="Financial System Mastery">
+                            <img class="img-fluid" src="img/courses/nlp-mastery.jpg" alt="NLP Mastery">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -333,28 +389,35 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(745)</small>
+                                <small>(15)</small>
                             </div>
-                            <h5 class="mb-4">Financial System Expert Certification</h5>
+                            <h5 class="mb-4">NLP Mastery</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Jennifer Adams</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>55 Hrs</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Sarah Johnson</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>50 Hrs</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>15 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Analytics Suite Section -->
-        <div id="analytics" class="course-section">
+        <!-- AI-Powered Data Analytics Section -->
+        <div id="ai-data-analytics" class="course-section">
             <div class="row g-4">
-                <!-- Beginner Level -->
+                <!-- AI-Powered Data Analytics -->
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/analytics-basic.jpg" alt="Analytics Basics">
+                            <img class="img-fluid" src="img/courses/ai-data-analytics-beginner.jpg" alt="AI-Powered Data Analytics">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -363,7 +426,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-primary mb-2">Beginner</span>
-                                <h3 class="mb-0">R899</h3>
+                                <h3 class="mb-0">R1,399</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -371,14 +434,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(634)</small>
+                                <small>(45)</small>
                             </div>
-                            <h5 class="mb-4">Analytics Fundamentals</h5>
+                            <h5 class="mb-4">AI-Powered Data Analytics</h5>
                         </div>
                         <div class="d-flex border-top">
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Emily Wong</small>
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>20 Hrs</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>45 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -386,7 +456,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/analytics-intermediate.jpg" alt="Analytics Advanced">
+                            <img class="img-fluid" src="img/courses/ai-data-analytics-intermediate.jpg" alt="AI-Powered Data Analytics Intermediate">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -395,7 +465,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-success mb-2">Intermediate</span>
-                                <h3 class="mb-0">R1,899</h3>
+                                <h3 class="mb-0">R2,399</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -403,14 +473,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(756)</small>
+                                <small>(30)</small>
                             </div>
-                            <h5 class="mb-4">Advanced Analytics & Reporting</h5>
+                            <h5 class="mb-4">AI-Powered Data Analytics Intermediate</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Alex Thompson</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>30 Hrs</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>25 Students</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Emily Wong</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>40 Hrs</small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>30 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -418,7 +495,7 @@ ob_start();
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/courses/analytics-master.jpg" alt="Analytics Mastery">
+                            <img class="img-fluid" src="img/courses/ai-data-analytics-mastery.jpg" alt="AI-Powered Data Analytics Mastery">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Enroll Now</a>
@@ -427,7 +504,7 @@ ob_start();
                         <div class="text-center p-4 pb-0">
                             <div class="mb-3">
                                 <span class="badge bg-danger mb-2">Mastery</span>
-                                <h3 class="mb-0">R2,899</h3>
+                                <h3 class="mb-0">R3,499</h3>
                             </div>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
@@ -435,14 +512,21 @@ ob_start();
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
-                                <small>(543)</small>
+                                <small>(20)</small>
                             </div>
-                            <h5 class="mb-4">Analytics Expert Certification</h5>
+                            <h5 class="mb-4">AI-Powered Data Analytics Mastery</h5>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Daniel Park</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>45 Hrs</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-user-tie text-primary me-2"></i>Michael Chen</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-clock text-primary me-2"></i>55 Hrs</small>
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>20 Students</small>
+                        </div>
+                        <div class="text-center mt-4">
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <a href="<?php echo $base_url; ?>/user-portal/checkout.php?course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php else: ?>
+                                <a href="<?php echo $base_url; ?>/login.php?redirect=checkout&course_id=1" class="btn btn-primary rounded-pill py-3 px-5">Get Started</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -455,8 +539,8 @@ ob_start();
 <!-- Add JavaScript for course section switching -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Show LMS section by default
-    const defaultSection = document.getElementById('lms');
+    // Show AI & Machine Learning section by default
+    const defaultSection = document.getElementById('ai-ml');
     if (defaultSection) {
         defaultSection.style.display = 'block';
         defaultSection.classList.add('active');
@@ -466,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const courseSections = document.querySelectorAll('.course-section');
     
     // Set first nav button as active by default
-    const defaultButton = categoryNav.querySelector('[data-category="lms"]');
+    const defaultButton = categoryNav.querySelector('[data-category="ai-ml"]');
     if (defaultButton) {
         defaultButton.classList.remove('btn-light');
         defaultButton.classList.add('active', 'btn-primary');
