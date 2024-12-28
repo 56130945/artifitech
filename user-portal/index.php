@@ -2,6 +2,22 @@
 require_once 'includes/template.php';
 require_once 'includes/db_functions.php';
 
+function render_header($title) {
+    echo "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>$title</title>
+        <!-- Add other head elements here -->
+    </head>
+    <body>";
+}
+
+function render_footer() {
+    echo "</body></html>";
+}
+
 render_header("Our Products");
 ?>
 

@@ -12,6 +12,17 @@ $title = $title ?? "Artifitech User Portal";
 
 // Check if it's the checkout page
 $is_checkout = $page === 'checkout';
+
+// Main Content
+$content = $content ?? '';
+
+?>
+
+<div class="<?php echo $is_checkout ? 'container-fluid' : 'admin-content'; ?>">
+    <?php echo $content; ?>
+</div>
+
+<?php
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,15 +121,6 @@ $is_checkout = $page === 'checkout';
                 </div>
             </nav>
         </aside>
-    <?php endif; ?>
-
-    <!-- Main Content -->
-    <div class="<?php echo $is_checkout ? 'container-fluid' : 'admin-content'; ?>">
-        <?php echo $content; ?>
-    </div>
-
-    <?php if (!$is_checkout): ?>
-    </div>
     <?php endif; ?>
 
     <!-- JavaScript Libraries -->

@@ -51,15 +51,13 @@ try {
 
     // Get user's subscriptions
     $stmt = $conn->prepare("
-        SELECT s.*, p.name as product_name, p.description as product_description 
-        FROM subscriptions s
-        INNER JOIN products p ON s.product_id = p.id
-        WHERE s.user_id = ? 
-        AND s.status = 'active'
-        AND p.status = 'active'
+        SELECT products.name AS product_name, subscriptions.renewal_date, subscriptions.status
+        FROM subscriptions
+        JOIN products ON subscriptions.product_id = products.id
+        WHERE subscriptions.user_id = ? AND subscriptions.status = 'active'
     ");
     $stmt->execute([$_SESSION['user_id']]);
-    $activeSubscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    $activeSubscriptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     error_log("Active subscriptions query executed. Count: " . count($activeSubscriptions));
 
     // Get available courses
@@ -107,6 +105,15 @@ try {
     $availableProducts = [];
 }
 
+// Use product details from query string if available
+if (isset($_GET['product_name']) && isset($_GET['renewal_date'])) {
+    $activeSubscriptions[] = [
+        'product_name' => $_GET['product_name'],
+        'renewal_date' => $_GET['renewal_date'],
+        'status' => 'active'
+    ];
+}
+
 // Start output buffering
 ob_start();
 ?>
@@ -114,6 +121,10 @@ ob_start();
 <!-- Dashboard Content Start -->
 <div class="container-xxl py-5">
     <div class="container">
+        <div class="container text-center mb-4">
+            <!-- Remove the existing 'Back to Website' button from the main content -->
+        </div>
+
         <?php if ($error): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <?php echo htmlspecialchars($error); ?>
@@ -276,7 +287,7 @@ ob_start();
                                             <td><?php echo $subscription['renewal_date'] ? date('M d, Y', strtotime($subscription['renewal_date'])) : ''; ?></td>
                                             <td><span class="badge bg-success">Active</span></td>
                                             <td>
-                                                <a href="subscription.php?id=<?php echo $subscription['id']; ?>" 
+                                                <a href="subscription.php?id=<?php echo $subscription['id'] ?? ''; ?>" 
                                                    class="btn btn-sm btn-primary">
                                                     <i class="fas fa-cog me-2"></i>Manage
                                                 </a>
@@ -357,6 +368,13 @@ ob_start();
             </div>
         </div>
     </div>
+</div>
+
+<div class="sidebar">
+    <a href="../index.php" class="btn btn-primary mb-3">
+        <i class="fas fa-arrow-left me-2"></i>Back to Website
+    </a>
+    <!-- Existing sidebar content -->
 </div>
 
 <?php

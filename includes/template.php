@@ -15,12 +15,12 @@ if ($is_back_office) {
 }
 
 // Common meta defaults (can be overridden by individual pages)
-$title = $title ?? "Artifitech - Leading Educational Technology Solutions Provider";
-$keywords = $keywords ?? "Educational Technology, EduManager, AI Solutions, IoT Solutions, Cloud Computing";
-$description = $description ?? "Artifitech is South Africa's leading provider of educational technology solutions, specializing in Learning Management Systems and enterprise solutions.";
-$og_title = $og_title ?? "Artifitech - Leading Educational Technology Solutions";
-$og_description = $og_description ?? "South Africa's leading provider of educational technology solutions";
-$og_url = $og_url ?? "https://artifitech.com";
+$title = $title ?? 'Artifitech - Leading Educational Technology Solutions Provider';
+$keywords = $keywords ?? 'Educational Technology, EduManager, AI Solutions, IoT Solutions, Cloud Computing';
+$description = $description ?? 'Artifitech is South Africa\'s leading provider of educational technology solutions, specializing in Learning Management Systems and enterprise solutions.';
+$og_title = $og_title ?? 'Artifitech - Leading Educational Technology Solutions Provider';
+$og_description = $og_description ?? 'South Africa\'s leading provider of educational technology solutions';
+$og_url = $og_url ?? 'https://artifitech.com';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,4 +106,4 @@ $og_url = $og_url ?? "https://artifitech.com";
     <script src="<?php echo $base_path; ?>js/main.js"></script>
 </body>
 
-</html> 
+</html>

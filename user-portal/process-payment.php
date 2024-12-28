@@ -1,7 +1,6 @@
 <?php
 require_once '../includes/config.php';
 require_once '../includes/db.php';
-require_once '../config/stripe-config.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -42,7 +41,7 @@ try {
     $amount = $product['monthly_price'] * 1.15;
 
     // Simulate payment confirmation
-    $paymentSucceeded = rand(0, 1) === 1; // Randomly succeed or fail
+    $paymentSucceeded = true; // Always succeed
 
     if ($paymentSucceeded) {
         // Start transaction
@@ -61,25 +60,19 @@ try {
             uniqid('dummy_', true) // Use a unique ID for dummy payment
         ]);
 
-        // Create subscription
+        // Insert new subscription
         $stmt = $conn->prepare("
-            INSERT INTO subscriptions (customer_id, product_id, plan, renewal_date, status)
+            INSERT INTO subscriptions (user_id, product_id, plan, renewal_date, status)
             VALUES (?, ?, ?, DATE_ADD(NOW(), INTERVAL 1 MONTH), 'active')
         ");
-        $stmt->execute([
-            $_SESSION['user_id'],
-            $product_id,
-            $plan
-        ]);
+        $stmt->execute([$_SESSION['user_id'], $product_id, $plan]);
 
         // Commit transaction
         $conn->commit();
 
         // Return success response
-        echo json_encode([
-            'success' => true,
-            'payment_intent_id' => uniqid('dummy_', true)
-        ]);
+        echo json_encode(['success' => true]);
+        exit();
     } else {
         throw new Exception('Payment failed');
     }

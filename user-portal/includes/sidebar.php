@@ -76,6 +76,11 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                     <i class="fas fa-question-circle me-2"></i> Support
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">
+                    <i class="fas fa-arrow-left me-2"></i> Back to Website
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -2,7 +2,6 @@
 // Include necessary files
 require_once '../includes/config.php';
 require_once '../includes/db.php';
-require_once '../config/stripe-config.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -61,12 +60,6 @@ try {
 // Set page-specific variables
 $title = "Checkout - " . htmlspecialchars($product['name']);
 $page = 'checkout';
-
-// Initialize Stripe publishable key for the frontend
-// $stripePublishableKey = $stripe['publishable_key'];
-
-// Check if Stripe is available
-// $stripeAvailable = file_exists(__DIR__ . '/../vendor/autoload.php');
 
 // Start output buffering
 ob_start();
@@ -128,43 +121,16 @@ ob_start();
                             </div>
                         </div>
                         <?php else: ?>
-                        <!-- Payment Form -->
+                        <!-- Simplified Payment Form -->
                         <form id="payment-form">
                             <input type="hidden" id="product-id" value="<?php echo $product_id; ?>">
                             <input type="hidden" id="plan" value="<?php echo $plan; ?>">
-                            
-                            <div class="mb-4">
-                                <label class="form-label text-muted fw-bold mb-3">Card Number</label>
-                                <input type="text" class="form-control" id="card-number" placeholder="1234 5678 9012 3456">
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label text-muted fw-bold mb-3">Expiration Date</label>
-                                <input type="text" class="form-control" id="exp-date" placeholder="MM/YY">
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label text-muted fw-bold mb-3">CVV</label>
-                                <input type="text" class="form-control" id="cvv" placeholder="123">
-                            </div>
-
                             <button type="submit" class="btn rounded-pill py-3 px-5 w-100 fw-bold" style="background-color: #06BBCC; color: white;" id="submit-button">
                                 <span id="button-text">Pay Now</span>
                                 <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
                             </button>
-
-                            <button type="button" class="btn rounded-pill py-3 px-5 w-100 fw-bold mt-3" style="background-color: #f44336; color: white;" onclick="window.location.href='../products.php';">
-                                Cancel Payment
-                            </button>
                         </form>
 
-                        <div class="text-center mt-4">
-                            <small class="text-muted">
-                                By completing this purchase, you agree to our 
-                                <a href="../terms.php" style="color: #06BBCC;">Terms of Service</a>
-                            </small>
-                        </div>
-
-                        <!-- Add Stripe JS -->
-                        <!-- <script src="https://js.stripe.com/v3/"></script> -->
                         <script>
                         document.addEventListener('DOMContentLoaded', function() {
                             const form = document.getElementById('payment-form');
@@ -172,60 +138,55 @@ ob_start();
                             const spinner = document.getElementById('spinner');
                             const buttonText = document.getElementById('button-text');
 
+                            if (!form) return;
+
                             form.addEventListener('submit', async function(event) {
                                 event.preventDefault();
-                                
-                                // Disable form submission
                                 submitButton.disabled = true;
                                 spinner.classList.remove('d-none');
                                 buttonText.textContent = 'Processing...';
 
-                                console.log('Submitting payment form...');
+                                try {
+                                    const response = await fetch('process-payment.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            payment_method_id: 'dummy_method',
+                                            product_id: document.getElementById('product-id').value,
+                                            plan: document.getElementById('plan').value
+                                        })
+                                    });
 
-                                // Simulate payment processing delay
-                                setTimeout(async function() {
-                                    try {
-                                        console.log('Sending payment request...');
-                                        // Simulate sending payment to server
-                                        const response = await fetch('process-payment.php', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify({
-                                                payment_method_id: 'dummy_method',
-                                                product_id: document.getElementById('product-id').value,
-                                                plan: document.getElementById('plan').value
-                                            }),
-                                        });
-
-                                        console.log('Received response:', response);
-                                        const result = await response.json();
-
-                                        console.log('Payment result:', result);
-
-                                        if (result.error) {
-                                            throw new Error(result.error);
-                                        }
-
-                                        // Redirect to success page with order ID
-                                        window.location.href = 'payment-success.php?order_id=' + result.payment_intent_id;
-
-                                    } catch (error) {
-                                        console.error('Payment error:', error);
-                                        const errorElement = document.getElementById('card-errors');
-                                        errorElement.textContent = error.message || 'An error occurred during payment processing.';
-                                        
-                                        // Re-enable form submission
-                                        submitButton.disabled = false;
-                                        spinner.classList.add('d-none');
-                                        buttonText.textContent = 'Pay Now';
+                                    if (!response.ok) {
+                                        throw new Error('Network response was not ok');
                                     }
-                                }, 2000); // Simulate 2-second delay
+
+                                    const result = await response.json();
+
+                                    if (result.error) {
+                                        throw new Error(result.error);
+                                    }
+
+                                    window.location.href = 'dashboard.php';
+
+                                } catch (error) {
+                                    console.error('Payment error:', error);
+                                    submitButton.disabled = false;
+                                    spinner.classList.add('d-none');
+                                    buttonText.textContent = 'Pay Now';
+                                }
                             });
                         });
                         </script>
                         <?php endif; ?>
+
+                        <div class="text-center mt-4">
+                            <a href="dashboard.php" class="btn btn-secondary rounded-pill py-3 px-5">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -243,6 +204,28 @@ ob_start();
     </div>
 </div>
 <!-- Checkout Section End -->
+
+<!-- Pay Now Button -->
+<form method="post" action="">
+    <div class="text-center mt-4">
+        <button type="submit" name="pay_now" class="btn btn-primary btn-lg">Pay Now</button>
+    </div>
+</form>
+
+<?php
+// Handle Pay Now button click
+if (isset($_POST['pay_now'])) {
+    // Simulate successful payment
+    echo '<div class="alert alert-success text-center mt-4">Payment Successful!</div>';
+    
+    // Redirect to dashboard with product details after 2 seconds
+    echo '<script>
+        setTimeout(function() {
+            window.location.href = "../user-portal/dashboard.php?product_name=' . urlencode($product['name']) . '&renewal_date=' . urlencode(date('Y-m-d', strtotime('+1 month'))) . '";
+        }, 2000);
+    </script>';
+}
+?>
 
 <?php
 $content = ob_get_clean();
