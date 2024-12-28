@@ -122,9 +122,10 @@ ob_start();
                         </div>
                         <?php else: ?>
                         <!-- Simplified Payment Form -->
-                        <form id="payment-form">
+                        <form id="payment-form" method="post">
                             <input type="hidden" id="product-id" value="<?php echo $product_id; ?>">
                             <input type="hidden" id="plan" value="<?php echo $plan; ?>">
+                            <input type="hidden" name="pay_now" value="1">
                             <button type="submit" class="btn rounded-pill py-3 px-5 w-100 fw-bold" style="background-color: #06BBCC; color: white;" id="submit-button">
                                 <span id="button-text">Pay Now</span>
                                 <span id="spinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
@@ -142,37 +143,62 @@ ob_start();
 
                             form.addEventListener('submit', async function(event) {
                                 event.preventDefault();
-                                submitButton.disabled = true;
-                                spinner.classList.remove('d-none');
-                                buttonText.textContent = 'Processing...';
 
                                 try {
-                                    const response = await fetch('process-payment.php', {
+                                    // Disable button and show spinner
+                                    submitButton.disabled = true;
+                                    spinner.classList.remove('d-none');
+                                    buttonText.textContent = 'Processing Payment...';
+
+                                    // Simulate payment processing delay
+                                    await new Promise(resolve => setTimeout(resolve, 2000));
+
+                                    // Send request to store subscription
+                                    const response = await fetch('store-subscription.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json'
                                         },
                                         body: JSON.stringify({
-                                            payment_method_id: 'dummy_method',
                                             product_id: document.getElementById('product-id').value,
                                             plan: document.getElementById('plan').value
                                         })
                                     });
 
-                                    if (!response.ok) {
-                                        throw new Error('Network response was not ok');
-                                    }
-
                                     const result = await response.json();
 
-                                    if (result.error) {
-                                        throw new Error(result.error);
+                                    if (!response.ok) {
+                                        throw new Error(result.error || 'Failed to process payment');
                                     }
 
-                                    window.location.href = 'dashboard.php';
+                                    // Show success message
+                                    const successDiv = document.createElement('div');
+                                    successDiv.className = 'alert alert-success text-center mt-4';
+                                    successDiv.innerHTML = `
+                                        <h5 class="mb-2">Payment Successful!</h5>
+                                        <p class="mb-0">Your subscription has been activated.</p>
+                                        <p class="small text-muted mb-0">Payment ID: ${result.subscription.payment_id}</p>
+                                    `;
+                                    form.insertAdjacentElement('afterend', successDiv);
+
+                                    // Hide the form
+                                    form.style.display = 'none';
+
+                                    // Redirect after 3 seconds
+                                    setTimeout(function() {
+                                        window.location.href = 'dashboard.php?subscription_success=1';
+                                    }, 3000);
 
                                 } catch (error) {
                                     console.error('Payment error:', error);
+                                    
+                                    // Show error message
+                                    const errorDiv = document.createElement('div');
+                                    errorDiv.className = 'alert alert-danger text-center mt-4';
+                                    errorDiv.textContent = error.message || 'Payment failed. Please try again.';
+                                    form.insertAdjacentElement('afterend', errorDiv);
+
+                                    // Re-enable button
                                     submitButton.disabled = false;
                                     spinner.classList.add('d-none');
                                     buttonText.textContent = 'Pay Now';
@@ -205,29 +231,6 @@ ob_start();
 </div>
 <!-- Checkout Section End -->
 
-<!-- Pay Now Button -->
-<form method="post" action="">
-    <div class="text-center mt-4">
-        <button type="submit" name="pay_now" class="btn btn-primary btn-lg">Pay Now</button>
-    </div>
-</form>
-
-<?php
-// Handle Pay Now button click
-if (isset($_POST['pay_now'])) {
-    // Simulate successful payment
-    echo '<div class="alert alert-success text-center mt-4">Payment Successful!</div>';
-    
-    // Redirect to dashboard with product details after 2 seconds
-    echo '<script>
-        setTimeout(function() {
-            window.location.href = "../user-portal/dashboard.php?product_name=' . urlencode($product['name']) . '&renewal_date=' . urlencode(date('Y-m-d', strtotime('+1 month'))) . '";
-        }, 2000);
-    </script>';
-}
-?>
-
 <?php
 $content = ob_get_clean();
 include 'includes/template.php';
-?> 

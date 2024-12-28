@@ -119,6 +119,23 @@ $content = $content ?? '';
                         </li>
                     </ul>
                 </div>
+
+                <div class="nav-section mt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../logout.php">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mt-2">
+                            <a class="nav-link btn btn-primary" href="../index.php">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                <span>Back to Website</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </aside>
     <?php endif; ?>

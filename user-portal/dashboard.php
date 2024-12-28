@@ -371,13 +371,10 @@ ob_start();
 </div>
 
 <div class="sidebar">
-    <a href="../index.php" class="btn btn-primary mb-3">
-        <i class="fas fa-arrow-left me-2"></i>Back to Website
-    </a>
     <!-- Existing sidebar content -->
 </div>
 
 <?php
 $content = ob_get_clean();
-include '../includes/user_portal_template.php';
-?> 
+require_once 'includes/template.php';
+?>

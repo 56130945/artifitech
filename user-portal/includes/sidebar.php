@@ -1,7 +1,6 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
 ?>
-
 <div class="sidebar bg-light border-end">
     <div class="sidebar-header p-3 border-bottom">
         <img src="../img/logo.png" alt="Artifitech Logo" class="img-fluid mb-3" style="max-height: 40px;">
@@ -76,11 +75,6 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                     <i class="fas fa-question-circle me-2"></i> Support
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../index.php">
-                    <i class="fas fa-arrow-left me-2"></i> Back to Website
-                </a>
-            </li>
         </ul>
     </div>
 </div>
@@ -138,4 +132,4 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
         margin-left: 0;
     }
 }
-</style> 
+</style>
