@@ -212,21 +212,20 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="bg-light p-4 rounded shadow-hover mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3 class="text-primary mb-0">Latest News</h3>
-                    <a href="blog.php" class="btn btn-sm btn-outline-primary">View All Posts</a>
                 </div>
                 <div class="news-item mb-4">
                     <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="AI Integration in Education">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>15 Nov 2023</div>
                     <h5>AI Integration in Education</h5>
                     <p class="text-muted">Discover how our AI solutions are revolutionizing the education sector...</p>
-                    <a href="blog.php?id=1" class="btn btn-outline-primary btn-sm">Read More</a>
+                    <a href="news.php?id=1" class="btn btn-outline-primary btn-sm">Read More</a>
                 </div>
                 <div class="news-item">
                     <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="New Features in EduManager">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>10 Nov 2023</div>
                     <h5>New Features in EduManager</h5>
                     <p class="text-muted">Explore the latest features added to our flagship LMS platform...</p>
-                    <a href="blog.php?id=2" class="btn btn-outline-primary btn-sm">Read More</a>
+                    <a href="news.php?id=2" class="btn btn-outline-primary btn-sm">Read More</a>
                 </div>
             </div>
 
@@ -1030,6 +1029,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <!-- Right Column - Events -->
         <div class="col-lg-2 wow fadeInUp px-3" data-wow-delay="0.5s">
+            <?php require_once 'includes/business-hours.php'; ?>
+            <div class="bg-light p-4 rounded shadow-hover mb-4">
+                <h3 class="mb-4 text-primary">Business Hours</h3>
+                <div class="d-flex align-items-center bg-white rounded p-3 shadow-sm">
+                    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                        <i class="far fa-clock text-white"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1"><?php echo getFormattedBusinessHours(); ?></h6>
+                        <?php if (isBusinessOpen()): ?>
+                            <small class="text-success"><i class="fas fa-door-open me-1"></i>We're Open</small>
+                        <?php else: ?>
+                            <small class="text-danger"><i class="fas fa-door-closed me-1"></i>Currently Closed</small>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-light p-4 h-100 rounded shadow-hover">
                 <h3 class="mb-4 text-primary">Upcoming Events</h3>
                 <div class="event-item mb-4">

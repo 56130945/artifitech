@@ -2,7 +2,9 @@
 <!-- Particle Background -->
 <canvas id="particle-canvas"></canvas>
 <link href="css/particles.css" rel="stylesheet">
+<link href="css/search.css" rel="stylesheet">
 <script src="js/particles.js"></script>
+<script src="js/search.js" defer></script>
 
 <!-- Brand & Contact Start -->
 <div class="container-fluid py-4 px-5 wow fadeIn" data-wow-delay="0.1s">
@@ -17,22 +19,11 @@
                 <div class="col-4">
                     <div class="d-flex align-items-center justify-content-end">
                         <div class="flex-shrink-0 btn-lg-square border rounded-circle">
-                            <i class="far fa-clock text-primary"></i>
-                        </div>
-                        <div class="ps-3">
-                            <p class="mb-2">Opening Hour</p>
-                            <h6 class="mb-0">Mon - Fri, 8:00 - 17:00</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="d-flex align-items-center justify-content-end">
-                        <div class="flex-shrink-0 btn-lg-square border rounded-circle">
-                            <i class="fa fa-phone text-primary"></i>
+                            <i class="fas fa-phone text-primary"></i>
                         </div>
                         <div class="ps-3">
                             <p class="mb-2">Call Us</p>
-                            <h6 class="mb-0">+27 123 456 789</h6>
+                            <h6 class="mb-0">+27 12 771 1212</h6>
                         </div>
                     </div>
                 </div>
@@ -43,7 +34,7 @@
                         </div>
                         <div class="ps-3">
                             <p class="mb-2">Email Us</p>
-                            <h6 class="mb-0">info@artifitech.co.za</h6>
+                            <h6 class="mb-0">info@artifitech.com</h6>
                         </div>
                     </div>
                 </div>
@@ -70,13 +61,13 @@
                 <a href="contact.php" class="nav-item nav-link <?php echo ($page === 'contact') ? 'active' : ''; ?>">Contact Us</a>
             </div>
             <div class="auth-buttons d-none d-lg-flex">
-                <div class="search-wrapper">
+                <form class="search-wrapper" onsubmit="return false;">
                     <input type="text" class="search-input" placeholder="Search...">
-                    <button class="search-button">
+                    <button type="button" class="search-button">
                         <i class="bi bi-search"></i>
                     </button>
                     <div class="search-results"></div>
-                </div>
+                </form>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <div class="dropdown">
                         <button class="btn-user dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
