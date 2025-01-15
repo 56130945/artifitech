@@ -1116,3 +1116,50 @@ h6 { font-size: 1rem; }
 [data-theme="dark"] .team-item:hover {
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
 }
+
+/* News Section Styles */
+.news-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.news-content {
+    transition: all 0.3s ease;
+}
+
+.news-content.collapsing {
+    transition-duration: 0.35s;
+}
+
+.news-content.show {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+}
+
+.news-item button[aria-expanded="true"] .read-more-text {
+    display: none;
+}
+
+.news-item button[aria-expanded="true"] .read-less-text {
+    display: inline !important;
+}
+
+.news-item button[aria-expanded="false"] .read-more-text {
+    display: inline;
+}
+
+.news-item button[aria-expanded="false"] .read-less-text {
+    display: none !important;
+}
+
+.news-content ul li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.news-content ul li i {
+    position: absolute;
+    left: 0;
+    top: 4px;
+}

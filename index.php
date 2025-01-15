@@ -11,42 +11,128 @@ $og_title = "Artifitech - Leading Educational Technology Solutions";
 $og_description = "South Africa's leading provider of educational technology solutions";
 $og_url = "https://artifitech.com";
 
-// Add Black Friday Modal CSS with correct path
-$additional_css = '<link rel="stylesheet" href="' . $base_url . '/css/black-friday-modal.css">';
+// Add required CSS and JS
+$additional_css = '
+    <link rel="stylesheet" href="' . $base_url . '/css/black-friday-modal.css">
+';
 
-// Add Black Friday Modal JS with correct path
-$additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></script>';
+$additional_js = '
+    <script src="' . $base_url . '/js/black-friday-modal.js"></script>
+    <script src="' . $base_url . '/js/news.js"></script>
+';
 
 // Start output buffering
 ob_start();
+
+// Include the news modal template
+include 'includes/news-modal.php';
 ?>
+
 <!-- Christmas Modal -->
-<div class="christmas-overlay" id="modalOverlay">
-    <div class="christmas-modal" role="dialog" aria-labelledby="modalTitle">
-        <div class="christmas-decoration decoration-top-left"></div>
-        <div class="christmas-decoration decoration-top-right"></div>
-        <button class="christmas-close" id="closeButton" aria-label="Close">&times;</button>
-        <div class="christmas-content">
-            <h1 class="christmas-header" id="modalTitle">🎄 Christmas Special 🎅</h1>
-            <div class="christmas-body">
-                <h2>Season's Greetings!</h2>
-                <p>Celebrate the festive season with our special Christmas offer</p>
-                <ul class="christmas-features">
-                    <li>🎁 50% OFF EduManager LMS</li>
-                    <li>🎄 Free Setup & Migration</li>
-                    <li>⭐ Premium Support Package</li>
-                    <li>🎅 Bonus Holiday Training Sessions</li>
-                </ul>
-                <p class="christmas-price">
-                    <span class="original-price">R4,999/mo</span>
-                    <span class="new-price">R2,499/mo</span>
-                </p>
-                <p class="offer-ends">Limited Time Offer - Valid until December 25th!</p>
-                <a href="#products" class="christmas-cta">Claim Your Gift Now</a>
+<div class="modal fade" id="christmasModal" tabindex="-1" aria-labelledby="christmasModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="christmas-modal">
+                <button class="christmas-close" id="closeButton" aria-label="Close">&times;</button>
+                <div class="christmas-content">
+                    <h1 class="christmas-header">🎉 New Year Special! 🎊</h1>
+                    <div class="christmas-body">
+                        <p style="font-size: 1.2rem;">Start 2025 with Innovation!</p>
+                        <p>Get our Premium EduManager Suite at an exclusive price:</p>
+                        <div class="pricing-info">
+                            <span class="old-price">R3,999/mo</span>
+                            <span class="new-price">R2,499/mo</span>
+                        </div>
+                        <p class="offer-ends">Limited Time Offer - Valid until January 31st!</p>
+                        <a href="#products" class="christmas-cta">Claim Your New Year Offer</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .christmas-modal {
+        position: relative;
+        background: linear-gradient(135deg, #06BBCC 0%, #0891a1 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+    }
+    .christmas-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1;
+    }
+    .christmas-header {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: white;
+    }
+    .christmas-body {
+        padding: 1rem;
+    }
+    .christmas-body h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    .christmas-body p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    .pricing-info {
+        margin: 2rem 0;
+    }
+    .old-price {
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.3rem;
+        margin-right: 1rem;
+    }
+    .new-price {
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    .offer-ends {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin: 1rem 0;
+    }
+    .christmas-cta {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: white;
+        color: #06BBCC;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+    .christmas-cta:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+        color: #06BBCC;
+    }
+</style>
 
 <script>
 // Function to create snowflakes
@@ -68,7 +154,7 @@ function createSnowflakes() {
 
 // Function to show modal
 function showModal() {
-    const modal = document.getElementById('modalOverlay');
+    const modal = document.getElementById('christmasModal');
     if (modal) {
         modal.style.display = 'block';
         createSnowflakes();
@@ -77,7 +163,7 @@ function showModal() {
 
 // Function to hide modal
 function hideModal() {
-    const modal = document.getElementById('modalOverlay');
+    const modal = document.getElementById('christmasModal');
     if (modal) {
         modal.style.display = 'none';
     }
@@ -95,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close modal when clicking outside
-    const modalOverlay = document.getElementById('modalOverlay');
+    const modalOverlay = document.getElementById('christmasModal');
     if (modalOverlay) {
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === this) {
@@ -124,20 +210,23 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="col-lg-2 wow fadeInUp px-3" data-wow-delay="0.1s">
             <!-- Latest News -->
             <div class="bg-light p-4 rounded shadow-hover mb-4">
-                <h3 class="mb-4 text-primary">Latest News</h3>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="text-primary mb-0">Latest News</h3>
+                    <a href="blog.php" class="btn btn-sm btn-outline-primary">View All Posts</a>
+                </div>
                 <div class="news-item mb-4">
-                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="News Image">
+                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="AI Integration in Education">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>15 Nov 2023</div>
                     <h5>AI Integration in Education</h5>
                     <p class="text-muted">Discover how our AI solutions are revolutionizing the education sector...</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                    <a href="blog.php?id=1" class="btn btn-outline-primary btn-sm">Read More</a>
                 </div>
                 <div class="news-item">
-                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="News Image">
+                    <img src="img/index/news-1.jpg.png" class="img-fluid rounded mb-3" alt="New Features in EduManager">
                     <div class="date text-primary mb-2"><i class="far fa-calendar-alt me-2"></i>10 Nov 2023</div>
                     <h5>New Features in EduManager</h5>
                     <p class="text-muted">Explore the latest features added to our flagship LMS platform...</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+                    <a href="blog.php?id=2" class="btn btn-outline-primary btn-sm">Read More</a>
                 </div>
             </div>
 

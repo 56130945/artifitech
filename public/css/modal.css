@@ -1,0 +1,15 @@
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.christmas-modal {
+    position: relative;
+    background: linear-gradient(135deg, #06BBCC 0%, #0891a1 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+}
+/* Rest of the modal styles */

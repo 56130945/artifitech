@@ -117,27 +117,21 @@ if (isset($_GET['product_name']) && isset($_GET['renewal_date'])) {
 // Start output buffering
 ob_start();
 ?>
-<!-- Dashboard Content Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="container text-center mb-4">
-            <!-- Remove the existing 'Back to Website' button from the main content -->
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="mb-4">Dashboard</h2>
+                <?php if ($error): ?>
+                    <div class="alert alert-danger"><?php echo $error; ?></div>
+                <?php endif; ?>
+                <?php if ($success): ?>
+                    <div class="alert alert-success"><?php echo $success; ?></div>
+                <?php endif; ?>
+            </div>
         </div>
 
-        <?php if ($error): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?php echo htmlspecialchars($error); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php endif; ?>
-        
-        <?php if ($success): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?php echo htmlspecialchars($success); ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php endif; ?>
-        
         <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stats-card">
@@ -369,11 +363,7 @@ ob_start();
     </div>
 </div>
 
-<div class="sidebar">
-    <!-- Existing sidebar content -->
-</div>
-
 <?php
 $content = ob_get_clean();
-require_once 'includes/template.php';
+include '../includes/user_portal_template.php';
 ?>
