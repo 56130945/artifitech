@@ -66,7 +66,6 @@
             <div class="navbar-nav me-auto p-3 p-lg-0">
                 <a href="index.php" class="nav-item nav-link <?php echo ($page === 'home') ? 'active' : ''; ?>">Home</a>
                 <a href="about.php" class="nav-item nav-link <?php echo ($page === 'about') ? 'active' : ''; ?>">About Us</a>
-                <a href="products.php" class="nav-item nav-link <?php echo ($page === 'products') ? 'active' : ''; ?>">Products</a>
                 <a href="academy.php" class="nav-item nav-link <?php echo ($page === 'academy') ? 'active' : ''; ?>">Academy</a>
                 <a href="contact.php" class="nav-item nav-link <?php echo ($page === 'contact') ? 'active' : ''; ?>">Contact Us</a>
             </div>

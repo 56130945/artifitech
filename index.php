@@ -20,7 +20,6 @@ $additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></scr
 // Start output buffering
 ob_start();
 ?>
-
 <!-- Christmas Modal -->
 <div class="christmas-overlay" id="modalOverlay">
     <div class="christmas-modal" role="dialog" aria-labelledby="modalTitle">
@@ -43,7 +42,7 @@ ob_start();
                     <span class="new-price">R2,499/mo</span>
                 </p>
                 <p class="offer-ends">Limited Time Offer - Valid until December 25th!</p>
-                <a href="products.php" class="christmas-cta">Claim Your Gift Now</a>
+                <a href="#products" class="christmas-cta">Claim Your Gift Now</a>
             </div>
         </div>
     </div>
@@ -117,13 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<!-- Product Navigation -->
-<div class="product-nav text-center mb-5">
-    <a href="#edumanager" class="btn btn-primary active" data-product="edumanager">EduManager LMS</a>
-    <a href="#hr" class="btn btn-light" data-product="hr">HR System</a>
-    <a href="#finance" class="btn btn-light" data-product="finance">Financial System</a>
-    <a href="#analytics" class="btn btn-light" data-product="analytics">Analytics Suite</a>
-</div>
 
 <!-- Pricing Plans Start -->
 <div class="container-fluid py-5" style="margin-top: 2rem;">
@@ -194,6 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <h6 class="section-title bg-white text-center text-primary px-3">Pricing Plans</h6>
                 <h1 class="display-6 mb-4">Choose the Perfect Solution for Your Institution</h1>
             </div>
+
+            <!-- Product Navigation -->
+        <div class="product-nav text-center mb-5">
+            <a href="#edumanager" class="btn btn-primary active" data-product="edumanager">EduManager LMS</a>
+            <a href="#hr" class="btn btn-light" data-product="hr">HR System</a>
+            <a href="#finance" class="btn btn-light" data-product="finance">Financial System</a>
+            <a href="#analytics" class="btn btn-light" data-product="analytics">Analytics Suite</a>
+        </div>
 
             <!-- EduManager Pricing -->
             <div id="edumanager" class="pricing-section active">
@@ -934,6 +934,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
+            <div class="mt-5 pt-5">
+                <?php include 'includes/products-section.php'; ?>
+            </div>
         </div>
 
         <!-- Right Column - Events -->
@@ -1244,4 +1247,4 @@ document.addEventListener('DOMContentLoaded', function() {
 <?php
 $content = ob_get_clean();
 include 'includes/template.php';
-?> 
+?>

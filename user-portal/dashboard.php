@@ -117,7 +117,6 @@ if (isset($_GET['product_name']) && isset($_GET['renewal_date'])) {
 // Start output buffering
 ob_start();
 ?>
-
 <!-- Dashboard Content Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -131,14 +130,14 @@ ob_start();
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php endif; ?>
-
+        
         <?php if ($success): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?php echo htmlspecialchars($success); ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <?php endif; ?>
-
+        
         <!-- Stats Cards -->
         <div class="stats-grid">
             <div class="stats-card">
@@ -299,7 +298,7 @@ ob_start();
                                         <td colspan="4" class="text-center py-4">
                                             <i class="fas fa-cube fa-2x text-muted mb-3"></i>
                                             <p class="mb-0">You don't have any active subscriptions.</p>
-                                            <a href="../products.php" class="btn btn-sm btn-primary mt-3">
+                                            <a href="../index.php#products" class="btn btn-sm btn-primary mt-3">
                                                 View Products
                                             </a>
                                         </td>

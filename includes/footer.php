@@ -18,7 +18,7 @@
                 <h5 class="text-light mb-4">Quick Links</h5>
                 <a class="btn btn-link" href="about.php">About Us</a>
                 <a class="btn btn-link" href="contact.php">Contact Us</a>
-                <a class="btn btn-link" href="products.php">Our Products</a>
+                <a class="btn btn-link" href="index.php#products">Our Products</a>
                 <a class="btn btn-link" href="project.php">Projects</a>
                 <a class="btn btn-link" href="#">Support</a>
             </div>
@@ -61,7 +61,6 @@
     </div>
 </div>
 <!-- Footer End -->
-
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
 

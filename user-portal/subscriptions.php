@@ -107,7 +107,7 @@ ob_start();
     <div class="table-card">
         <div class="table-header">
             <h5 class="table-title">My Subscriptions</h5>
-            <a href="../products.php" class="btn btn-sm" style="background-color: #06BBCC; color: white;">
+            <a href="../index.php#products" class="btn btn-sm" style="background-color: #06BBCC; color: white;">
                 <i class="fas fa-plus me-2"></i>Subscribe to New Product
             </a>
         </div>
@@ -130,7 +130,7 @@ ob_start();
                         <td colspan="7" class="text-center py-4">
                             <i class="fas fa-credit-card fa-2x text-muted mb-3"></i>
                             <p class="mb-0">You don't have any subscriptions yet.</p>
-                            <a href="../products.php" class="btn btn-sm mt-3" style="background-color: #06BBCC; color: white;">
+                            <a href="../index.php#products" class="btn btn-sm mt-3" style="background-color: #06BBCC; color: white;">
                                 View Available Products
                             </a>
                         </td>

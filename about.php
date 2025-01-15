@@ -20,7 +20,6 @@ $additional_js = '<script src="' . $base_url . '/js/black-friday-modal.js"></scr
 // Start output buffering
 ob_start();
 ?>
-
 <!-- About Start -->
 <div class="container-xxl py-5">
     <div class="container">
@@ -47,7 +46,7 @@ ob_start();
                             </ul>
                         </div>
                     </div>
-                    <a class="btn btn-primary rounded-pill py-3 px-5" href="products.php">Explore Our Products</a>
+                    <a class="btn btn-primary rounded-pill py-3 px-5" href="index.php#products">Explore Our Products</a>
                 </div>
             </div>
         </div>
@@ -217,4 +216,4 @@ ob_start();
 <?php
 $content = ob_get_clean();
 include 'includes/template.php';
-?> 
+?>
