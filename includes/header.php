@@ -5,6 +5,7 @@
 <link href="css/search.css" rel="stylesheet">
 <script src="js/particles.js"></script>
 <script src="js/search.js" defer></script>
+<script src="js/ai-agent.js" defer></script>
 
 <!-- Brand & Contact Start -->
 <div class="container-fluid py-4 px-5 wow fadeIn" data-wow-delay="0.1s">
@@ -16,33 +17,66 @@
         </div>
         <div class="col-lg-8 col-md-7 d-none d-lg-block">
             <div class="row">
-                <div class="col-4">
-                    <div class="d-flex align-items-center justify-content-end">
+                <div class="col-6">
+                    <div class="d-flex align-items-center justify-content-center ai-agent-trigger" id="aiAgentTrigger" style="cursor: pointer;">
                         <div class="flex-shrink-0 btn-lg-square border rounded-circle">
-                            <i class="fas fa-phone text-primary"></i>
+                            <i class="fas fa-robot text-primary"></i>
                         </div>
                         <div class="ps-3">
-                            <p class="mb-2">Call Us</p>
-                            <h6 class="mb-0">+27 12 771 1212</h6>
+                            <p class="mb-2">AI Assistant</p>
+                            <h6 class="mb-0">Ask Me Anything</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="d-flex align-items-center justify-content-end">
-                        <div class="flex-shrink-0 btn-lg-square border rounded-circle">
-                            <i class="far fa-envelope text-primary"></i>
+                <div class="col-6">
+                    <a href="https://wa.me/27127711212" target="_blank" class="text-decoration-none">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <div class="flex-shrink-0 btn-lg-square border rounded-circle">
+                                <i class="fab fa-whatsapp text-primary"></i>
+                            </div>
+                            <div class="ps-3">
+                                <p class="mb-2 text-dark">WhatsApp</p>
+                                <h6 class="mb-0 text-dark">+27 12 771 1212</h6>
+                            </div>
                         </div>
-                        <div class="ps-3">
-                            <p class="mb-2">Email Us</p>
-                            <h6 class="mb-0">info@artifitech.com</h6>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Brand & Contact End -->
+
+<!-- AI Agent Modal -->
+<div class="ai-agent-modal" id="aiAgentModal">
+    <div class="ai-agent-content">
+        <div class="ai-agent-header">
+            <div class="ai-agent-title">
+                <i class="fas fa-robot text-primary"></i>
+                <h5>AI Receptionist</h5>
+            </div>
+            <button class="ai-agent-close" id="aiAgentClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-agent-messages" id="aiAgentMessages">
+            <div class="ai-message">
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="ai-message-content">
+                    Hello! I'm your AI assistant. How can I help you today?
+                </div>
+            </div>
+        </div>
+        <div class="ai-agent-input">
+            <input type="text" id="aiAgentInput" placeholder="Type your message...">
+            <button id="aiAgentSend">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg">
